@@ -19,6 +19,14 @@ Content (specs, parts, craft steps, articles) lives in `lib/content.ts`; nav and
 
 The form opens the visitor's email app addressed to `NEXT_PUBLIC_CONTACT_EMAIL`. Set it in Vercel → Project → Settings → Environment Variables, then redeploy. Until it's set, the form shows a "not set up yet" message.
 
+## Westpaq Cleaning Solutions (client sample)
+
+A standalone single-page landing site for a prospective client lives in `public/westpaq/index.html`. It's one self-contained file (inline CSS, JS and SVG; Google Fonts is the only external request), separate from the HODINKEE pages.
+
+- **View it:** open the file directly in a browser, or run `npm run dev` and visit `http://localhost:3000/westpaq` (rewrite in `next.config.mjs`).
+- **Hand it off:** the file can be dropped onto any static host as `index.html`.
+- **Before publishing:** search the file for `Confirm before publishing` / `Placeholder`. Swap the placeholder logo mark (`#logo-mark` symbol) for the real Westpaq logo, add the Google reviews URL, connect the demo quote form to a real backend, and remove the `noindex` meta tag.
+
 ## Run locally
 
 ```bash
