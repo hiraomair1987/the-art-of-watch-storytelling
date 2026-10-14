@@ -364,10 +364,12 @@
     .reviews-copy h2 { font-size: clamp(28px, 3.4vw, 38px); margin-top: 14px; }
     .reviews-copy p { margin-top: 14px; color: var(--muted); }
     .reviews-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 22px; }
-    .placeholder-link {
-      display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--muted);
-      border-bottom: 1.5px dashed #b3bcc6; padding-bottom: 2px; cursor: default;
+    .review-link {
+      display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--coral-strong);
+      text-decoration: none; border-bottom: 1.5px solid currentColor; padding-bottom: 2px;
     }
+    .review-link svg { width: 16px; height: 16px; transition: transform .2s; }
+    .review-link:hover svg { transform: translateX(3px); }
     @media (max-width: 720px) {
       .reviews-card { grid-template-columns: minmax(0, 1fr); text-align: left; }
       .rating-big { padding: 0 0 28px; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -760,9 +762,8 @@
             <h2 id="reviews-title">Rated 4.7 from 123 Google reviews</h2>
             <p>This rating and review count come from Westpaq Cleaning Solutions’ Google Business Profile.</p>
             <div class="reviews-meta">
-              <!-- Replace with a real link once the Google review URL is supplied, e.g. <a href="https://g.page/...">Read Google reviews</a> -->
-              <span class="placeholder-link">Read Google reviews</span>
-              <span class="verify">Placeholder: add review URL and confirm current rating</span>
+              <a class="review-link" href="https://www.google.com/maps/place/Westpaq+Cleaning+Services/@29.7211085,-95.6497144,17z/data=!3m1!4b1!4m6!3m5!1s0x8640dc29f6865949:0xb0311581b3ce5533!8m2!3d29.7211039!4d-95.6448435!16s%2Fg%2F11f10dqbrp" target="_blank" rel="noopener">Read Google reviews <svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> (opens Google Maps in a new tab)</span></a>
+              <span class="verify">Confirm current rating; listing is named “Westpaq Cleaning Services”</span>
             </div>
           </div>
         </div>
@@ -815,7 +816,7 @@
               </a>
             </li>
             <li>
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=3418+S+Texas+6+Suite+B+129+Houston+TX+77082" target="_blank" rel="noopener">
+              <a href="https://www.google.com/maps/place/Westpaq+Cleaning+Services/@29.7211085,-95.6497144,17z/data=!3m1!4b1!4m6!3m5!1s0x8640dc29f6865949:0xb0311581b3ce5533!8m2!3d29.7211039!4d-95.6448435!16s%2Fg%2F11f10dqbrp" target="_blank" rel="noopener">
                 <span class="contact-icon" aria-hidden="true"><svg><use href="#i-pin"/></svg></span>
                 <span><small>Office <span class="sr-only">(opens Google Maps in a new tab)</span></small><b>3418 S Texas 6, Suite B #129<br>Houston, TX 77082</b></span>
               </a>

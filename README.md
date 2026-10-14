@@ -25,7 +25,7 @@ A standalone single-page landing site for a prospective client lives in `public/
 
 - **View it:** open the file directly in a browser, or run `npm run dev` and visit `http://localhost:3000/westpaq` (rewrite in `next.config.mjs`).
 - **Hand it off:** the file can be dropped onto any static host as `index.html`.
-- **Before publishing:** search the file for `Confirm before publishing` / `Placeholder`. Swap the placeholder logo mark (`#logo-mark` symbol) for the real Westpaq logo, add the Google reviews URL, connect the demo quote form to a real backend, and remove the `noindex` meta tag.
+- **Before publishing:** search the file for `Confirm before publishing` / `Placeholder`. Swap the placeholder logo mark (`#logo-mark` symbol) for the real Westpaq logo, confirm the Google rating, connect the demo quote form to a real backend, and remove the `noindex` meta tag.
 
 ## Run locally
 
