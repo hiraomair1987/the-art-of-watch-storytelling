@@ -21,11 +21,11 @@ The form opens the visitor's email app addressed to `NEXT_PUBLIC_CONTACT_EMAIL`.
 
 ## Westpaq Cleaning Services (client sample)
 
-A standalone single-page landing site for a prospective client lives in `public/westpaq/index.html`. It's one self-contained file (inline CSS, JS and SVG; Google Fonts is the only external request), separate from the HODINKEE pages.
+A standalone single-page landing site for a prospective client lives in `public/westpaq/index.html`. It's one HTML file (inline CSS, JS and SVG) plus compressed WebP photos in `public/westpaq/images/`, separate from the HODINKEE pages. The photos are AI-generated placeholders; swap in Westpaq's own photos before publishing.
 
 - **View it:** open the file directly in a browser, or run `npm run dev` and visit `http://localhost:3000/westpaq` (rewrite in `next.config.mjs`).
-- **Hand it off:** the file can be dropped onto any static host as `index.html`.
-- **Before publishing:** search the file for `Confirm before publishing` / `Placeholder`. Swap the placeholder logo mark (`#logo-mark` symbol) for the real Westpaq logo, confirm the Google rating, connect the demo quote form to a real backend, and remove the `noindex` meta tag.
+- **Hand it off:** upload the whole `public/westpaq/` folder (page + `images/`) to any static host.
+- **Before publishing:** search the file for `Confirm before publishing` / `Placeholder`. Swap the placeholder logo mark and the AI placeholder photos (`#logo-mark` symbol) for the real Westpaq logo, confirm the Google rating, connect the demo quote form to a real backend, and remove the `noindex` meta tag.
 
 ## Run locally
 

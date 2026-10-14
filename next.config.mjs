@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    // Standalone Westpaq client sample: a single static file in public/westpaq/.
-    return [{ source: "/westpaq", destination: "/westpaq/index.html" }];
+  async redirects() {
+    // Standalone Westpaq client sample in public/westpaq/. Redirect (not rewrite) so the
+    // page's relative image paths resolve under /westpaq/.
+    return [{ source: "/westpaq", destination: "/westpaq/index.html", permanent: false }];
   },
   async headers() {
     return [

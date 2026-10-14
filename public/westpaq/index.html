@@ -231,16 +231,18 @@
       background: var(--charcoal); overflow: hidden; color: var(--white);
       box-shadow: 0 30px 60px -30px rgba(29,33,38,.55);
     }
-    .hero-visual .arrows { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 35% center; }
     .hero-visual-content {
       position: absolute; inset: auto 0 0 0; padding: clamp(22px, 3vw, 32px);
-      background: linear-gradient(to top, rgba(29,33,38,.95) 30%, rgba(29,33,38,0));
+      padding-top: 90px;
+      background: linear-gradient(to top, rgba(22,25,29,.97) 0%, rgba(22,25,29,.88) 55%, rgba(22,25,29,0) 100%);
     }
-    .hero-visual-label { font: 600 12px/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: #aeb6c0; }
+    .hero-visual-label { font: 600 12px/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: #dde2e7; }
     .sector-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
     .sector-chips li {
       font-size: 14px; font-weight: 500; padding: 7px 13px; border-radius: 999px;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      background: rgba(22,25,29,.55); border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
     .hero-badge {
       position: absolute; top: clamp(18px, 3vw, 28px); left: clamp(18px, 3vw, 28px);
@@ -295,6 +297,20 @@
 
     /* ---------- Services ---------- */
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 0 0 14px; }
+    .photo-strip figure { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; background: var(--gray); }
+    .photo-strip img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .photo-strip figure:hover img { transform: scale(1.04); }
+    .photo-strip figcaption {
+      position: absolute; left: 14px; bottom: 14px;
+      font: 600 14px/1 var(--font-body); color: var(--ink);
+      background: rgba(255,255,255,.94); padding: 9px 13px; border-radius: 999px;
+    }
+    .photo-note { margin-bottom: 28px; }
+    @media (max-width: 700px) {
+      .photo-strip { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .photo-strip figure:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+    }
     .service-card {
       position: relative; padding: 30px 28px 28px; border-radius: var(--radius);
       background: var(--white); border: 1px solid var(--line);
@@ -323,12 +339,19 @@
 
     /* ---------- Why ---------- */
     .why { background: var(--charcoal); color: var(--white); }
-    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.1); border-radius: var(--radius-lg); overflow: hidden; }
+    .why-layout { display: grid; grid-template-columns: 5fr 7fr; gap: 20px; align-items: stretch; }
+    .why-photo { margin: 0; border-radius: var(--radius-lg); overflow: hidden; min-height: 100%; background: var(--charcoal-2); }
+    .why-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,.1); border-radius: var(--radius-lg); overflow: hidden; }
     .why-item { background: var(--charcoal); padding: 34px 30px; }
     .why-item .num { font: 700 13px/1 var(--font-display); color: #ff9c8b; letter-spacing: .08em; }
     .why-item h3 { font-size: 21px; margin-top: 18px; }
     .why-item p { margin-top: 10px; color: #c3cad2; font-size: 16px; }
-    @media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px) {
+      .why-layout { grid-template-columns: 1fr; }
+      .why-photo { aspect-ratio: 16 / 10; min-height: 0; }
+      .why-photo img { object-position: center 35%; }
+    }
     @media (max-width: 580px) { .why-grid { grid-template-columns: 1fr; } .why-item { padding: 28px 22px; } }
 
     /* ---------- Process ---------- */
@@ -488,9 +511,6 @@
     .js .reveal[data-delay="1"] { transition-delay: .08s; }
     .js .reveal[data-delay="2"] { transition-delay: .16s; }
     .js .reveal[data-delay="3"] { transition-delay: .24s; }
-    .arrow-drift { animation: drift 9s ease-in-out infinite alternate; }
-    .arrow-drift.d2 { animation-duration: 12s; animation-delay: -3s; }
-    @keyframes drift { from { transform: translateX(-10px); } to { transform: translateX(14px); } }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -575,19 +595,9 @@
           </p>
         </div>
 
-        <div class="hero-visual reveal" data-delay="2" role="img" aria-label="Graphic of forward-pointing coral arrows from the Westpaq logo, with the six facility types Westpaq serves">
-          <svg class="arrows" viewBox="0 0 400 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <defs>
-              <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#ffffff" opacity=".09"/></pattern>
-            </defs>
-            <rect width="400" height="440" fill="url(#dots)"/>
-            <g class="arrow-drift">
-              <path d="M70 150h200M200 70l80 80-80 80" fill="none" stroke="#e4553f" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-            <g class="arrow-drift d2" opacity=".22">
-              <path d="M150 250h170M260 180l70 70-70 70" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-          </svg>
+        <div class="hero-visual reveal" data-delay="2">
+          <!-- Illustrative AI-generated image. Replace with Westpaq's own site photos before publishing. -->
+          <img class="hero-photo" src="images/office.webp" srcset="images/office-800.webp 800w, images/office.webp 1264w" sizes="(max-width: 900px) 100vw, 520px" width="1264" height="848" alt="Spotless open-plan office with polished concrete floors and tidy desks, a janitorial cart parked in the aisle, and the Houston skyline through the windows" fetchpriority="high">
           <div class="hero-badge">
             <span class="hero-badge-icon" aria-hidden="true"><svg><use href="#i-person"/></svg></span>
             <span><b>Women-owned</b><span>Houston, Texas</span></span>
@@ -635,6 +645,21 @@
           <h2 id="services-title">Cleaning tailored to the facility you run</h2>
           <p>Every site has different needs. We work with businesses and public organizations across Greater Houston and shape our service around each one.</p>
         </div>
+        <div class="photo-strip">
+          <figure class="reveal">
+            <img src="images/retail-800.webp" width="800" height="537" loading="lazy" alt="Bright retail store with gleaming white tile floors, tidy clothing racks and a floor scrubber parked in the aisle">
+            <figcaption>Retail</figcaption>
+          </figure>
+          <figure class="reveal" data-delay="1">
+            <img src="images/school-800.webp" width="800" height="537" loading="lazy" alt="Freshly mopped school hallway with shining floors, gray lockers, a wet-floor sign and a mop cart">
+            <figcaption>Educational</figcaption>
+          </figure>
+          <figure class="reveal" data-delay="2">
+            <img src="images/medical-800.webp" width="800" height="537" loading="lazy" alt="Clean, bright medical waiting area with gray chairs, a reception desk and a hand-sanitizer station">
+            <figcaption>Medical</figcaption>
+          </figure>
+        </div>
+        <p class="photo-note"><span class="verify">Illustrative AI-generated images: replace with Westpaq’s own photos before publishing</span></p>
         <div class="services-grid">
           <article class="service-card reveal">
             <span class="service-icon" aria-hidden="true"><svg><use href="#s-retail"/></svg></span>
@@ -682,6 +707,10 @@
           <h2 id="why-title">Built around quality and long-term clients</h2>
           <p>Our approach is focused on quality work and keeping clients for the long term.</p>
         </div>
+        <div class="why-layout">
+        <figure class="why-photo reveal">
+          <img src="images/cart-800.webp" width="800" height="993" loading="lazy" alt="Gloved hand wiping a glass panel with a coral microfiber cloth beside an organized janitorial cart in a bright office lobby">
+        </figure>
         <div class="why-grid">
           <div class="why-item reveal">
             <p class="num">01</p>
@@ -713,6 +742,7 @@
             <h3>Insured and bonded</h3>
             <p>Our operations are supported by General Liability Insurance, a Business Owner’s Policy, janitorial/surety bonds and Workers’ Compensation Insurance, in compliance with state laws.</p>
           </div>
+        </div>
         </div>
       </div>
     </section>
