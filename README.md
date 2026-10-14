@@ -19,7 +19,7 @@ Content (specs, parts, craft steps, articles) lives in `lib/content.ts`; nav and
 
 The form opens the visitor's email app addressed to `NEXT_PUBLIC_CONTACT_EMAIL`. Set it in Vercel → Project → Settings → Environment Variables, then redeploy. Until it's set, the form shows a "not set up yet" message.
 
-## Westpaq Cleaning Solutions (client sample)
+## Westpaq Cleaning Services (client sample)
 
 A standalone single-page landing site for a prospective client lives in `public/westpaq/index.html`. It's one self-contained file (inline CSS, JS and SVG; Google Fonts is the only external request), separate from the HODINKEE pages.
 
