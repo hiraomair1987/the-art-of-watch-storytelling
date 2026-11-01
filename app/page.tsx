@@ -179,7 +179,7 @@ export default function Home() {
 
       {/* 06 · Closing */}
       <section id="contact" data-chapter data-state-start="6" aria-labelledby="contact-title" className="chapter">
-        <div className="shell grid gap-12 pb-24 pt-28 lg:min-h-screen lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
+        <div className="shell grid gap-12 pb-24 pt-44 lg:min-h-screen lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
           <div className="text-halo">
             <p className="eyebrow" data-reveal>
               Let’s talk

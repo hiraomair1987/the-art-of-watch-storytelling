@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[80vh] items-center pt-24">
+    <section className="flex min-h-[80vh] items-center pt-40">
       <div className="shell">
         <p className="eyebrow">404</p>
         <h1 className="display-lg mt-4">This page drifted out of orbit.</h1>

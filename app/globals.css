@@ -7,6 +7,13 @@
   --plum-900: #1f0519;
   --plum-800: #330a2b;
   --brand: #610955;
+  --maroon: #351321;
+  --terracotta: #a7583a;
+  --sand: #c8aaa2;
+  --hdr-top: 30px;
+  --hdr-main: 68px;
+  --hdr-nav: 42px;
+  --hdr-h: calc(var(--hdr-top) + var(--hdr-main) + var(--hdr-nav) + 7px);
   --violet: #a47bff;
   --violet-soft: #e4a8f2;
   --magenta: #f07ac8;
@@ -22,7 +29,7 @@
     background: var(--plum-950);
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: var(--hdr-h);
   }
 
   body {
@@ -157,8 +164,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 5.5rem;
-    padding-bottom: 3rem;
+    padding-top: calc(var(--hdr-h) + 1rem);
+    padding-bottom: 2.5rem;
   }
   @media (max-width: 1023px) {
     .chapter-tall.unpin-md {
@@ -167,8 +174,8 @@
     .unpin-md .chapter-pin {
       position: relative;
       min-height: auto;
-      padding-top: 7rem;
-      padding-bottom: 7rem;
+      padding-top: calc(var(--hdr-h) + 3rem);
+      padding-bottom: 6rem;
     }
   }
 
@@ -305,27 +312,83 @@
     opacity: 0.85;
   }
 
-  /* ----- header ----- */
+  /* ----- header: three bands ----- */
   .site-header {
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 50;
-    transition:
-      background-color 0.4s ease,
-      border-color 0.4s ease,
-      backdrop-filter 0.4s ease;
-    /* Solid brand plum, matching the reference header colour. */
-    background: var(--brand);
-    border-bottom: 1px solid rgba(246, 239, 230, 0.1);
+    color: var(--sand);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    transition: box-shadow 0.4s ease;
   }
-  .site-header.is-solid {
-    background: rgba(97, 9, 85, 0.96);
-    border-bottom-color: rgba(246, 239, 230, 0.14);
-    box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.55);
+  .site-header.is-scrolled {
+    box-shadow: 0 14px 40px -14px rgba(0, 0, 0, 0.6);
+  }
+  .hdr-top {
+    background: var(--brand);
+    height: var(--hdr-top);
+    overflow: hidden;
+    color: rgba(246, 239, 230, 0.75);
+    transition: height 0.35s var(--ease), opacity 0.25s ease;
+  }
+  .is-scrolled .hdr-top {
+    height: 0;
+    opacity: 0;
+  }
+  .hdr-top-link {
+    transition: color 0.2s ease;
+  }
+  .hdr-top-link:hover,
+  .hdr-top-link:focus-visible {
+    color: var(--cream);
+  }
+  .hdr-main {
+    background: var(--maroon);
+    height: var(--hdr-main);
+  }
+  .hdr-main .link-quiet,
+  .hdr-main .logo-mark {
+    color: var(--sand);
+  }
+  .hdr-main .text-accent {
+    color: #e9a3c9;
+  }
+  .hdr-jump {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--sand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(200, 170, 162, 0.45);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+  .hdr-jump:hover,
+  .hdr-jump:focus-visible {
+    color: var(--cream);
+    text-decoration-color: var(--cream);
+  }
+  .hdr-rule {
+    height: 4px;
+    background: var(--brand);
+  }
+  .hdr-nav {
+    background: var(--terracotta);
+    height: var(--hdr-nav);
+  }
+  .hdr-nav::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background: linear-gradient(180deg, #96435a, #73365c);
+  }
+  .hdr-mobile {
+    background: var(--maroon);
+    border-top: 1px solid rgba(200, 170, 162, 0.15);
   }
   .nav-link {
     position: relative;
-    color: rgba(246, 239, 230, 0.82);
+    color: #f6e6dc;
     padding: 0.4rem 0;
     transition: color 0.25s ease;
   }
@@ -336,14 +399,14 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background: var(--magenta);
+    background: var(--cream);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.35s var(--ease);
   }
   .nav-link:hover,
   .nav-link:focus-visible {
-    color: var(--cream);
+    color: #fff;
   }
   .nav-link:hover::after,
   .nav-link:focus-visible::after {
@@ -540,4 +603,12 @@
 .logo-mark {
   color: var(--cream);
   filter: drop-shadow(0 0 10px rgba(240, 122, 200, 0.35));
+}
+
+@media (max-width: 767px) {
+  :root {
+    --hdr-top: 26px;
+    --hdr-main: 58px;
+    --hdr-nav: 38px;
+  }
 }

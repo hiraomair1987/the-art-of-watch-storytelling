@@ -32,7 +32,7 @@ export default function ServicePage({ params }: Params) {
     <>
       <SceneLoader detailIndex={index} />
 
-      <section aria-labelledby="svc-title" className="relative flex min-h-[88vh] items-center pb-16 pt-32 max-md:items-end">
+      <section aria-labelledby="svc-title" className="relative flex min-h-[88vh] items-center pb-16 pt-48 max-md:items-end">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="text-sm" data-reveal>
             <ol className="flex flex-wrap items-center gap-2 text-cream-muted">
