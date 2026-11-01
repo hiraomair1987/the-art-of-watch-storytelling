@@ -89,7 +89,8 @@ export const caseStudies: CaseStudy[] = [
     approach:
       "We designed and built a WordPress website with Elementor. A full-width hero sets the tone, followed by a “What I do” section presenting tour packages for Dubai, Canada, Australia, Switzerland, London and the USA.\n\nThe site also includes a press logo strip, an about section, a newsletter sign-up, an Instagram gallery and a footer with navigation, email sign-up, social links and site search.",
     results: [],
-    image: "/case-studies/vanessa-river.png",
+    image: "/case-studies/vanessa-river.webp",
+    fullPage: "/case-studies/vanessa-river-full.webp",
   },
   {
     slug: "harry-narang-consulting",
@@ -225,6 +226,29 @@ export const caseStudies: CaseStudy[] = [
     gallery: ["/case-studies/aetherion-2.webp"],
   },
   {
+    slug: "aurora-estates",
+    published: true,
+    kind: "client",
+    sector: "Real estate",
+    liveUrl: "https://aurora-estates-ring-gallery-wheat.vercel.app",
+    title: "An interactive 3D property gallery for a luxury real estate brand",
+    client: "Aurora Estates",
+    industry: "Luxury real estate",
+    country: "India & UAE",
+    services: ["3d-websites", "website-development", "creative-design"],
+    metric: "3D property gallery website",
+    tech: ["HTML", "CSS", "JavaScript"],
+    summary:
+      "A luxury property website for Aurora Estates, built around an interactive 3D ring gallery that lets buyers spin through residences, villas, commercial spaces and developments across India and the UAE.",
+    challenge:
+      "Aurora Estates presents a large portfolio of residential, commercial and land listings to buyers in India, the UAE and overseas. The website needed to make browsing hundreds of properties feel premium and effortless, while still giving serious buyers the facts they need — price band, location, status and handover stage — up front.",
+    approach:
+      "We designed and built a website whose homepage is a 3D ring of property cards: visitors move, drag or swipe to spin it, click a property to lock it in the centre, and open a detail panel with specifications, description and similar properties. A filter panel narrows the portfolio by type, location, budget, status and bedrooms, and a grid view offers a simpler alternative.\n\nFurther sections cover flagship developments, investment options (ready-to-move, pre-launch and commercial), a dedicated guide for NRI buyers with a five-step buying process, the company’s principles, and an enquiry form. The site switches between English and Hindi, supports keyboard navigation and touch gestures, and is built as a lightweight HTML, CSS and JavaScript site.",
+    results: [],
+    // Upload a screenshot with this exact name to public/case-studies/ and it appears automatically.
+    image: "/case-studies/aurora-estates.png",
+  },
+  {
     slug: "revsol",
     published: true,
     kind: "client",
@@ -280,6 +304,7 @@ export const sectors: Sector[] = [
   { name: "Professional services", text: "Personal brand and consulting websites that build credibility and lead visitors to get in touch." },
   { name: "Technology", text: "Clear, pricing-led websites that help hosting and technology businesses explain what they offer." },
   { name: "Cleaning services", text: "Quote-focused websites for commercial and residential cleaning companies." },
+  { name: "Real estate", text: "Interactive property websites that make large portfolios easy and engaging to browse." },
   { name: "Industrial & safety supplies", text: "Product-led websites that help suppliers present wide ranges of equipment clearly and turn browsing into enquiries." },
 ];
 
