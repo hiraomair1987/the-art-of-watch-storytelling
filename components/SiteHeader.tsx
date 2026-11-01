@@ -30,10 +30,10 @@ export default function SiteHeader() {
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       {/* Layer 1 · plum utility strip */}
-      <div className="hdr-top" aria-hidden={scrolled}>
+      <div className="hdr-top">
         <div className="shell flex h-full items-center justify-between text-[11px] uppercase tracking-[0.2em]">
           <p className="hidden sm:block">Strategy · Creative · Performance</p>
-          <a href={`mailto:${site.contactEmail}`} className="hdr-top-link normal-case tracking-normal" tabIndex={scrolled ? -1 : undefined}>
+          <a href={`mailto:${site.contactEmail}`} className="hdr-top-link normal-case tracking-normal">
             {site.contactEmail}
           </a>
         </div>

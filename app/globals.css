@@ -10,10 +10,11 @@
   --maroon: #351321;
   --terracotta: #a7583a;
   --sand: #c8aaa2;
-  --hdr-top: 30px;
-  --hdr-main: 68px;
+  --hdr-top: 54px;
+  --hdr-top-scrolled: 30px;
+  --hdr-main: 64px;
   --hdr-nav: 42px;
-  --hdr-h: calc(var(--hdr-top) + var(--hdr-main) + var(--hdr-nav) + 7px);
+  --hdr-h: calc(var(--hdr-top) + var(--hdr-main) + var(--hdr-nav) + 15px);
   --violet: #a47bff;
   --violet-soft: #e4a8f2;
   --magenta: #f07ac8;
@@ -324,16 +325,16 @@
   .site-header.is-scrolled {
     box-shadow: 0 14px 40px -14px rgba(0, 0, 0, 0.6);
   }
+  /* Layer 1 — tall plum band, as in the reference */
   .hdr-top {
-    background: var(--brand);
+    background: linear-gradient(180deg, #630857 0%, #610955 70%, #5e0b52 100%);
     height: var(--hdr-top);
     overflow: hidden;
-    color: rgba(246, 239, 230, 0.75);
-    transition: height 0.35s var(--ease), opacity 0.25s ease;
+    color: rgba(246, 239, 230, 0.78);
+    transition: height 0.35s var(--ease);
   }
   .is-scrolled .hdr-top {
-    height: 0;
-    opacity: 0;
+    height: var(--hdr-top-scrolled);
   }
   .hdr-top-link {
     transition: color 0.2s ease;
@@ -342,16 +343,27 @@
   .hdr-top-link:focus-visible {
     color: var(--cream);
   }
+  /* Layer 2 — deep maroon, shaded where it meets the plum above and below */
   .hdr-main {
-    background: var(--maroon);
     height: var(--hdr-main);
+    background: linear-gradient(
+      180deg,
+      #4f103f 0px,
+      #401231 1.5px,
+      #371222 3px,
+      #351321 5px,
+      #351321 calc(100% - 4px),
+      #3b1128 calc(100% - 2.5px),
+      #4c0d3a calc(100% - 1px),
+      #5c0e4c 100%
+    );
   }
   .hdr-main .link-quiet,
   .hdr-main .logo-mark {
     color: var(--sand);
   }
   .hdr-main .text-accent {
-    color: #e9a3c9;
+    color: var(--sand);
   }
   .hdr-jump {
     font-size: 11px;
@@ -368,19 +380,31 @@
     color: var(--cream);
     text-decoration-color: var(--cream);
   }
+  /* Thin plum rule between the bands */
   .hdr-rule {
-    height: 4px;
-    background: var(--brand);
+    height: 6px;
+    background: linear-gradient(180deg, #610b52 0%, #620754 35%, #610a56 70%, #6e1744 85%, #923d50 100%);
   }
+  /* Layer 3 — terracotta navigation */
   .hdr-nav {
-    background: var(--terracotta);
     height: var(--hdr-nav);
+    background: linear-gradient(180deg, #a6544a 0px, #a7583a 2px, #a7583a calc(100% - 2px), #a4554a 100%);
   }
+  /* Bottom shade: terracotta → plum stripe → soft mauve edge */
   .hdr-nav::after {
     content: "";
     display: block;
-    height: 3px;
-    background: linear-gradient(180deg, #96435a, #73365c);
+    height: 9px;
+    background: linear-gradient(
+      180deg,
+      #964450 0px,
+      #731d42 1.5px,
+      #610948 3px,
+      #620a58 4.5px,
+      #5d0c50 6px,
+      #73385a 7.5px,
+      rgba(199, 153, 164, 0.55) 9px
+    );
   }
   .hdr-mobile {
     background: var(--maroon);
@@ -607,8 +631,9 @@
 
 @media (max-width: 767px) {
   :root {
-    --hdr-top: 26px;
-    --hdr-main: 58px;
+    --hdr-top: 34px;
+    --hdr-top-scrolled: 24px;
+    --hdr-main: 56px;
     --hdr-nav: 38px;
   }
 }
