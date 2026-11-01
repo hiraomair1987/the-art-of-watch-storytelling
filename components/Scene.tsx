@@ -475,6 +475,24 @@ function buildServiceObjects(glass: THREE.Material, edge: THREE.LineBasicMateria
     g.children[g.children.length - 1].rotation.x = Math.PI / 2;
     objs.push(g);
   }
+  // App Development — a phone with app tiles
+  {
+    const g = new THREE.Group();
+    g.add(withEdges(roundedPanelGeometry(0.68, 1.32, 0.12, 0.06)));
+    const tileMat = new THREE.MeshBasicMaterial({ color: 0xe8f5fd, transparent: true, opacity: 0.6 });
+    for (let r = 0; r < 3; r++) {
+      for (let c = 0; c < 2; c++) {
+        const tile = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.2), r === 0 && c === 0 ? accent : tileMat);
+        tile.position.set(-0.13 + c * 0.26, 0.34 - r * 0.28, 0.035);
+        g.add(tile);
+      }
+    }
+    const bar = new THREE.Mesh(new THREE.CapsuleGeometry(0.025, 0.18, 4, 8), accent);
+    bar.rotation.z = Math.PI / 2;
+    bar.position.set(0, -0.54, 0.04);
+    g.add(bar);
+    objs.push(g);
+  }
   return objs;
 }
 
