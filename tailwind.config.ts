@@ -5,8 +5,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        plum: { 950: "#12061a", 900: "#1a0a24", 800: "#261134", 700: "#371a4a" },
-        violet: { 300: "#c4a6ff", 400: "#a47bff", 500: "#8456f0" },
+        plum: { 950: "#14030f", 900: "#1f0519", 800: "#330a2b", 700: "#4a0c40" },
+        brand: "#610955",
+        violet: { 300: "#e4a8f2", 400: "#a47bff", 500: "#8456f0" },
         accent: "#f07ac8",
         cream: { DEFAULT: "#f6efe6", muted: "rgba(246, 239, 230, 0.7)" },
       },

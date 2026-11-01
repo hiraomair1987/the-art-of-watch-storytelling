@@ -16,6 +16,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
+import { LOGO_CENTER, LOGO_PATH } from "@/lib/logo";
 
 type Props = {
   /** When set, the scene shows a single service object (used on service pages). */
@@ -144,6 +146,7 @@ type State = {
   coreScale: number;
   nodes: THREE.Vector3[]; // two satellite orbs used in the approach chapter
   nodeScale: number;
+  emblem: number; // 0–1 presence of the 3D logo at the core
   cam: THREE.Vector3;
   look: THREE.Vector3;
 };
@@ -167,6 +170,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
     coreScale: 1,
     nodes: [v(0, 0, 0), v(0, 0, 0)],
     nodeScale: 0,
+    emblem: 0,
     cam: v(0, 0, 10 * zoom),
     look: v(0, 0, 0),
   });
@@ -174,7 +178,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
   // 0 · Opening — a calm constellation beside the headline
   {
     const s = blank();
-    const c = portrait ? v(0, 3.6, -3) : v(2.7 * lx, 0.1, 0);
+    const c = portrait ? v(0, 4.6, -4.5) : v(2.7 * lx, 0.1, 0);
     for (let i = 0; i < PANELS; i++) {
       const k = i + 0.5;
       const phi = Math.acos(1 - (2 * k) / PANELS);
@@ -193,6 +197,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
     s.reveal = 0.62;
     s.core.copy(c);
     s.coreScale = 1;
+    s.emblem = 1;
     s.nodes = [c.clone(), c.clone()];
     s.cam.set(0, 0, 10 * zoom);
     s.look.set(0, 0, 0);
@@ -304,7 +309,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
     const x0 = portrait ? -1.6 : 0.6 * lx;
     const x1 = portrait ? 1.6 : 5.6 * lx;
     const y0 = portrait ? -4.2 : -3;
-    const y1 = portrait ? 4.6 : 3.3;
+    const y1 = portrait ? 4.6 : 2.9;
     for (let i = 0; i < PANELS; i++) {
       const u = i / (PANELS - 1);
       s.pos.push(v(lerp(x0, x1, u) + Math.sin(u * Math.PI) * 0.7, lerp(y0, y1, Math.pow(u, 1.15)), lerp(-1.2, 1.2, u)));
@@ -316,8 +321,9 @@ function buildStates({ lx, portrait }: Layout): State[] {
       s.thread.push(v(lerp(x0, x1, u) + Math.sin(u * Math.PI) * 0.7, lerp(y0, y1, Math.pow(u, 1.15)) + 0.22, lerp(-1.2, 1.2, u)));
     }
     s.reveal = 1;
-    s.core.set(x1 + 0.2, y1 + 0.8, 1.4);
+    s.core.set(x1 + 0.2, y1 + 0.6, 1.4);
     s.coreScale = 1.15;
+    s.emblem = 0.5;
     s.nodes = [s.core.clone(), s.core.clone()];
     s.cam.set(portrait ? 0 : -1.2, -0.6, 11 * zoom);
     s.look.set(portrait ? 0 : 1.2, 0.5, 0);
@@ -447,18 +453,18 @@ export default function Scene({ detailIndex }: Props) {
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x1a0a24, 0.05);
+    scene.fog = new THREE.FogExp2(0x200519, 0.05);
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
 
     const pmrem = new THREE.PMREMGenerator(renderer);
     const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     scene.environment = envTex;
 
-    scene.add(new THREE.AmbientLight(0x8d6cc4, 0.55));
+    scene.add(new THREE.AmbientLight(0xa46aa8, 0.55));
     const key = new THREE.DirectionalLight(0xffeadb, 0.9);
     key.position.set(3, 5, 6);
     scene.add(key);
-    const violet = new THREE.PointLight(0x7c5cff, 60, 40, 2);
+    const violet = new THREE.PointLight(0x8a5cff, 60, 40, 2);
     violet.position.set(-6, -2, 4);
     scene.add(violet);
     const magenta = new THREE.PointLight(0xe04fb3, 34, 30, 2);
@@ -470,8 +476,8 @@ export default function Scene({ detailIndex }: Props) {
 
     // Materials
     const glass = new THREE.MeshPhysicalMaterial({
-      color: 0x4a2470,
-      emissive: 0x1d0a33,
+      color: 0x610955,
+      emissive: 0x2a0424,
       metalness: 0.15,
       roughness: 0.16,
       clearcoat: 1,
@@ -482,7 +488,7 @@ export default function Scene({ detailIndex }: Props) {
       side: THREE.DoubleSide,
       depthWrite: false,
     });
-    const edge = new THREE.LineBasicMaterial({ color: 0xc4a6ff, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
+    const edge = new THREE.LineBasicMaterial({ color: 0xe4a8f2, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
     const accent = new THREE.MeshBasicMaterial({ color: 0xff7fd0, toneMapped: false });
     const glow = glowTexture();
     const uiTex = [uiTexture(0), uiTexture(1), uiTexture(2)];
@@ -518,13 +524,42 @@ export default function Scene({ detailIndex }: Props) {
     const makeOrb = () => {
       const g = new THREE.Group();
       g.add(new THREE.Mesh(new THREE.SphereGeometry(0.2, 24, 16), orbMat));
-      const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: 0xd57bff, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+      const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: 0xe07be6, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
       halo.scale.setScalar(2.2);
       g.add(halo);
       root.add(g);
       return g;
     };
     const core = makeOrb();
+    const coreSphere = core.children[0];
+
+    // The ev logo as a glass emblem at the heart of the world
+    const emblemGroup = new THREE.Group();
+    const emblemMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf6efe6,
+      emissive: 0x610955,
+      emissiveIntensity: 0.8,
+      fog: false,
+      metalness: 0.25,
+      roughness: 0.22,
+      clearcoat: 1,
+      envMapIntensity: 1,
+      side: THREE.DoubleSide,
+    });
+    {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg"><path d="${LOGO_PATH}" fill="#000" fill-rule="evenodd"/></svg>`;
+      const shapes = new SVGLoader().parse(svg).paths.flatMap((p) => SVGLoader.createShapes(p));
+      const geo = new THREE.ExtrudeGeometry(shapes, { depth: 46, bevelEnabled: true, bevelThickness: 8, bevelSize: 5, bevelSegments: 2, curveSegments: 10 });
+      const k = 2.5 / LOGO_CENTER.size;
+      geo.translate(-LOGO_CENTER.x, -LOGO_CENTER.y, -23);
+      geo.scale(k, -k, k);
+      geo.computeVertexNormals();
+      const mesh = new THREE.Mesh(geo, emblemMat);
+      emblemGroup.add(mesh);
+      emblemGroup.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 40), edge));
+    }
+    emblemGroup.scale.setScalar(0.0001);
+    root.add(emblemGroup);
     const nodes = [makeOrb(), makeOrb()];
 
     // Luminous thread
@@ -538,7 +573,7 @@ export default function Scene({ detailIndex }: Props) {
     root.add(thread);
     const beads = new THREE.Points(
       threadGeo,
-      new THREE.PointsMaterial({ map: glow, color: 0xc98bff, size: 0.16, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }),
+      new THREE.PointsMaterial({ map: glow, color: 0xd98bf0, size: 0.16, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }),
     );
     beads.frustumCulled = false;
     root.add(beads);
@@ -560,7 +595,7 @@ export default function Scene({ detailIndex }: Props) {
     const PCOUNT = small ? 500 : 1100;
     const pPos = new Float32Array(PCOUNT * 3);
     const pCol = new Float32Array(PCOUNT * 3);
-    const cA = new THREE.Color(0xa47bff);
+    const cA = new THREE.Color(0xb47cf0);
     const cB = new THREE.Color(0xff86d4);
     const cC = new THREE.Color(0xf6efe6);
     const pr = mulberry32(21);
@@ -750,6 +785,18 @@ export default function Scene({ detailIndex }: Props) {
         mixVec(n.position, A.nodes[k], B.nodes[k], f);
         n.scale.setScalar(Math.max(0.0001, lerp(A.nodeScale, B.nodeScale, smooth(f))));
       });
+
+      // Emblem
+      const em = lerp(A.emblem, B.emblem, smooth(f));
+      coreSphere.scale.setScalar(Math.max(0.0001, 1 - em));
+      emblemGroup.visible = em > 0.01;
+      emblemGroup.position.copy(core.position).add(tmpA.set(0, 0, 0.35));
+      emblemGroup.scale.setScalar(Math.max(0.0001, em * (layout.portrait ? 0.7 : 1) * (0.6 + 0.4 * lerp(A.coreScale, B.coreScale, f))));
+      emblemGroup.rotation.set(
+        -pointer.y * 0.18 + (motion ? Math.sin(elapsed * 0.4) * 0.05 : 0),
+        pointer.x * 0.32 + (motion ? Math.sin(elapsed * 0.3) * 0.12 : 0) - 0.12,
+        0,
+      );
 
       // Thread
       for (let k = 0; k < THREAD_CTRL; k++) mixVec(ctrl[k], A.thread[k], B.thread[k], smooth(f));
