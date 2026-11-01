@@ -1,139 +1,239 @@
-import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
-import ArticleCard from "@/components/ArticleCard";
-import Reveal from "@/components/Reveal";
-import WatchScroll from "@/components/WatchScroll";
-import { articles, watch } from "@/lib/content";
-import { images } from "@/lib/images";
+import ChapterNav from "@/components/ChapterNav";
+import ContactForm from "@/components/ContactForm";
+import ServicesShowcase from "@/components/ServicesShowcase";
+import StoryScene from "@/components/scene/StoryScene";
+import { site } from "@/lib/site";
 
-const chapters = [
-  { href: "/watch", eyebrow: "01", title: "The Watch", text: "Reference 01, an automatic chronograph in blackened titanium.", image: images.dial },
-  { href: "/movement", eyebrow: "02", title: "The Movement", text: "Seven groups of parts, and what each one does.", image: images.movement },
-  { href: "/craft", eyebrow: "03", title: "The Craft", text: "Six steps from first sketch to the wrist.", image: images.gearTrain },
+export const metadata: Metadata = {
+  title: { absolute: "efficiovirtual — Make your next digital move count" },
+  description:
+    "efficiovirtual helps brands grow with Google Ads, marketing automation, 3D websites, landing pages and creative design — strategy, creative and performance working as one system.",
+  alternates: { canonical: "/" },
+};
+
+const stages = [
+  {
+    name: "Strategy",
+    text: "We start with your goals, audience and numbers, then decide which channels, offers and messages deserve your budget — and how we’ll measure each one.",
+  },
+  {
+    name: "Creative",
+    text: "Ads, pages and visuals built from that plan, in one consistent voice. Every asset has a job to do and a clear next step for the people who see it.",
+  },
+  {
+    name: "Performance",
+    text: "We launch, track and refine — adjusting budgets, targeting and copy based on what the data shows, then feeding what we learn back into the strategy.",
+  },
 ];
 
-const stats = [
-  ["28,800", "Vibrations per hour"],
-  ["42 h", "Power reserve"],
-  ["25", "Jewels"],
-  ["100 m", "Water resistance"],
+const fragments = ["Ads with no shared plan", "A website that doesn’t convert", "Follow-ups done by hand", "Creative that changes every campaign"];
+
+const outcomes = [
+  { title: "Reporting you can read", text: "Clear dashboards tied to the goals we agreed, not vanity numbers." },
+  { title: "Decisions backed by data", text: "Budget moves towards what works, and away from what doesn’t." },
+  { title: "A system that compounds", text: "Each campaign, page and email makes the next one smarter." },
 ];
 
-export default function Home() {
+function WordmarkReveal() {
+  const letters = Array.from(site.name);
+  return (
+    <p className="wordmark-reveal display text-[clamp(3.2rem,14vw,8.5rem)] font-light italic leading-[0.9] text-cream" aria-label={site.name}>
+      {letters.map((l, i) => (
+        <span key={i} aria-hidden="true" style={{ ["--i" as string]: i }}>
+          {l}
+        </span>
+      ))}
+    </p>
+  );
+}
+
+export default function HomePage() {
   return (
     <>
-      <WatchScroll />
+      <StoryScene mode="story" />
+      <ChapterNav />
 
-      {/* Statement */}
-      <section className="section shell border-t border-white/5">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-          <Reveal>
-            <p className="eyebrow mb-5">{watch.subtitle}</p>
-            <h2 className="heading">One watch. Hundreds of parts. A single heartbeat.</h2>
-            <p className="copy mt-6 max-w-md">{watch.intro}</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/watch" className="btn-primary">
-                Discover {watch.name}
-              </Link>
-              <Link href="/contact" className="btn-ghost">
-                Get in touch
-              </Link>
+      {/* 1 — Opening */}
+      <section id="top" data-chapter aria-labelledby="hero-title" className="relative z-10 min-h-[130vh]">
+        <div className="sticky top-0 flex min-h-screen items-center pb-16 pt-28">
+          <div className="shell">
+            <div className="readable max-w-2xl">
+              <p className="eyebrow" data-reveal>
+                Digital marketing agency
+              </p>
+              <div className="mt-6">
+                <WordmarkReveal />
+              </div>
+              <h1 id="hero-title" className="display mt-6 max-w-xl text-balance text-[2rem] sm:text-5xl" data-reveal style={{ ["--delay" as string]: "500ms" }}>
+                Make your next digital move count.
+              </h1>
+              <p className="lede mt-6 max-w-lg" data-reveal style={{ ["--delay" as string]: "650ms" }}>
+                We help brands grow by joining up strategy, creative and performance marketing — so every campaign, page and email
+                pulls in the same direction.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--delay" as string]: "800ms" }}>
+                <Link href="#contact" className="btn-primary">
+                  Let’s talk <span className="arrow" aria-hidden="true">→</span>
+                </Link>
+                <Link href="#services" className="btn-ghost">
+                  Explore services
+                </Link>
+              </div>
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-sm">
-              <Image src={images.assembled.src} alt={images.assembled.alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+            <div className="mt-16 hidden items-center gap-4 text-xs uppercase tracking-[0.24em] text-cream-dim sm:flex" aria-hidden="true">
+              <span className="scroll-cue" />
+              Scroll to explore
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Chapters */}
-      <section className="section shell pt-0 md:pt-0">
-        <Reveal>
-          <p className="eyebrow mb-5">Chapters</p>
-          <h2 className="heading max-w-3xl">Go deeper.</h2>
-        </Reveal>
-        <div className="mt-12 grid gap-10 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 lg:gap-8">
-          {chapters.map((c, i) => (
-            <Reveal key={c.href} delay={i * 0.08}>
-              <Link href={c.href} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-white/[0.03]">
-                  <Image
-                    src={c.image.src}
-                    alt={c.image.alt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                    <p className="text-xs tabular-nums text-white/40">{c.eyebrow}</p>
-                    <h3 className="mt-2 text-3xl font-semibold tracking-tightest text-white/90">{c.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-white/60">{c.text}</p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm text-white/80">
-                      Read chapter <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Numbers */}
-      <section className="border-y border-white/5 bg-white/[0.015]">
-        <div className="shell grid grid-cols-2 gap-x-8 gap-y-12 py-16 md:grid-cols-4 md:py-24">
-          {stats.map(([value, label], i) => (
-            <Reveal key={label} delay={i * 0.06}>
-              <dl className="border-t border-white/10 pt-5">
-                <dt className="text-xs uppercase tracking-[0.22em] text-white/40">{label}</dt>
-                <dd className="mt-3 text-4xl font-semibold tabular-nums tracking-tightest text-white/90 md:text-5xl">{value}</dd>
-              </dl>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Journal */}
-      <section className="section shell">
-        <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="eyebrow mb-5">Journal</p>
-            <h2 className="heading">Stories from the bench.</h2>
           </div>
-          <Link href="/journal" className="btn-ghost self-start sm:self-auto">
-            All stories
-          </Link>
-        </Reveal>
-        <div className="mt-12 grid gap-12 sm:grid-cols-2 md:mt-16 lg:grid-cols-3 lg:gap-8">
-          {articles.map((a, i) => (
-            <Reveal key={a.slug} delay={i * 0.08}>
-              <ArticleCard article={a} />
-            </Reveal>
-          ))}
         </div>
       </section>
 
-      {/* Closing */}
-      <section className="relative overflow-hidden border-t border-white/5">
-        <Image src={images.exploded.src} alt="" fill sizes="100vw" className="object-cover opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/60 to-ink" />
-        <div className="shell relative py-28 text-center md:py-44">
-          <Reveal>
-            <p className="eyebrow mb-5">Made to Last</p>
-            <h2 className="heading mx-auto max-w-3xl">Built to be serviced, not replaced.</h2>
-            <p className="copy mx-auto mt-6">Questions about the watch, the movement or this project? We would love to hear from you.</p>
-            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-primary">
-                Contact us
-              </Link>
-              <Link href="/craft" className="btn-ghost">
-                How it&apos;s made
-              </Link>
+      {/* 2 — The challenge */}
+      <section id="challenge" data-chapter aria-labelledby="challenge-title" className="relative z-10 min-h-screen lg:min-h-[200vh]">
+        <div className="flex min-h-screen items-center py-24 lg:sticky lg:top-0">
+          <div className="shell">
+            <div className="readable max-w-xl">
+              <p className="eyebrow" data-reveal>
+                01 — The challenge
+              </p>
+              <h2 id="challenge-title" className="h-chapter mt-6" data-reveal>
+                Attention is earned. Growth is designed.
+              </h2>
+              <p className="lede mt-6" data-reveal>
+                Most brands don’t lack activity. They lack connection. Ads run in one place, the website lives in another, and
+                emails go out on their own. Each piece works hard — but alone.
+              </p>
+              <ul className="mt-8 flex flex-wrap gap-2" data-reveal aria-label="Common gaps">
+                {fragments.map((f) => (
+                  <li key={f} className="rounded-full border border-white/10 bg-plum-900/50 px-4 py-2 text-sm text-cream-muted backdrop-blur">
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-8 text-[15px] font-medium text-cream" data-reveal>
+                We bring the pieces into one plan, so every touchpoint moves people forward.
+              </p>
             </div>
-          </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 3 — Our approach */}
+      <section id="approach" data-chapter aria-labelledby="approach-title" className="relative z-10 min-h-screen lg:min-h-[180vh]">
+        <div className="flex min-h-screen items-center py-24 lg:sticky lg:top-0">
+          <div className="shell">
+            <div className="readable max-w-xl">
+              <p className="eyebrow" data-reveal>
+                02 — Our approach
+              </p>
+              <h2 id="approach-title" className="h-chapter mt-6" data-reveal>
+                Three stages. One connected system.
+              </h2>
+              <ol className="mt-10 space-y-7">
+                {stages.map((s, i) => (
+                  <li key={s.name} className="grid grid-cols-[auto_1fr] gap-x-5" data-reveal style={{ ["--delay" as string]: `${i * 120}ms` }}>
+                    <span className="mt-1 flex h-9 w-9 items-center justify-center rounded-full border border-violet-soft/40 bg-plum-900/60 font-display text-sm text-violet-soft">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <h3 className="font-display text-2xl font-normal tracking-tight">{s.name}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-cream-muted">{s.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4 — Our services */}
+      <section id="services" data-chapter aria-labelledby="services-title" className="relative z-10 py-28 lg:py-40">
+        <div className="shell">
+          <div className="max-w-xl">
+            <div className="readable">
+              <p className="eyebrow" data-reveal>
+                03 — Our services
+              </p>
+              <h2 id="services-title" className="h-chapter mt-6" data-reveal>
+                Everything growth needs, working together.
+              </h2>
+              <p className="lede mt-6" data-reveal>
+                Five services, one team. Use one on its own or combine them — they’re designed to share data, messaging and goals.
+              </p>
+            </div>
+            <div className="mt-12">
+              <ServicesShowcase />
+            </div>
+            <p className="mt-8 text-sm text-cream-dim" data-reveal>
+              Not sure where to start?{" "}
+              <Link href="/services" className="link">
+                Compare all services
+              </Link>{" "}
+              or{" "}
+              <Link href="#contact" className="link">
+                ask us
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 5 — The outcome */}
+      <section id="outcome" data-chapter aria-labelledby="outcome-title" className="relative z-10 min-h-screen lg:min-h-[180vh]">
+        <div className="flex min-h-screen items-center py-24 lg:sticky lg:top-0">
+          <div className="shell">
+            <div className="readable max-w-xl">
+              <p className="eyebrow" data-reveal>
+                04 — The outcome
+              </p>
+              <h2 id="outcome-title" className="h-chapter mt-6" data-reveal>
+                Growth you can measure — and keep building on.
+              </h2>
+              <p className="lede mt-6" data-reveal>
+                When strategy, creative and performance share one plan, results stop depending on a single lucky campaign. You
+                see what’s working, why, and where to invest next.
+              </p>
+              <ul className="mt-10 grid gap-5 sm:grid-cols-3 lg:grid-cols-1">
+                {outcomes.map((o, i) => (
+                  <li key={o.title} className="border-l border-violet-soft/30 pl-5" data-reveal style={{ ["--delay" as string]: `${i * 120}ms` }}>
+                    <h3 className="text-base font-semibold text-cream">{o.title}</h3>
+                    <p className="mt-1.5 text-[15px] leading-relaxed text-cream-muted">{o.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6 — Closing */}
+      <section id="contact" data-chapter aria-labelledby="contact-title" className="relative z-10 pb-28 pt-28 lg:pb-36 lg:pt-40">
+        <div className="shell grid items-start gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+          <div className="readable lg:sticky lg:top-32">
+            <p className="eyebrow" data-reveal>
+              05 — Let’s talk
+            </p>
+            <h2 id="contact-title" className="h-chapter mt-6" data-reveal>
+              Ready to make your next move count?
+            </h2>
+            <p className="lede mt-6 max-w-md" data-reveal>
+              Tell us where you are and where you want to be. We’ll come back with honest thoughts on what to do first — whether
+              that’s a campaign, a page or a complete system.
+            </p>
+            <p className="mt-8 text-sm text-cream-dim" data-reveal>
+              Or email us directly at{" "}
+              <a href={`mailto:${site.contactEmail}`} className="link">
+                {site.contactEmail}
+              </a>
+            </p>
+          </div>
+          <div data-reveal>
+            <ContactForm />
+          </div>
         </div>
       </section>
     </>

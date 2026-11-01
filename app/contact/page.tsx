@@ -1,55 +1,48 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
-import PageHeader from "@/components/PageHeader";
-import Reveal from "@/components/Reveal";
+import ContactFormFromQuery from "@/components/ContactFormFromQuery";
+import PageIntro from "@/components/PageIntro";
+import StoryScene from "@/components/scene/StoryScene";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Questions about Reference 01, the movement, or this project? Get in touch.",
+  title: "Contact — Let’s talk",
+  description: "Tell efficiovirtual about your goals. Get in touch about Google Ads, marketing automation, 3D websites, landing pages or creative design.",
+  alternates: { canonical: "/contact" },
 };
-
-const faqs = [
-  {
-    q: "Is Reference 01 a real watch?",
-    a: "Reference 01 is a design concept created for this site. The photography is a rendered study, and the specifications are illustrative.",
-  },
-  {
-    q: "How often should a mechanical watch be serviced?",
-    a: "Every five to eight years is typical. Sooner if it starts gaining or losing time noticeably. Our Journal has a full care guide.",
-  },
-  {
-    q: "Can I use this site's design for my own project?",
-    a: "Send us a message with a little about what you have in mind and we will get back to you.",
-  },
-];
 
 export default function ContactPage() {
   return (
     <>
-      <PageHeader eyebrow="Contact" title="Let's talk watches.">
-        Questions about the watch, the movement, or how this site was made. Send a note and we will reply as soon as we
-        can.
-      </PageHeader>
-
-      <section className="shell pb-24 md:pb-36">
-        <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr] lg:gap-24">
-          <Reveal>
-            <ContactForm />
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="eyebrow mb-6">Good to know</p>
-            <dl className="divide-y divide-white/10 border-y border-white/10">
-              {faqs.map((f) => (
-                <div key={f.q} className="py-6">
-                  <dt className="text-lg font-medium tracking-tight text-white/90">{f.q}</dt>
-                  <dd className="mt-2 text-[15px] leading-relaxed text-white/60">{f.a}</dd>
-                </div>
-              ))}
+      <StoryScene mode="static" story={5} />
+      <div className="relative z-10 pb-28 pt-36 lg:pt-44">
+        <div className="shell grid items-start gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+          <div>
+            <PageIntro eyebrow="Let’s talk" title="Make your next digital move count." crumbs={[{ href: "/", label: "Home" }]}>
+              Share a little about your business and what you’d like to achieve. We’ll reply with honest thoughts and a suggested
+              first step.
+            </PageIntro>
+            <dl className="readable mt-10 space-y-5 text-[15px]">
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.24em] text-cream-dim">Email</dt>
+                <dd className="mt-1.5">
+                  <a href={`mailto:${site.contactEmail}`} className="link">
+                    {site.contactEmail}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-[0.24em] text-cream-dim">What to include</dt>
+                <dd className="mt-1.5 max-w-sm text-cream-muted">Your goals, your timeline, and anything you’ve already tried.</dd>
+              </div>
             </dl>
-          </Reveal>
+          </div>
+          <Suspense fallback={<ContactForm />}>
+            <ContactFormFromQuery />
+          </Suspense>
         </div>
-      </section>
+      </div>
     </>
   );
 }

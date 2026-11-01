@@ -1,23 +1,33 @@
-# HODINKEE — The Art of Watchmaking
+# efficiovirtual
 
-A scroll-driven exploded view of a mechanical chronograph. Built with Next.js 14 (App Router), Tailwind CSS, Framer Motion and an HTML5 canvas image sequence.
+A 3D storytelling website for **efficiovirtual**, a digital marketing agency (Google Ads, marketing automation, 3D websites, landing pages, creative design).
+
+Built with Next.js 14 (App Router), Tailwind CSS and Three.js.
 
 ## Pages
 
 | Route | What's there |
 | --- | --- |
-| `/` | Scroll-driven exploded view, then overview, chapters, key numbers, journal teaser |
-| `/watch` | Reference 01: photo gallery, highlights, dial feature, full specifications |
-| `/movement` | Interactive exploded view with numbered hotspots, then each part explained |
-| `/craft` | Six stages from design to quality control |
-| `/journal` | Featured story + list; each story at `/journal/[slug]` |
-| `/contact` | Contact form + FAQ |
+| `/` | The scroll story: Opening → Challenge → Approach → Services → Outcome → Let's talk (contact form) |
+| `/services` | All five services |
+| `/services/[slug]` | One page per service: what's included, how we work, who it suits |
+| `/contact` | Contact form (`?service=<slug>` preselects a service) |
 
-Content (specs, parts, craft steps, articles) lives in `lib/content.ts`; nav and site settings in `lib/site.ts`.
+Copy lives in `lib/services.ts` (services) and `app/page.tsx` (homepage chapters). Brand name, nav and contact settings are in `lib/site.ts`.
 
-### Contact form
+## The 3D world
 
-The form opens the visitor's email app addressed to `NEXT_PUBLIC_CONTACT_EMAIL`. Set it in Vercel → Project → Settings → Environment Variables, then redeploy. Until it's set, the form shows a "not set up yet" message.
+- `components/scene/world.ts`: plain Three.js. One scene of glass panels, luminous threads, glowing nodes and particles. Each chapter is a different arrangement of the same objects (`OPEN`, `SCATTER`, `ALIGN`, `APPROACH`, `SERVICES`, `OUTCOME`, `CLOSE`), and the "story" value blends between them.
+- `components/scene/StoryScene.tsx`: maps scroll position to the story value. Each `[data-chapter]` section holds its arrangement while it fills the screen, and transitions happen around section boundaries. It also handles mouse parallax (fine pointers only), a gentle scroll-based sway on touch screens, and service focus events from the cards.
+- Three.js is loaded with a dynamic import after the page renders, so the HTML is usable straight away.
+- **Reduced motion:** no scroll-tied camera moves, idle float or parallax. The scene jumps to each chapter's resting composition and only re-renders when something changes.
+- **No WebGL** (or context lost): a static CSS composition in the same palette is shown instead. All content is plain HTML, so nothing depends on the 3D layer.
+
+## Contact form
+
+- By default the form opens the visitor's email app, addressed to `NEXT_PUBLIC_CONTACT_EMAIL` (default `hello@efficiovirtual.com`).
+- To receive submissions directly, set `NEXT_PUBLIC_FORM_ENDPOINT` to any endpoint that accepts a JSON POST (Formspree, Basin, a webhook). Fields sent: `name`, `email`, `company`, `service`, `message`.
+- `NEXT_PUBLIC_SITE_URL` sets the canonical URL (default `https://efficiovirtual.com`).
 
 ## Run locally
 
@@ -26,22 +36,3 @@ npm install
 npm run dev     # http://localhost:3000
 npm run build   # production build
 ```
-
-## How it works
-
-- `components/WatchScroll.tsx` — a `h-[400vh]` section with a sticky full-screen `<canvas>`. Framer Motion's `useScroll` (smoothed with `useSpring`) maps scroll progress to a frame index; frames cross-fade on the fractional part of the index so scrolling never steps.
-- `public/video-split/frame_[0-79]_delay-0.04s.webp` — 80 frames (1600×900) taken from the source video.
-- The footage only goes one way (assembled → exploded), so the timeline plays it forward to the 60% beat, holds, then plays it in reverse so the watch reassembles for "Made to Last." Tweak `FRAME_INPUT` / `FRAME_OUTPUT` to change the pacing.
-- Images are drawn with `contain` fit and their edges are feathered into the `#050505` background, so nothing is cropped on mobile.
-
-## Deploy: GitLab → Vercel
-
-1. Push this repo to GitLab:
-   ```bash
-   git remote add gitlab git@gitlab.com:<you>/<repo>.git
-   git push gitlab <branch>
-   ```
-2. In Vercel: **Add New → Project → Continue with GitLab**, pick the repo. The Next.js preset is detected automatically; no environment variables are needed.
-3. Every push to GitLab then triggers a deploy (preview builds for branches, production for the default branch).
-
-The frame sequence is served with a one-year immutable `Cache-Control` header (see `next.config.mjs`). If you replace frames, give them new file names so caches don't serve the old ones.

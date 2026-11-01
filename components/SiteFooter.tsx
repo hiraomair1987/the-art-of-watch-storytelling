@@ -1,52 +1,56 @@
 import Link from "next/link";
-import { nav } from "@/lib/site";
+import Wordmark from "./Wordmark";
+import { services } from "@/lib/services";
+import { nav, site } from "@/lib/site";
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-white/5">
+    <footer className="relative z-10 border-t border-white/[0.08] bg-plum-950/85 backdrop-blur-xl">
       <div className="shell grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:py-20">
-        <div>
-          <Link href="/" className="text-[13px] font-semibold uppercase tracking-[0.38em] text-white/90">
-            Hodinkee
-          </Link>
-          <p className="copy mt-5">
-            The Art of Watchmaking — one chronograph, taken apart piece by piece and put back together again.
+        <div className="max-w-sm">
+          <Wordmark />
+          <p className="mt-5 text-sm leading-relaxed text-cream-dim">
+            A digital marketing agency bringing strategy, creative and performance together — so every move you make online counts.
           </p>
+          <a href={`mailto:${site.contactEmail}`} className="link mt-6 inline-block text-sm">
+            {site.contactEmail}
+          </a>
         </div>
 
-        <div>
-          <p className="eyebrow mb-5">Explore</p>
-          <ul className="space-y-3 text-sm">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-white/60 transition-colors hover:text-white/90">
-                  {item.label}
+        <nav aria-label="Services">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-cream-dim">Services</h2>
+          <ul className="mt-5 space-y-3 text-sm">
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/services/${s.slug}`} className="text-cream-muted transition-colors hover:text-cream focus-visible:text-cream">
+                  {s.name}
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
 
-        <div>
-          <p className="eyebrow mb-5">Elsewhere</p>
-          <ul className="space-y-3 text-sm">
+        <nav aria-label="Footer">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-cream-dim">Company</h2>
+          <ul className="mt-5 space-y-3 text-sm">
+            {nav.map((n) => (
+              <li key={n.href}>
+                <Link href={n.href} className="text-cream-muted transition-colors hover:text-cream focus-visible:text-cream">
+                  {n.label}
+                </Link>
+              </li>
+            ))}
             <li>
-              <a href="https://www.hodinkee.com" target="_blank" rel="noopener noreferrer" className="text-white/60 transition-colors hover:text-white/90">
-                hodinkee.com ↗
-              </a>
-            </li>
-            <li>
-              <a href="https://shop.hodinkee.com" target="_blank" rel="noopener noreferrer" className="text-white/60 transition-colors hover:text-white/90">
-                HODINKEE Shop ↗
-              </a>
+              <Link href="/services" className="text-cream-muted transition-colors hover:text-cream focus-visible:text-cream">
+                All services
+              </Link>
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
-
-      <div className="shell flex flex-col gap-2 border-t border-white/5 py-8 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-        <span>© {new Date().getFullYear()} · A scrollytelling design study.</span>
-        <span>Not an official HODINKEE property. Watch and specifications are a concept.</span>
+      <div className="shell flex flex-col gap-3 border-t border-white/[0.06] py-6 text-xs text-cream-dim sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} efficiovirtual. All rights reserved.</p>
+        <p>Strategy · Creative · Performance</p>
       </div>
     </footer>
   );
