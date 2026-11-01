@@ -25,7 +25,7 @@ export default function OG() {
           <path d={LOGO_PATH} fill="#039efd" fillRule="evenodd" />
         </svg>
         <div style={{ fontSize: 40, display: "flex" }}>
-          efficio<span style={{ color: "#f4a6cf" }}>virtual</span>
+          efficio<span style={{ color: "#a0d3f1" }}>virtual</span>
         </div>
         <div style={{ fontSize: 84, lineHeight: 1.02, marginTop: 24, maxWidth: 900 }}>Make your next digital move count.</div>
       </div>
