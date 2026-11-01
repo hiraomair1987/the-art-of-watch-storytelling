@@ -50,8 +50,9 @@ export default function Home() {
                 Make your next digital move <em className="italic text-accent">count.</em>
               </h1>
               <p className="lede mt-6 max-w-lg" data-reveal style={{ ["--d" as string]: "240ms" }}>
-                efficiovirtual is a performance-focused digital marketing agency. We combine Google Ads management, marketing
-                automation, 3D website design and high-converting landing pages into one plan that helps your brand grow.
+                efficiovirtual is a performance-focused digital marketing agency. From Google Ads, SEO and social media
+                marketing to website development, 3D websites and landing pages, we combine everything into one plan that helps
+                your brand grow.
               </p>
               <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "360ms" }}>
                 <Link href="#contact" className="btn btn-primary">
@@ -127,7 +128,7 @@ export default function Home() {
       </section>
 
       {/* 04 · Services */}
-      <section id="services" data-chapter data-state-start="4" aria-labelledby="services-title" className="chapter chapter-tall unpin-md">
+      <section id="services" data-chapter data-state-start="4" aria-labelledby="services-title" className="chapter chapter-tall unpin-md unpin-short">
         <div className="chapter-pin">
           <div className="shell">
             <div className="flex flex-col justify-between gap-4 text-halo md:flex-row md:items-end">
@@ -146,14 +147,14 @@ export default function Home() {
                 </Link>
               </p>
             </div>
-            <ul className="mt-[26vh] grid gap-3 sm:grid-cols-2 lg:mt-[22vh] lg:grid-cols-5">
+            <ul className="mt-[24vh] grid gap-3 sm:grid-cols-2 lg:mt-[17vh] lg:grid-cols-4">
               {services.map((s, i) => (
                 <li key={s.slug} data-reveal style={{ ["--d" as string]: `${120 + i * 80}ms` }}>
                   <TiltCard serviceIndex={i} className="flex h-full flex-col p-5">
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-violet-300">{s.short}</p>
-                    <h3 className="mt-3 text-[1.45rem] leading-tight">{s.name}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed">{s.summary}</p>
-                    <Link href={`/services/${s.slug}`} className="arrow-link stretched mt-5" aria-label={`${s.name}: see details`}>
+                    <p className="text-[10.5px] uppercase tracking-[0.18em] text-violet-300">{s.short}</p>
+                    <h3 className="mt-2 text-[1.3rem] leading-tight">{s.name}</h3>
+                    <p className="mt-2 flex-1 text-[13.5px] leading-relaxed">{s.summary}</p>
+                    <Link href={`/services/${s.slug}`} className="arrow-link stretched mt-4" aria-label={`${s.name}: see details`}>
                       See details <span aria-hidden="true">→</span>
                     </Link>
                   </TiltCard>

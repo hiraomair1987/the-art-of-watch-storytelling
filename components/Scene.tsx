@@ -4,7 +4,7 @@
  * The single, shared 3D world behind every page.
  *
  * One fixed WebGL canvas holds a set of glass panels, a luminous thread, a
- * glowing core, five service objects and a particle field. Each story chapter
+ * glowing core, one 3D object per service and a particle field. Each story chapter
  * is a "state" (a full layout of those objects plus a camera pose). Scroll
  * position maps to a continuous value `t` between states, with holds while a
  * chapter is on screen, and everything is interpolated from that one number.
@@ -424,6 +424,57 @@ function buildServiceObjects(glass: THREE.Material, edge: THREE.LineBasicMateria
     g.add(moon);
     objs.push(g);
   }
+  // Website Development & Maintenance — stacked browser windows
+  {
+    const g = new THREE.Group();
+    [0, 1, 2].forEach((k) => {
+      const w = withEdges(roundedPanelGeometry(1.15, 0.78, 0.07, 0.04));
+      w.position.set(-0.18 + k * 0.18, 0.14 - k * 0.14, -0.25 + k * 0.25);
+      g.add(w);
+    });
+    [0, 1, 2].forEach((k) => {
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 8), accent);
+      dot.position.set(0.0 + k * 0.09, 0.2, 0.29);
+      g.add(dot);
+    });
+    objs.push(g);
+  }
+  // SEO & Google Business — a magnifying lens over a location point
+  {
+    const g = new THREE.Group();
+    const lens = withEdges(new THREE.TorusGeometry(0.5, 0.07, 14, 64));
+    lens.position.set(-0.12, 0.12, 0);
+    g.add(lens);
+    const handle = withEdges(new THREE.CylinderGeometry(0.06, 0.06, 0.55, 16));
+    handle.position.set(0.4, -0.42, 0);
+    handle.rotation.z = Math.PI / 4;
+    g.add(handle);
+    const pin = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 14), accent);
+    pin.position.set(-0.12, 0.18, 0);
+    g.add(pin);
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.2, 16), accent);
+    tip.rotation.x = Math.PI;
+    tip.position.set(-0.12, 0.0, 0);
+    g.add(tip);
+    objs.push(g);
+  }
+  // Social Media Marketing — a hub with orbiting connections
+  {
+    const g = new THREE.Group();
+    g.add(withEdges(new THREE.IcosahedronGeometry(0.36, 1)));
+    const orbit = new THREE.Group();
+    orbit.name = "orbiters";
+    [0, 1, 2].forEach((k) => {
+      const a = (k / 3) * Math.PI * 2;
+      const node = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 10), accent);
+      node.position.set(Math.cos(a) * 0.78, Math.sin(a) * 0.25, Math.sin(a) * 0.78);
+      orbit.add(node);
+    });
+    g.add(orbit);
+    g.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.TorusGeometry(0.78, 0.004, 4, 64)), edge));
+    g.children[g.children.length - 1].rotation.x = Math.PI / 2;
+    objs.push(g);
+  }
   return objs;
 }
 
@@ -542,17 +593,17 @@ export default function Scene({ detailIndex, fixedState }: Props) {
     // The ev logo as a glass emblem at the heart of the world
     const emblemGroup = new THREE.Group();
     const emblemMat = new THREE.MeshPhysicalMaterial({
-      color: 0xa23394,
-      emissive: 0x5d0755,
-      emissiveIntensity: 0.45,
+      // Brand logo blue (#039EFD) — the emblem keeps the logo's own colour.
+      color: 0x039efd,
+      emissive: 0x039efd,
+      emissiveIntensity: 0.35,
+      toneMapped: false,
       fog: false,
       metalness: 0.35,
       roughness: 0.16,
       clearcoat: 1,
       clearcoatRoughness: 0.08,
-      sheen: 1,
-      sheenColor: new THREE.Color(0xf4a6cf),
-      envMapIntensity: 1.2,
+      envMapIntensity: 0.45,
       side: THREE.DoubleSide,
     });
     {
@@ -684,11 +735,12 @@ export default function Scene({ detailIndex, fixedState }: Props) {
         svcLayout = services.map(() => ({ p: portrait ? new THREE.Vector3(0, 2.6, -1) : new THREE.Vector3(3.3 * lx, 0.2, 1.2), s: portrait ? 1.25 : 1.9 }));
       } else {
         svcLayout = services.map((_, i) => {
+          const mid = (services.length - 1) / 2;
           if (portrait) {
-            const a = (i - 2) * 0.62;
-            return { p: new THREE.Vector3(Math.sin(a) * 2.6, 3.3 + Math.cos(a) * 0.5 - 0.5, Math.cos(a) * 1 - 1), s: 0.62 };
+            const a = (i - mid) * 0.4;
+            return { p: new THREE.Vector3(Math.sin(a) * 2.7, 3.2 + (i % 2 ? 0.35 : -0.1), Math.cos(a) * 1 - 1.2), s: 0.42 };
           }
-          return { p: new THREE.Vector3((i - 2) * 2.55 * lx, 0.85 + (i % 2 ? 0.2 : -0.05), 0.4 - Math.abs(i - 2) * 0.35), s: 0.95 };
+          return { p: new THREE.Vector3((i - mid) * 1.62 * lx, 1.05 + (i % 2 ? 0.22 : -0.05), 0.3 - Math.abs(i - mid) * 0.18), s: 0.68 };
         });
       }
       measureChapters();
@@ -846,6 +898,8 @@ export default function Scene({ detailIndex, fixedState }: Props) {
         g.rotation.set(0.15 + pointer.y * 0.25 * h + (k === 1 ? 0.4 : 0), spin + pointer.x * 0.5 * h + (k === 0 ? 0.3 : 0), 0);
         const moon = g.getObjectByName("moon");
         if (moon && motion) moon.position.set(Math.cos(elapsed * 0.5) * 0.9, 0.3, Math.sin(elapsed * 0.5) * 0.9);
+        const orbiters = g.getObjectByName("orbiters");
+        if (orbiters && motion) orbiters.rotation.y = elapsed * 0.45;
       });
 
       // Particles: slow drift, a touch of scroll depth

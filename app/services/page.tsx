@@ -8,7 +8,7 @@ import { services } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Google Ads, marketing automation, 3D websites, landing pages and creative design from efficiovirtual.",
+  description: "Google Ads, SEO and Google Business, social media marketing, website development and maintenance, 3D websites, landing pages, marketing automation and creative design from efficiovirtual.",
   alternates: { canonical: "/services" },
 };
 
@@ -17,7 +17,7 @@ export default function ServicesPage() {
     <>
       <SceneLoader fixedState={4} />
       <PageIntro eyebrow="Services" title="Everything you need to grow, working together.">
-        <p>Five services, each useful on its own and stronger together. Here’s what each one does and what it includes.</p>
+        <p>Eight services, each useful on its own and stronger together. Here’s what each one does and what it includes.</p>
       </PageIntro>
 
       <nav aria-label="On this page" className="pb-10">

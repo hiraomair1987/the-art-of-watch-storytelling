@@ -6,7 +6,7 @@ export const site = {
   name: "efficiovirtual",
   title: "efficiovirtual | Digital Marketing Agency for Google Ads, 3D Websites & Landing Pages",
   description:
-    "efficiovirtual is a performance-focused digital marketing agency for brands in the USA, UK, Canada and Pakistan: Google Ads management, marketing automation, 3D website design, high-converting landing pages and creative design.",
+    "efficiovirtual is a performance-focused digital marketing agency for brands in the USA, UK, Canada and Pakistan: Google Ads, SEO and Google Business Profile, social media marketing, website development, 3D websites, landing pages, marketing automation and creative design.",
   /** Countries we market to. Used in search-engine data on the homepage. */
   areasServed: ["United States", "United Kingdom", "Canada", "Pakistan"],
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://efficiovirtual.com",
