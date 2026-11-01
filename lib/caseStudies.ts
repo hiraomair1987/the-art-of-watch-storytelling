@@ -27,6 +27,8 @@ export type CaseStudy = {
   services: string[];
   /** One or two sentences shown on the card. */
   summary: string;
+  /** Headline result shown on the showcase card, e.g. "73% more leads". Real results only. */
+  metric?: string;
   challenge: string;
   approach: string;
   /** Real, verifiable results only — e.g. "Cost per lead down 32% in 90 days". */
@@ -60,6 +62,19 @@ export const caseStudies: CaseStudy[] = [
   placeholder(6, ["seo-google-business"]),
   placeholder(7, ["social-media-marketing"]),
   placeholder(8, ["app-development"]),
+];
+
+/**
+ * TESTIMONIALS shown on the Case Studies page.
+ * Replace the placeholders with real quotes (with the client's permission) and
+ * set `placeholder: false`. Add `rating` (1–5) only if it comes from a real review.
+ */
+export type Testimonial = { quote: string; name: string; context: string; rating?: number; placeholder?: boolean };
+
+export const testimonials: Testimonial[] = [
+  { quote: "Your first client testimonial will appear here.", name: "Client name", context: "Industry", placeholder: true },
+  { quote: "Add real quotes from happy clients in lib/caseStudies.ts.", name: "Client name", context: "Industry", placeholder: true },
+  { quote: "Testimonials rotate automatically, one at a time.", name: "Client name", context: "Industry", placeholder: true },
 ];
 
 export const publishedCaseStudies = caseStudies.filter((c) => c.published);
