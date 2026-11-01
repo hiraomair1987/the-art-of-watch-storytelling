@@ -103,6 +103,18 @@ export const homeFaqs: Faq[] = [
   },
 ];
 
+/** Optional, fully written service page. When present it replaces the standard layout. */
+export type ServiceDetail = {
+  /** Exact browser/Google title, used as-is (no " — efficiovirtual" suffix). */
+  titleAbsolute?: string;
+  intro: string[];
+  sections: { heading: string; paragraphs?: string[]; listIntro?: string; list?: string[]; note?: string }[];
+  processTitle: string;
+  process: { name: string; text: string }[];
+  cta: { heading: string; text: string };
+  faqs: { q: string; a: string }[];
+};
+
 export type Service = {
   slug: string;
   name: string;
@@ -116,6 +128,8 @@ export type Service = {
   seoDescription: string;
   /** The service page's H1 — descriptive, includes the main keyword. */
   h1: string;
+  /** Optional fully written page content (see ServiceDetail). */
+  page?: ServiceDetail;
   short: string;
   summary: string;
   intro: string;
@@ -302,9 +316,78 @@ export const services: Service[] = [
   },
   {
     slug: "app-development",
-    seoTitle: "Mobile & Web App Development",
-    seoDescription: "App development for iOS, Android and the web: planning, UX/UI design, development, testing and launch, with ongoing support if you need it.",
-    h1: "Mobile and web app development",
+    seoTitle: "App Development Services",
+    seoDescription: "Plan and build an app around your users and business goals with app development services from efficiovirtual. Tell us what you want to create.",
+    h1: "App development shaped around your business",
+    page: {
+      titleAbsolute: "App Development Services | efficiovirtual",
+      intro: [
+        "A useful app starts with a clear understanding of its users and purpose. efficiovirtual helps businesses plan and develop digital app experiences around real needs, from early ideas and user flows to design and development.",
+        "Our app development services cover iOS, Android and web apps — planned, designed, built, launched and supported for as long as you need.",
+      ],
+      sections: [
+        {
+          heading: "Turn an idea into a clear plan",
+          paragraphs: [
+            "We begin by understanding what the app should help people do. Together, we can define its audience, core features, and the experience users should have. This gives the project a practical foundation before design and development move forward.",
+            "Where it helps, we plan a prototype of the core screens so the main journey can be reviewed early, before full development begins.",
+          ],
+        },
+        {
+          heading: "What app development can include",
+          listIntro: "Depending on the project scope, app development may include:",
+          list: [
+            "App concept and requirements planning",
+            "User flows and feature definition",
+            "App UI/UX design",
+            "Prototype planning",
+            "iOS, Android and web app development",
+            "Testing, launch preparation and app store submission",
+            "Ongoing updates, maintenance and support, if agreed",
+          ],
+          note: "Platforms, technologies, deliverables and ongoing support are confirmed for each project before work begins.",
+        },
+        {
+          heading: "Designed around the people who will use it",
+          paragraphs: [
+            "An app should make its main tasks clear and straightforward. We consider how users move through the experience, what information they need, and how the app fits your wider digital presence.",
+            "Whether it’s a customer-facing mobile app or a custom business app for your team, the design is shaped around the tasks people come to complete.",
+          ],
+        },
+      ],
+      processTitle: "A practical development process",
+      process: [
+        { name: "Understand", text: "Define the app’s purpose, audience, and essential features." },
+        { name: "Plan and design", text: "Map the user experience and create the visual direction." },
+        { name: "Build and refine", text: "Develop the agreed scope and review it through testing and feedback." },
+      ],
+      cta: {
+        heading: "Have an app idea to explore?",
+        text: "Contact efficiovirtual at admin@efficiovirtual.com to discuss the project.",
+      },
+      faqs: [
+        {
+          q: "What types of apps do you develop?",
+          a: "We develop iOS apps, Android apps and web apps — from customer-facing mobile apps to business tools for your team. The right platform depends on your users and goals, and we’ll recommend an approach once we understand the project.",
+        },
+        {
+          q: "Can you help plan an app before development starts?",
+          a: "Yes. App planning can help define the intended users, core features, and user flows before the build begins. This can include requirements planning, feature definition and prototype planning.",
+        },
+        {
+          q: "How long does app development take?",
+          a: "Timing depends on the app’s features, platforms, integrations, and project scope. A timeline is provided once the requirements are understood.",
+        },
+        {
+          q: "Do you provide app updates and maintenance?",
+          a: "Yes. After launch we can provide updates, bug fixes, new features and ongoing support for as long as you need it. Tell us what you need by email and we’ll agree what the support covers.",
+        },
+        {
+          q: "Do you build apps for both iOS and Android?",
+          a: "Yes. We build apps for iOS and Android, as well as web apps, and we handle app store submission as part of launch.",
+        },
+      ],
+    },
     forWho: "Businesses that need an app for their customers or team — from a first version to a growing product.",
     name: "App Development",
     navLabel: "Apps",
