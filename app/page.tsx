@@ -8,6 +8,7 @@ import ContactForm from "@/components/ContactForm";
 import SocialLinks from "@/components/SocialLinks";
 import { homeFaqs, processSteps, services, stages } from "@/lib/content";
 import { site, socials } from "@/lib/site";
+import { locations } from "@/lib/locations";
 
 const pageTitle = "efficiovirtual | Digital Marketing, Google Ads & Web Design";
 const pageDescription =
@@ -277,6 +278,17 @@ export default function Home() {
                 From there we adapt the details that matter locally — search terms, spelling, currency, campaign timing and
                 the tone of your messaging — while keeping your brand consistent across every channel. Communication happens
                 by email and scheduled calls at times that suit your time zone.
+              </p>
+              <p className="text-[15px]">
+                See what we consider in each market:{" "}
+                {locations.map((l, i) => (
+                  <span key={l.slug}>
+                    <Link href={`/locations/${l.slug}`} className="text-link">
+                      digital marketing in {l.inSentence}
+                    </Link>
+                    {i < locations.length - 2 ? ", " : i === locations.length - 2 ? " and " : "."}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
