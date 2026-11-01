@@ -180,7 +180,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
   // 0 · Opening — a calm constellation beside the headline
   {
     const s = blank();
-    const c = portrait ? v(0, 4.6, -4.5) : v(2.7 * lx, 0.1, 0);
+    const c = portrait ? v(0, 4.6, -4.5) : v(3.25 * lx, 0.1, -0.4);
     for (let i = 0; i < PANELS; i++) {
       const k = i + 0.5;
       const phi = Math.acos(1 - (2 * k) / PANELS);

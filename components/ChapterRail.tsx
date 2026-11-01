@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 const chapters = [
   { id: "top", label: "Home" },
-  { id: "challenge", label: "The challenge" },
-  { id: "approach", label: "Our approach" },
+  { id: "intro", label: "About" },
   { id: "services", label: "Services" },
-  { id: "process", label: "Process" },
+  { id: "approach", label: "Approach" },
+  { id: "markets", label: "Where we work" },
   { id: "faq", label: "FAQ" },
   { id: "contact", label: "Let’s talk" },
 ];
