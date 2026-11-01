@@ -1,53 +1,46 @@
 import type { Metadata } from "next";
+import SceneLoader from "@/components/SceneLoader";
 import ContactForm from "@/components/ContactForm";
-import PageHeader from "@/components/PageHeader";
-import Reveal from "@/components/Reveal";
+import SocialLinks from "@/components/SocialLinks";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Questions about Reference 01, the movement, or this project? Get in touch.",
+  description: "Get in touch with efficiovirtual at admin@efficiovirtual.com or send a message about your project.",
+  alternates: { canonical: "/contact" },
 };
-
-const faqs = [
-  {
-    q: "Is Reference 01 a real watch?",
-    a: "Reference 01 is a design concept created for this site. The photography is a rendered study, and the specifications are illustrative.",
-  },
-  {
-    q: "How often should a mechanical watch be serviced?",
-    a: "Every five to eight years is typical. Sooner if it starts gaining or losing time noticeably. Our Journal has a full care guide.",
-  },
-  {
-    q: "Can I use this site's design for my own project?",
-    a: "Send us a message with a little about what you have in mind and we will get back to you.",
-  },
-];
 
 export default function ContactPage() {
   return (
     <>
-      <PageHeader eyebrow="Contact" title="Let's talk watches.">
-        Questions about the watch, the movement, or how this site was made. Send a note and we will reply as soon as we
-        can.
-      </PageHeader>
-
-      <section className="shell pb-24 md:pb-36">
-        <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr] lg:gap-24">
-          <Reveal>
+      <SceneLoader fixedState={6} />
+      <section aria-labelledby="page-title" className="pb-24 pt-48 md:pt-56">
+        <div className="shell grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+          <div className="text-halo">
+            <p className="eyebrow" data-reveal>
+              Contact
+            </p>
+            <h1 id="page-title" className="display-xl mt-5" data-reveal style={{ ["--d" as string]: "100ms" }}>
+              Let’s talk.
+            </h1>
+            <p className="lede mt-6 max-w-md" data-reveal style={{ ["--d" as string]: "200ms" }}>
+              Tell us about your brand, your goals and your timing. We read every message and reply with honest next steps.
+            </p>
+            <div className="mt-8" data-reveal style={{ ["--d" as string]: "300ms" }}>
+              <a href={`mailto:${site.contactEmail}`} className="email-cta">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-cream-muted">Email us</span>
+                <span className="font-display text-2xl text-cream sm:text-3xl">{site.contactEmail}</span>
+              </a>
+            </div>
+            <div className="mt-8" data-reveal style={{ ["--d" as string]: "400ms" }}>
+              <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-cream-muted">Follow efficiovirtual</p>
+              <SocialLinks size="lg" />
+            </div>
+          </div>
+          <div className="glass rounded-3xl p-6 sm:p-9" data-reveal style={{ ["--d" as string]: "200ms" }}>
+            <h2 className="mb-6 text-2xl">Send a message</h2>
             <ContactForm />
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="eyebrow mb-6">Good to know</p>
-            <dl className="divide-y divide-white/10 border-y border-white/10">
-              {faqs.map((f) => (
-                <div key={f.q} className="py-6">
-                  <dt className="text-lg font-medium tracking-tight text-white/90">{f.q}</dt>
-                  <dd className="mt-2 text-[15px] leading-relaxed text-white/60">{f.a}</dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
+          </div>
         </div>
       </section>
     </>
