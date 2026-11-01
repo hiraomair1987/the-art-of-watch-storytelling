@@ -149,20 +149,21 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "westpaq-cleaning-services",
     published: true,
-    kind: "concept",
-    title: "A single-page website concept for a Houston commercial cleaning company",
+    kind: "client",
+    liveUrl: "https://westpaq-cleaning-services.vercel.app",
+    title: "A single-page website for a Houston commercial cleaning company",
     client: "Westpaq Cleaning Services",
     industry: "Commercial cleaning",
     country: "USA",
     services: ["website-development", "landing-pages", "creative-design"],
-    metric: "Website concept · single page",
+    metric: "Single-page website",
     tech: ["HTML", "CSS", "JavaScript"],
     summary:
-      "A fast, single-page website concept for a women-owned commercial cleaning company serving facilities across Greater Houston.",
+      "A fast, single-page website for Westpaq Cleaning Services, a women-owned commercial cleaning company serving facilities across Greater Houston.",
     challenge:
-      "Commercial buyers — facility managers, office administrators and procurement teams — need to see quickly that a cleaner understands their type of building, can be trusted on site, and is easy to get a quote from. The concept had to present six very different facility types clearly and lead every visitor towards a custom quote request.",
+      "Commercial buyers — facility managers, office administrators and procurement teams — need to see quickly that a cleaner understands their type of building, can be trusted on site, and is easy to get a quote from. The website had to present six very different facility types clearly and lead every visitor towards a custom quote request.",
     approach:
-      "We designed a focused one-page site built around the quote journey. Sections cover the facilities served (retail, offices, government, industrial, medical and educational), why clients choose the company, a three-step path from first contact to a cleaning plan, reviews, credentials and a detailed quote form.\n\nThe page is a single lightweight HTML file with inline CSS, JavaScript and SVG, plus compressed WebP photos, so it loads quickly on any connection and can be hosted anywhere. Sample photos and details are placeholders until the company confirms its own.",
+      "We designed a focused one-page site built around the quote journey. Sections cover the facilities served (retail, offices, government, industrial, medical and educational), why clients choose the company, a three-step path from first contact to a cleaning plan, reviews, credentials and a detailed quote form.\n\nThe page is a single lightweight HTML file with inline CSS, JavaScript and SVG, plus compressed WebP photos, so it loads quickly on any connection and can be hosted anywhere.",
     results: [],
     image: "/case-studies/westpaq.webp",
     gallery: ["/case-studies/westpaq-2.webp"],
@@ -171,6 +172,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "brightway-cleaning-demo",
     published: true,
     kind: "concept",
+    liveUrl: "https://cleaning-website-demo-sigma.vercel.app",
     title: "A ready-to-adapt website demo for cleaning businesses",
     client: "Brightway Cleaning Co. (demo)",
     industry: "Residential & commercial cleaning",
@@ -191,16 +193,17 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "aetherion-space-travel",
     published: true,
-    kind: "concept",
-    title: "An immersive 3D landing page for a luxury space-travel concept",
+    kind: "client",
+    liveUrl: "https://aetherion-mocha.vercel.app",
+    title: "An immersive 3D landing page for a luxury space-travel brand",
     client: "Aetherion",
-    industry: "Luxury travel (concept)",
+    industry: "Luxury travel",
     country: "Global",
     services: ["3d-websites", "website-development", "creative-design"],
-    metric: "3D website concept",
+    metric: "3D website",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     summary:
-      "A cinematic landing page for a fictional luxury space-travel brand, built around an interactive 3D orbital carousel.",
+      "A cinematic landing page for Aetherion, a luxury space-travel brand, built around an interactive 3D orbital carousel.",
     challenge:
       "A premium travel experience has to feel extraordinary from the first screen — while still loading quickly, working on phones and remaining usable for people who prefer less motion.",
     approach:
