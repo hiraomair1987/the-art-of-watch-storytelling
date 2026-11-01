@@ -1215,8 +1215,8 @@ a.work-card-link:hover .work-arrow {
   letter-spacing: -0.03em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(240, 164, 107, 0.18);
-  animation: ticker 40s linear infinite;
   pointer-events: none;
+  will-change: transform;
 }
 .ticker-band {
   overflow: hidden;
@@ -1283,4 +1283,39 @@ a.work-card-link:hover .work-arrow {
 .quote-tab:hover,
 .quote-tab:focus-visible {
   transform: translateX(-3px);
+}
+
+/* Giant outlined brand wordmark at the end of the Case Studies page */
+.giant-wordmark {
+  margin: 0;
+  padding: 0 1rem 1.5rem;
+  text-align: center;
+  font-family: var(--font-heavy);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 10.8vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(240, 164, 107, 0.28);
+  background: linear-gradient(180deg, rgba(240, 164, 107, 0.16), transparent 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Mouse-following light in the Case Studies hero */
+.work-hero[data-spotlight]::before {
+  background:
+    radial-gradient(420px circle at var(--mx, 70%) var(--my, 30%), rgba(240, 164, 107, 0.14), transparent 60%),
+    linear-gradient(115deg, transparent 38%, rgba(167, 83, 55, 0.28) 46%, rgba(240, 164, 107, 0.16) 50%, transparent 58%),
+    linear-gradient(115deg, transparent 62%, rgba(167, 83, 55, 0.18) 70%, transparent 78%),
+    radial-gradient(60% 50% at 20% 0%, rgba(93, 7, 85, 0.5), transparent 70%);
+  inset: 0;
+}
+[data-parallax],
+[data-scroll-x] {
+  will-change: transform;
 }

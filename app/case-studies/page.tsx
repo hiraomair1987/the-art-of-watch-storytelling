@@ -8,6 +8,7 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import CaseGrid from "@/components/CaseGrid";
 import CaseFaq from "@/components/CaseFaq";
 import SideRails from "@/components/SideRails";
+import ScrollFx from "@/components/ScrollFx";
 import { caseFaqs, caseStudies, publishedCaseStudies, sectors, stats, testimonials } from "@/lib/caseStudies";
 import { services } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -16,12 +17,18 @@ import { withAvailableImages } from "@/lib/caseStudyImages";
 
 const hasPublished = publishedCaseStudies.length > 0;
 const hasConcepts = publishedCaseStudies.some((c) => c.kind === "concept");
+// Real figures counted from the published projects (see `stats` in lib/caseStudies.ts)
+const autoStats: Record<string, number> = {
+  "auto:projects": publishedCaseStudies.length,
+  "auto:sectors": new Set(publishedCaseStudies.map((c) => c.sector).filter(Boolean)).size,
+  "auto:services": new Set(publishedCaseStudies.flatMap((c) => c.services)).size,
+};
 const serviceNames = Object.fromEntries(services.map((s) => [s.slug, s.name]));
 
 export const metadata: Metadata = {
   ...pageMeta({
-    title: "Case Studies",
-    description: "Websites, 3D experiences and digital marketing projects by efficiovirtual — the brief, what we designed and built, and the results.",
+    title: "Case Studies: Web Design & Digital Marketing Projects",
+    description: "Web design and digital marketing case studies from efficiovirtual: WordPress websites, 3D websites and landing pages for travel, consulting, technology and cleaning brands.",
     path: "/case-studies",
   }),
   // Hidden from Google until at least one real case study is published.
@@ -52,13 +59,14 @@ export default function CaseStudiesPage() {
       <SceneLoader fixedState={1} />
       <JsonLd data={jsonLd} />
       <SideRails />
+      <ScrollFx />
 
       {/* 1 · Showcase hero */}
-      <section aria-labelledby="page-title" className="work-hero">
+      <section aria-labelledby="page-title" className="work-hero" data-spotlight>
         <div className="shell grid gap-14 pb-16 pt-44 lg:min-h-screen lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-10 lg:pt-36">
           <div>
             <p className="bracket-eyebrow">Selected work — five markets, one team</p>
-            <h1 id="page-title" className="work-title mt-6">
+            <h1 id="page-title" className="work-title mt-6" data-parallax="0.06">
               Our case studies
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-cream-muted sm:text-xl">
@@ -92,7 +100,7 @@ export default function CaseStudiesPage() {
         <div className="shell grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           <div data-reveal>
             <p className="bracket-eyebrow">Across the portfolio</p>
-            <h2 id="numbers-title" className="work-title mt-6 !text-[clamp(2.2rem,5vw,4.4rem)]">
+            <h2 id="numbers-title" className="work-title mt-6 !text-[clamp(2.2rem,5vw,4.4rem)]" data-parallax="0.05">
               What the numbers look like when you publish them.
             </h2>
             <div className="mt-7 max-w-xl space-y-5 text-[17px] leading-relaxed">
@@ -113,7 +121,9 @@ export default function CaseStudiesPage() {
                   {s.label}
                   {s.placeholder && <span className="case-badge static mt-2 block w-fit lg:ml-auto">Placeholder</span>}
                 </dt>
-                <dd className={`stat-value ${s.placeholder ? "opacity-40" : ""}`}>{s.value === "auto" ? publishedCaseStudies.length : s.value}</dd>
+                <dd className={`stat-value ${s.placeholder ? "opacity-40" : ""}`} data-count={String(s.value in autoStats ? autoStats[s.value] : s.value)}>
+                  {s.value in autoStats ? autoStats[s.value] : s.value}
+                </dd>
               </div>
             ))}
           </dl>
@@ -133,6 +143,38 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
+      {/* About this work — descriptive content for search engines and visitors */}
+      <section aria-labelledby="work-about-title" className="py-16">
+        <div className="shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div data-reveal>
+            <p className="bracket-eyebrow">What we build</p>
+            <h2 id="work-about-title" className="work-title mt-5 !text-[clamp(1.9rem,3.8vw,3.2rem)]" data-parallax="0.05">
+              Web design and digital marketing projects
+            </h2>
+          </div>
+          <div className="space-y-5 text-[17px] leading-relaxed" data-reveal style={{ ["--d" as string]: "120ms" }}>
+            <p>
+              These case studies show the kind of work efficiovirtual delivers: <Link href="/services/website-development" className="text-link">WordPress and custom websites</Link>,{" "}
+              <Link href="/services/landing-pages" className="text-link">conversion-focused landing pages</Link>,{" "}
+              <Link href="/services/3d-websites" className="text-link">immersive 3D websites</Link> and the{" "}
+              <Link href="/services/creative-design" className="text-link">creative design</Link> that ties a brand together.
+            </p>
+            <p>
+              Each project starts with the same questions: who the visitors are, what they need to see, and what we want them to do next —
+              request a quote, book a call, subscribe or buy. The design, content and structure are then built around that path, with fast
+              loading, mobile-friendly layouts and clean, search-friendly code.
+            </p>
+            <p>
+              We work with travel brands and creators, consultants and personal brands, technology and hosting companies, and cleaning
+              businesses — remotely, for clients across the USA, the UAE, Canada, the UK and Pakistan. Alongside websites, we offer{" "}
+              <Link href="/services/google-ads" className="text-link">Google Ads management</Link>,{" "}
+              <Link href="/services/seo-google-business" className="text-link">SEO</Link> and{" "}
+              <Link href="/services/marketing-automation" className="text-link">marketing automation</Link> to bring the right visitors to them.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* 4 · Sectors */}
       <section aria-labelledby="sectors-title" className="py-20">
         <div className="shell">
@@ -143,13 +185,28 @@ export default function CaseStudiesPage() {
             </h2>
           </div>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {sectors.map((s, i) => (
-              <li key={s.name + i} className="sector-card" data-reveal style={{ ["--d" as string]: `${i * 80}ms` }}>
-                {s.placeholder && <span className="case-badge static mb-3 inline-block">Placeholder</span>}
-                <h3 className="text-xl text-cream">{s.name}</h3>
-                <p className="mt-2 text-sm">{s.text}</p>
-              </li>
-            ))}
+            {sectors.map((s, i) => {
+              const projects = publishedCaseStudies.filter((c) => c.sector === s.name);
+              return (
+                <li key={s.name + i} className="sector-card flex flex-col" data-reveal style={{ ["--d" as string]: `${i * 80}ms` }}>
+                  {s.placeholder && <span className="case-badge static mb-3 inline-block w-fit">Placeholder</span>}
+                  <p className="font-heavy text-4xl leading-none text-[#f0a46b]">{String(projects.length).padStart(2, "0")}</p>
+                  <h3 className="mt-4 text-xl text-cream">{s.name}</h3>
+                  <p className="mt-2 flex-1 text-sm">{s.text}</p>
+                  {projects.length > 0 && (
+                    <ul className="mt-4 space-y-1 border-t border-cream/10 pt-3">
+                      {projects.map((c) => (
+                        <li key={c.slug}>
+                          <Link href={`/case-studies/${c.slug}`} className="mono-link !text-[11px]">
+                            {c.client} <span aria-hidden="true">→</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -187,7 +244,7 @@ export default function CaseStudiesPage() {
 
       {/* 7 · Closing call to action over a scrolling word band */}
       <section aria-labelledby="cs-cta-title" className="ticker-cta">
-        <div className="ticker-words" aria-hidden="true">
+        <div className="ticker-words" aria-hidden="true" data-scroll-x="18">
           <span>Design · Build · Grow · Design · Build · Grow · Design · Build · Grow · </span>
           <span>Design · Build · Grow · Design · Build · Grow · Design · Build · Grow · </span>
         </div>
@@ -208,6 +265,9 @@ export default function CaseStudiesPage() {
             </a>
           </div>
         </div>
+        <p className="giant-wordmark" aria-hidden="true" data-scroll-x="6">
+          efficiovirtual
+        </p>
         <div className="ticker-band" aria-hidden="true">
           <div className="ticker-band-track">
             {Array.from({ length: 2 }).map((_, k) => (
