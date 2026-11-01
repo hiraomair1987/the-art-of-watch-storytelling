@@ -1,66 +1,86 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { site } from "@/lib/site";
+import { services } from "@/lib/content";
 
-const topics = ["General enquiry", "Press", "Collaboration", "Servicing question"];
+const topics = [...services.map((s) => s.name), "Not sure yet"];
 
 export default function ContactForm() {
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const [topic, setTopic] = useState(topics[topics.length - 1]);
+
+  // A "Discuss this service" link arrives as /?service=<slug>#contact.
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("service");
+    const match = services.find((s) => s.slug === slug);
+    if (match) setTopic(match.name);
+  }, []);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
-    const topic = String(data.get("topic") ?? "");
+    const company = String(data.get("company") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
-    if (!name || !email || !message) return setError("Please fill in your name, email and message.");
-    if (!/^\S+@\S+\.\S+$/.test(email)) return setError("That email address doesn't look right.");
-    if (!site.contactEmail) return setError("The contact address hasn't been set up yet. Please try again later.");
+    if (!name || !email || !message) return setError("Please add your name, email and a short message.");
+    if (!/^\S+@\S+\.\S+$/.test(email)) return setError("That email address doesn’t look quite right.");
 
     setError(null);
-    const body = `${message}\n\n— ${name} (${email})`;
-    window.location.href = `mailto:${site.contactEmail}?subject=${encodeURIComponent(`${topic} — ${name}`)}&body=${encodeURIComponent(body)}`;
+    const body = [message, "", `— ${name}`, email, company && `Company: ${company}`, `Interested in: ${topic}`].filter(Boolean).join("\n");
+    window.location.href = `mailto:${site.contactEmail}?subject=${encodeURIComponent(`New project: ${topic} — ${name}`)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   }
 
-  const field =
-    "mt-2 w-full rounded-sm border border-white/10 bg-white/[0.03] px-4 py-3.5 text-[15px] text-white/90 placeholder:text-white/30 transition-colors focus:border-white/40 focus:outline-none";
-
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-6 sm:grid-cols-2">
-      <label className="block text-xs uppercase tracking-[0.2em] text-white/50">
-        Name
-        <input name="name" autoComplete="name" required className={field} placeholder="Your name" />
-      </label>
-      <label className="block text-xs uppercase tracking-[0.2em] text-white/50">
-        Email
-        <input name="email" type="email" autoComplete="email" required className={field} placeholder="you@example.com" />
-      </label>
-      <label className="block text-xs uppercase tracking-[0.2em] text-white/50 sm:col-span-2">
-        Topic
-        <select name="topic" className={`${field} appearance-none`} defaultValue={topics[0]}>
+    <form onSubmit={onSubmit} noValidate className="grid gap-5 sm:grid-cols-2" aria-describedby="form-status">
+      <div className="field">
+        <label htmlFor="cf-name">Name</label>
+        <input id="cf-name" name="name" autoComplete="name" required placeholder="Your name" />
+      </div>
+      <div className="field">
+        <label htmlFor="cf-email">Email</label>
+        <input id="cf-email" name="email" type="email" autoComplete="email" required placeholder="you@company.com" />
+      </div>
+      <div className="field">
+        <label htmlFor="cf-company">
+          Company <span className="normal-case tracking-normal opacity-60">(optional)</span>
+        </label>
+        <input id="cf-company" name="company" autoComplete="organization" placeholder="Company or website" />
+      </div>
+      <div className="field">
+        <label htmlFor="cf-topic">I’m interested in</label>
+        <select id="cf-topic" name="topic" value={topic} onChange={(e) => setTopic(e.target.value)}>
           {topics.map((t) => (
-            <option key={t} className="bg-ink">
-              {t}
-            </option>
+            <option key={t}>{t}</option>
           ))}
         </select>
-      </label>
-      <label className="block text-xs uppercase tracking-[0.2em] text-white/50 sm:col-span-2">
-        Message
-        <textarea name="message" required rows={6} className={`${field} resize-y`} placeholder="How can we help?" />
-      </label>
+      </div>
+      <div className="field sm:col-span-2">
+        <label htmlFor="cf-message">What would you like to achieve?</label>
+        <textarea id="cf-message" name="message" required rows={5} placeholder="A few lines about your goals, timing and budget." />
+      </div>
 
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center">
-        <button type="submit" className="btn-primary w-full sm:w-auto">
+        <button type="submit" className="btn btn-primary w-full sm:w-auto">
           Send message
+          <span aria-hidden="true">→</span>
         </button>
-        <p className="text-sm text-white/50" role="status" aria-live="polite">
-          {error ? <span className="text-red-300/90">{error}</span> : sent ? "Your mail app should open with the message ready to send." : null}
+        <p id="form-status" className="text-sm text-cream-muted" role="status" aria-live="polite">
+          {error ? (
+            <span className="text-[#ffb3c8]">{error}</span>
+          ) : sent ? (
+            <>
+              Your email app should open with the message ready to send. If it doesn’t, write to{" "}
+              <a className="text-link" href={`mailto:${site.contactEmail}`}>
+                {site.contactEmail}
+              </a>
+              .
+            </>
+          ) : null}
         </p>
       </div>
     </form>

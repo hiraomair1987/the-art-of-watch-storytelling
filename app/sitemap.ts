@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
-import { articles } from "@/lib/content";
-import { nav, site } from "@/lib/site";
+import { site } from "@/lib/site";
+import { services } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", ...nav.map((n) => n.href)].map((path) => ({ url: `${site.url}${path}`, lastModified: new Date() }));
-  const posts = articles.map((a) => ({ url: `${site.url}/journal/${a.slug}`, lastModified: new Date(a.date) }));
-  return [...pages, ...posts];
+  return [
+    { url: site.url, changeFrequency: "monthly", priority: 1 },
+    ...services.map((s) => ({ url: `${site.url}/services/${s.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+  ];
 }

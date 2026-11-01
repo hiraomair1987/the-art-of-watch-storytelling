@@ -1,19 +1,19 @@
 export const site = {
-  name: "HODINKEE",
-  title: "HODINKEE — The Art of Watchmaking",
-  description: "A scroll-driven study of a mechanical chronograph: the watch, its movement, how it is made, and the stories around it.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://the-art-of-watch-storytelling.vercel.app",
+  name: "efficiovirtual",
+  title: "efficiovirtual — Digital marketing, creative and 3D web",
+  description:
+    "efficiovirtual helps brands grow through strategy, creative and performance marketing: Google Ads, marketing automation, 3D websites, landing pages and creative design.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://efficiovirtual.com",
   /**
    * Where the contact form sends messages (opens the visitor's mail app).
-   * Set NEXT_PUBLIC_CONTACT_EMAIL in Vercel → Project → Settings → Environment Variables.
+   * Override with NEXT_PUBLIC_CONTACT_EMAIL in your hosting environment.
    */
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@efficiovirtual.com",
 };
 
 export const nav = [
-  { href: "/watch", label: "The Watch" },
-  { href: "/movement", label: "Movement" },
-  { href: "/craft", label: "Craft" },
-  { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#approach", label: "Approach" },
+  { href: "/#services", label: "Services" },
+  { href: "/#outcome", label: "Outcome" },
+  { href: "/#contact", label: "Contact" },
 ] as const;

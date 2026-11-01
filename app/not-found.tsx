@@ -2,13 +2,20 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="shell flex min-h-[80vh] flex-col items-center justify-center py-32 text-center">
-      <p className="eyebrow mb-5">404</p>
-      <h1 className="heading">This part is missing.</h1>
-      <p className="copy mx-auto mt-6">The page you were looking for isn&apos;t here. It may have moved, or never existed.</p>
-      <Link href="/" className="btn-primary mt-9">
-        Back to home
-      </Link>
+    <section className="flex min-h-[80vh] items-center pt-24">
+      <div className="shell">
+        <p className="eyebrow">404</p>
+        <h1 className="display-lg mt-4">This page drifted out of orbit.</h1>
+        <p className="lede mt-5 max-w-md">The link may be old or mistyped. Let’s get you back on course.</p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href="/" className="btn btn-primary">
+            Back to home
+          </Link>
+          <Link href="/#contact" className="btn btn-ghost">
+            Let’s talk
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

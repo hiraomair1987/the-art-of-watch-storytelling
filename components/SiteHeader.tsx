@@ -1,18 +1,13 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/site";
+import Wordmark from "./Wordmark";
 
 export default function SiteHeader() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  // Close the menu whenever the route changes.
-  useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -21,101 +16,65 @@ export default function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock page scroll and allow Escape while the mobile menu is open.
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
-  const solid = scrolled || open;
-
   return (
-    <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
-          solid ? "border-b border-white/5 bg-ink/75 backdrop-blur-xl" : "border-b border-transparent"
-        }`}
-      >
-        <div className="shell flex h-16 items-center justify-between md:h-20">
-          <Link href="/" className="text-[13px] font-semibold uppercase tracking-[0.38em] text-white/90" aria-label="HODINKEE home">
-            Hodinkee
-          </Link>
+    <header className={`site-header ${scrolled || open ? "is-solid" : ""}`}>
+      <div className="shell flex h-16 items-center justify-between gap-6 md:h-20">
+        <Link href="/" className="link-quiet text-xl md:text-2xl" aria-label="efficiovirtual — home">
+          <Wordmark />
+        </Link>
 
-          <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-8 text-sm">
             {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={`relative text-[13px] tracking-tight transition-colors duration-300 ${
-                  isActive(item.href) ? "text-white/90" : "text-white/50 hover:text-white/90"
-                }`}
-              >
-                {item.label}
-                {isActive(item.href) && (
-                  <motion.span layoutId="nav-underline" className="absolute -bottom-1.5 left-0 right-0 h-px bg-white/60" />
-                )}
-              </Link>
+              <li key={item.href}>
+                <Link href={item.href} className="nav-link">
+                  {item.label}
+                </Link>
+              </li>
             ))}
-          </nav>
+          </ul>
+        </nav>
 
+        <div className="flex items-center gap-3">
+          <Link href="/#contact" className="btn btn-primary hidden h-10 px-5 text-sm sm:inline-flex">
+            Let&rsquo;s talk
+          </Link>
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="relative -mr-2 flex h-11 w-11 items-center justify-center md:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
+            className="menu-btn md:hidden"
             aria-expanded={open}
-            aria-controls="mobile-menu"
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((o) => !o)}
           >
-            <span className={`absolute h-px w-5 bg-white/90 transition-transform duration-300 ${open ? "rotate-45" : "-translate-y-[4px]"}`} />
-            <span className={`absolute h-px w-5 bg-white/90 transition-transform duration-300 ${open ? "-rotate-45" : "translate-y-[4px]"}`} />
+            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+            <span aria-hidden="true" className={`menu-icon ${open ? "is-open" : ""}`} />
           </button>
         </div>
-      </header>
+      </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col bg-ink/95 px-6 pb-10 pt-28 backdrop-blur-xl md:hidden"
-          >
-            <nav aria-label="Mobile" className="flex flex-col">
-              {nav.map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className={`flex items-baseline justify-between border-b border-white/10 py-5 text-3xl font-semibold tracking-tightest ${
-                      isActive(item.href) ? "text-white/90" : "text-white/60"
-                    }`}
-                  >
-                    {item.label}
-                    <span className="text-xs font-normal tracking-normal text-white/30">0{i + 1}</span>
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-            <p className="mt-auto text-xs text-white/40">The Art of Watchmaking — a design study.</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+      <nav id="mobile-nav" aria-label="Mobile" hidden={!open} className="md:hidden">
+        <ul className="shell flex flex-col gap-1 pb-6 pt-2">
+          {nav.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="mobile-link" onClick={() => setOpen(false)}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          <li className="pt-3">
+            <Link href="/#contact" className="btn btn-primary w-full" onClick={() => setOpen(false)}>
+              Let&rsquo;s talk
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
