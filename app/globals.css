@@ -772,7 +772,7 @@
   border-color: rgba(39, 159, 229, 0.4);
 }
 
-/* Tall content (e.g. eight service cards) scrolls normally on short screens instead of pinning */
+/* Tall content (e.g. many service cards) scrolls normally on short screens instead of pinning */
 @media (max-height: 1000px) {
   .chapter-tall.unpin-short {
     min-height: auto;

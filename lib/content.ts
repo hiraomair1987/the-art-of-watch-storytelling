@@ -59,7 +59,7 @@ export type Faq = { q: string; a: string };
 export const homeFaqs: Faq[] = [
   {
     q: "What digital marketing services does efficiovirtual offer?",
-    a: "Our core services are Google Ads management, marketing automation, 3D website design, landing page design and creative design. We also offer SEO and Google Business Profile setup, social media marketing, and website development and maintenance. You can use one service on its own or combine several into a single plan.",
+    a: "Our core services are Google Ads management, marketing automation, 3D website design, landing page design and creative design. We also offer SEO and Google Business Profile setup, social media marketing, website development and maintenance, and mobile and web app development. You can use one service on its own or combine several into a single plan.",
   },
   {
     q: "What does Google Ads management include?",
@@ -299,6 +299,28 @@ export const services: Service[] = [
       "Monthly performance reporting",
     ],
     fit: ["You post inconsistently or not at all", "Followers aren’t turning into customers", "You want to run social ads properly"],
+  },
+  {
+    slug: "app-development",
+    seoTitle: "Mobile & Web App Development",
+    seoDescription: "App development for iOS, Android and the web: planning, UX/UI design, development, testing and launch, with ongoing support if you need it.",
+    h1: "Mobile and web app development",
+    forWho: "Businesses that need an app for their customers or team — from a first version to a growing product.",
+    name: "App Development",
+    navLabel: "Apps",
+    short: "Mobile and web apps",
+    summary: "App development for iOS, Android and the web — planned, designed and built around what your users actually need.",
+    intro:
+      "We turn an app idea into a working product: planning the features that matter most, designing screens that are easy to use, building and testing the app, and helping you launch it. After launch, we can keep improving and maintaining it for as long as you need.",
+    includes: [
+      "Discovery and feature planning",
+      "UX and UI design for every screen",
+      "Development for iOS, Android or the web",
+      "Back-end, database and third-party integrations",
+      "Testing, app store submission and launch",
+      "Updates, fixes and new features after launch",
+    ],
+    fit: ["You have an app idea and need a team to build it", "Your customers or staff need a better tool than a website", "Your existing app needs a redesign or new features"],
   },
 ];
 
