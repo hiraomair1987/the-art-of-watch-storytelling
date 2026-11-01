@@ -10,8 +10,10 @@ const config: Config = {
         maroon: "#371321",
         terracotta: "#a75337",
         sand: "#c8aaa2",
-        violet: { 300: "#e4a8f2", 400: "#a47bff", 500: "#8456f0" },
-        accent: "#f4a6cf",
+        violet: { 300: "#a0d3f1", 400: "#279fe5", 500: "#1a7dc4" },
+        blue: { DEFAULT: "#1a7dc4", bright: "#279fe5", light: "#a0d3f1", pale: "#e8f5fd" },
+        navy: "#0d1b2a",
+        accent: "#a0d3f1",
         cream: { DEFAULT: "#eeebe4", muted: "rgba(238, 235, 228, 0.7)" },
       },
       fontFamily: {

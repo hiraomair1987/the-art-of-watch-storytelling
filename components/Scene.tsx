@@ -73,7 +73,7 @@ function uiTexture(kind: number) {
   c.height = 170;
   const g = c.getContext("2d")!;
   const bar = (x: number, y: number, w: number, h: number, a: number) => {
-    g.fillStyle = `rgba(240,225,255,${a})`;
+    g.fillStyle = `rgba(232,245,253,${a})`;
     g.beginPath();
     g.roundRect(x, y, w, h, h / 2);
     g.fill();
@@ -83,7 +83,7 @@ function uiTexture(kind: number) {
     bar(22, 54, 200, 7, 0.4);
     bar(22, 70, 180, 7, 0.4);
     bar(22, 86, 150, 7, 0.4);
-    g.fillStyle = "rgba(255,120,210,0.85)";
+    g.fillStyle = "rgba(39,159,229,0.85)";
     g.beginPath();
     g.roundRect(22, 118, 84, 26, 13);
     g.fill();
@@ -91,18 +91,18 @@ function uiTexture(kind: number) {
     // rising columns — an abstract "growth" mark, no data implied
     const hs = [28, 44, 40, 64, 78, 104];
     hs.forEach((h, i) => bar(26 + i * 36, 146 - h, 20, h, 0.35 + i * 0.1));
-    g.strokeStyle = "rgba(255,120,210,0.9)";
+    g.strokeStyle = "rgba(39,159,229,0.9)";
     g.lineWidth = 3;
     g.beginPath();
     hs.forEach((h, i) => (i ? g.lineTo(36 + i * 36, 132 - h) : g.moveTo(36, 132 - h)));
     g.stroke();
   } else {
-    g.strokeStyle = "rgba(240,225,255,0.7)";
+    g.strokeStyle = "rgba(232,245,253,0.7)";
     g.lineWidth = 3;
     g.beginPath();
     g.arc(62, 82, 38, 0, Math.PI * 2);
     g.stroke();
-    g.fillStyle = "rgba(255,120,210,0.7)";
+    g.fillStyle = "rgba(39,159,229,0.7)";
     g.beginPath();
     g.arc(62, 82, 14, 0, Math.PI * 2);
     g.fill();
@@ -402,7 +402,7 @@ function buildServiceObjects(glass: THREE.Material, edge: THREE.LineBasicMateria
   {
     const g = new THREE.Group();
     g.add(withEdges(roundedPanelGeometry(0.95, 1.35, 0.08, 0.05)));
-    const lineMat = new THREE.MeshBasicMaterial({ color: 0xf3e8ff, transparent: true, opacity: 0.55 });
+    const lineMat = new THREE.MeshBasicMaterial({ color: 0xe8f5fd, transparent: true, opacity: 0.55 });
     [0.42, 0.24, 0.1].forEach((y, i) => {
       const l = new THREE.Mesh(new THREE.PlaneGeometry(i ? 0.62 : 0.5, i ? 0.05 : 0.09), lineMat);
       l.position.set(i ? 0 : -0.06, y, 0.035);
@@ -517,13 +517,13 @@ export default function Scene({ detailIndex, fixedState }: Props) {
     const key = new THREE.DirectionalLight(0xffeadb, 0.9);
     key.position.set(3, 5, 6);
     scene.add(key);
-    // Brand lighting: plum fill, soft pink key, warm terracotta rim
+    // Brand lighting: plum fill, brand-blue key, warm terracotta rim
     const plum = new THREE.PointLight(0xb03ca6, 60, 40, 2);
     plum.position.set(-6, -2, 4);
     scene.add(plum);
-    const pink = new THREE.PointLight(0xf4a6cf, 40, 30, 2);
-    pink.position.set(6, 4, 4);
-    scene.add(pink);
+    const blue = new THREE.PointLight(0x279fe5, 45, 30, 2);
+    blue.position.set(6, 4, 4);
+    scene.add(blue);
     const terracotta = new THREE.PointLight(0xe0703f, 45, 26, 2);
     terracotta.position.set(1, -4, 5);
     scene.add(terracotta);
@@ -545,8 +545,8 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       side: THREE.DoubleSide,
       depthWrite: false,
     });
-    const edge = new THREE.LineBasicMaterial({ color: 0xe4a8f2, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
-    const accent = new THREE.MeshBasicMaterial({ color: 0xff7fd0, toneMapped: false });
+    const edge = new THREE.LineBasicMaterial({ color: 0x8fcaf0, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false });
+    const accent = new THREE.MeshBasicMaterial({ color: 0x279fe5, toneMapped: false });
     const glow = glowTexture();
     const uiTex = [uiTexture(0), uiTexture(1), uiTexture(2)];
     const uiMats = uiTex.map(
@@ -577,11 +577,11 @@ export default function Scene({ detailIndex, fixedState }: Props) {
     }
 
     // Core + satellite nodes
-    const orbMat = new THREE.MeshBasicMaterial({ color: 0xffd9f1, fog: false, toneMapped: false });
+    const orbMat = new THREE.MeshBasicMaterial({ color: 0xe8f5fd, fog: false, toneMapped: false });
     const makeOrb = () => {
       const g = new THREE.Group();
       g.add(new THREE.Mesh(new THREE.SphereGeometry(0.2, 24, 16), orbMat));
-      const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: 0xe07be6, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
+      const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: 0x279fe5, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false }));
       halo.scale.setScalar(2.2);
       g.add(halo);
       root.add(g);
@@ -628,16 +628,16 @@ export default function Scene({ detailIndex, fixedState }: Props) {
     const threadPos = new Float32Array(THREAD_SAMPLES * 3);
     const threadGeo = new THREE.BufferGeometry();
     threadGeo.setAttribute("position", new THREE.BufferAttribute(threadPos, 3));
-    const thread = new THREE.Line(threadGeo, new THREE.LineBasicMaterial({ color: 0xf0a8ff, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
+    const thread = new THREE.Line(threadGeo, new THREE.LineBasicMaterial({ color: 0xa0d3f1, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
     thread.frustumCulled = false;
     root.add(thread);
     const beads = new THREE.Points(
       threadGeo,
-      new THREE.PointsMaterial({ map: glow, color: 0xd98bf0, size: 0.16, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }),
+      new THREE.PointsMaterial({ map: glow, color: 0x7cc4f0, size: 0.16, transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }),
     );
     beads.frustumCulled = false;
     root.add(beads);
-    const pulse = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: 0xffb3e6, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
+    const pulse = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: 0xe8f5fd, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
     pulse.scale.setScalar(0.7);
     root.add(pulse);
 
@@ -655,8 +655,8 @@ export default function Scene({ detailIndex, fixedState }: Props) {
     const PCOUNT = small ? 500 : 1100;
     const pPos = new Float32Array(PCOUNT * 3);
     const pCol = new Float32Array(PCOUNT * 3);
-    const cA = new THREE.Color(0xb47cf0);
-    const cB = new THREE.Color(0xff86d4);
+    const cA = new THREE.Color(0x8fcaf0);
+    const cB = new THREE.Color(0x279fe5);
     const cC = new THREE.Color(0xeeebe4);
     const pr = mulberry32(21);
     for (let i = 0; i < PCOUNT; i++) {
