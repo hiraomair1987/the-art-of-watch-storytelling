@@ -7,6 +7,7 @@ import CtaBand from "@/components/CtaBand";
 import { getLocation, locations } from "@/lib/locations";
 import { services } from "@/lib/content";
 import { site } from "@/lib/site";
+import { breadcrumbLd, businessRef, pageMeta } from "@/lib/seo";
 
 type Params = { params: { slug: string } };
 
@@ -17,12 +18,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const l = getLocation(params.slug);
   if (!l) return {};
-  return {
-    title: l.title,
-    description: l.description,
-    alternates: { canonical: `/locations/${l.slug}` },
-    openGraph: { title: `${l.title} — efficiovirtual`, description: l.description, url: `/locations/${l.slug}` },
-  };
+  return pageMeta({ title: l.title, description: l.description, path: `/locations/${l.slug}`, image: `/locations/${l.slug}/opengraph-image` });
 }
 
 export default function LocationPage({ params }: Params) {
@@ -40,7 +36,7 @@ export default function LocationPage({ params }: Params) {
       serviceType: "Digital marketing",
       url,
       description: l.description,
-      provider: { "@type": "ProfessionalService", "@id": `${site.url}/#business`, name: "efficiovirtual", url: site.url },
+      provider: businessRef,
       areaServed: { "@type": "Country", name: l.country },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -48,15 +44,10 @@ export default function LocationPage({ params }: Params) {
         itemListElement: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name } })),
       },
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-        { "@type": "ListItem", position: 2, name: "Where we work", item: `${site.url}/locations` },
-        { "@type": "ListItem", position: 3, name: l.country, item: url },
-      ],
-    },
+    breadcrumbLd([
+      ["Where we work", "/locations"],
+      [l.country, `/locations/${l.slug}`],
+    ]),
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -71,7 +62,7 @@ export default function LocationPage({ params }: Params) {
 
       <section aria-labelledby="loc-title" className="pb-16 pt-48 md:pt-56">
         <div className="shell">
-          <nav aria-label="Breadcrumb" className="text-sm" data-reveal>
+          <nav aria-label="Breadcrumb" className="text-sm">
             <ol className="flex flex-wrap items-center gap-2 text-cream-muted">
               <li>
                 <Link href="/" className="footer-link">
@@ -91,18 +82,18 @@ export default function LocationPage({ params }: Params) {
             </ol>
           </nav>
           <div className="max-w-2xl text-halo">
-            <p className="eyebrow mt-10" data-reveal>
+            <p className="eyebrow mt-10">
               Where we work
             </p>
-            <h1 id="loc-title" className="display-lg mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
+            <h1 id="loc-title" className="display-lg mt-4">
               {l.h1}
             </h1>
-            <div className="lede mt-6 space-y-4" data-reveal style={{ ["--d" as string]: "200ms" }}>
+            <div className="lede mt-6 space-y-4">
               {l.intro.map((p) => (
                 <p key={p}>{p}</p>
               ))}
             </div>
-            <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "300ms" }}>
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link href="/contact" className="btn btn-primary">
                 Let’s talk <span aria-hidden="true">→</span>
               </Link>

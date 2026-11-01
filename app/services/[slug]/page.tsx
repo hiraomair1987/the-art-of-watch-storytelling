@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import SceneLoader from "@/components/SceneLoader";
 import TiltCard from "@/components/TiltCard";
 import { getService, services, stages } from "@/lib/content";
+import { site } from "@/lib/site";
+import { breadcrumbLd, businessRef, pageMeta } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 type Params = { params: { slug: string } };
 
@@ -14,12 +17,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const s = getService(params.slug);
   if (!s) return {};
-  return {
-    title: `${s.name} services`,
-    description: s.summary,
-    alternates: { canonical: `/services/${s.slug}` },
-    openGraph: { title: `${s.name} — efficiovirtual`, description: s.summary, url: `/services/${s.slug}` },
-  };
+  return pageMeta({ title: s.seoTitle, description: s.seoDescription, path: `/services/${s.slug}`, image: `/services/${s.slug}/opengraph-image` });
 }
 
 export default function ServicePage({ params }: Params) {
@@ -31,10 +29,28 @@ export default function ServicePage({ params }: Params) {
   return (
     <>
       <SceneLoader detailIndex={index} />
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            ["Services", "/services"],
+            [s.name, `/services/${s.slug}`],
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: s.h1,
+            serviceType: s.name,
+            description: s.seoDescription,
+            url: `${site.url}/services/${s.slug}`,
+            provider: businessRef,
+            areaServed: site.areasServed.map((name) => ({ "@type": "Country", name })),
+          },
+        ]}
+      />
 
       <section aria-labelledby="svc-title" className="relative flex min-h-[88vh] items-center pb-16 pt-48 max-md:items-end">
         <div className="shell">
-          <nav aria-label="Breadcrumb" className="text-sm" data-reveal>
+          <nav aria-label="Breadcrumb" className="text-sm">
             <ol className="flex flex-wrap items-center gap-2 text-cream-muted">
               <li>
                 <Link href="/" className="footer-link">
@@ -54,19 +70,19 @@ export default function ServicePage({ params }: Params) {
             </ol>
           </nav>
           <div className="max-w-2xl text-halo">
-            <p className="eyebrow mt-10" data-reveal>
+            <p className="eyebrow mt-10">
               {s.short}
             </p>
-            <h1 id="svc-title" className="display-xl mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
-              {s.name}
+            <h1 id="svc-title" className="display-lg mt-4">
+              {s.h1}
             </h1>
-            <p className="mt-6 text-xl text-cream sm:text-2xl" data-reveal style={{ ["--d" as string]: "200ms" }}>
+            <p className="mt-6 text-xl text-cream sm:text-2xl">
               {s.summary}
             </p>
-            <p className="lede mt-5" data-reveal style={{ ["--d" as string]: "300ms" }}>
+            <p className="lede mt-5">
               {s.intro}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "400ms" }}>
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link href={`/contact?service=${s.slug}`} className="btn btn-primary">
                 Let’s talk about {s.name} <span aria-hidden="true">→</span>
               </Link>

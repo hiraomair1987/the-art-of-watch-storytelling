@@ -4,12 +4,22 @@ import PageIntro from "@/components/PageIntro";
 import TiltCard from "@/components/TiltCard";
 import CtaBand from "@/components/CtaBand";
 import { processSteps, stages } from "@/lib/content";
+import { site } from "@/lib/site";
+import { breadcrumbLd, businessRef, pageMeta } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "efficiovirtual is a digital marketing studio joining strategy, creative and performance so every digital move counts.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMeta({
+  title: "About efficiovirtual | Digital Marketing Agency",
+  description:
+    "efficiovirtual is a digital marketing agency joining strategy, creative and performance marketing so every part of your marketing works together.",
+  path: "/about",
+  absoluteTitle: true,
+});
+
+const jsonLd = [
+  breadcrumbLd([["About", "/about"]]),
+  { "@context": "https://schema.org", "@type": "AboutPage", name: "About efficiovirtual", url: `${site.url}/about`, about: businessRef },
+];
 
 const beliefs = [
   {
@@ -30,6 +40,7 @@ export default function AboutPage() {
   return (
     <>
       <SceneLoader fixedState={2} />
+      <JsonLd data={jsonLd} />
       <PageIntro eyebrow="About efficiovirtual" title="A studio for brands that want growth to make sense.">
         <p>
           efficiovirtual is a digital marketing studio. We plan, build and run the pieces that bring customers in — ads,

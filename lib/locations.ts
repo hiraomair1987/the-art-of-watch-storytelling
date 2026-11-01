@@ -36,7 +36,7 @@ export const locations: Location[] = [
     inSentence: "the USA",
     country: "United States",
     label: "USA",
-    title: "Digital Marketing Services for US Businesses",
+    title: "Digital Marketing for US Businesses",
     description:
       "Google Ads management, marketing automation, 3D websites, landing pages and creative design for businesses in the USA, delivered remotely by efficiovirtual.",
     h1: "Digital marketing for businesses in the USA",
@@ -84,7 +84,7 @@ export const locations: Location[] = [
     inSentence: "the UAE",
     country: "United Arab Emirates",
     label: "UAE",
-    title: "Digital Marketing Services for Businesses in the UAE",
+    title: "Digital Marketing for UAE Businesses",
     description:
       "Google Ads, marketing automation, 3D websites, landing pages and creative design for businesses in the UAE, delivered remotely by efficiovirtual.",
     h1: "Digital marketing for businesses in the UAE",
@@ -132,7 +132,7 @@ export const locations: Location[] = [
     inSentence: "Canada",
     country: "Canada",
     label: "Canada",
-    title: "Digital Marketing Services for Canadian Businesses",
+    title: "Digital Marketing for Canadian Businesses",
     description:
       "Google Ads management, marketing automation, 3D websites, landing pages and creative design for businesses in Canada, delivered remotely by efficiovirtual.",
     h1: "Digital marketing for businesses in Canada",
@@ -180,7 +180,7 @@ export const locations: Location[] = [
     inSentence: "the UK",
     country: "United Kingdom",
     label: "UK",
-    title: "Digital Marketing Services for UK Businesses",
+    title: "Digital Marketing for UK Businesses",
     description:
       "Google Ads management, marketing automation, 3D websites, landing pages and creative design for businesses in the UK, delivered remotely by efficiovirtual.",
     h1: "Digital marketing for businesses in the UK",
@@ -228,7 +228,7 @@ export const locations: Location[] = [
     inSentence: "Pakistan",
     country: "Pakistan",
     label: "Pakistan",
-    title: "Digital Marketing Services for Businesses in Pakistan",
+    title: "Digital Marketing for Pakistani Businesses",
     description:
       "Google Ads, marketing automation, 3D websites, landing pages and creative design for businesses in Pakistan, delivered remotely by efficiovirtual.",
     h1: "Digital marketing for businesses in Pakistan",

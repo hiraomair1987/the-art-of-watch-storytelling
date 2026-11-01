@@ -69,6 +69,24 @@ The easiest way is [Vercel](https://vercel.com) (free for personal use): sign in
 
 No client logos, testimonials or statistics are included — add real ones only.
 
+## SEO
+
+What's already set up:
+
+- Every page has its own title, meta description, canonical URL, link-preview image (Open Graph / Twitter) and exactly one H1. Use the `pageMeta()` helper in `lib/seo.ts` for any new page.
+- Structured data (JSON-LD): business details on the homepage, Service and Breadcrumb data on service and country pages, FAQ data where there are FAQs. Only verified details are included — no address, phone number, reviews or ratings.
+- `sitemap.xml` and `robots.txt` are generated automatically (`app/sitemap.ts`, `app/robots.ts`).
+- Temporary `*.vercel.app` addresses send a "noindex" header (`middleware.ts`), so only your real domain appears in Google.
+- The 3D scene only loads on devices with graphics acceleration and after the page has loaded, so text appears quickly.
+
+Before Google can index the site:
+
+1. Connect **efficiovirtual.com** in Vercel → Project → Settings → Domains. Until then, all canonical URLs and the sitemap already point to efficiovirtual.com.
+2. Add the site to **Google Search Console** (search.google.com/search-console) as a URL-prefix property for `https://efficiovirtual.com`. Choose the **HTML tag** method, copy only the code inside `content="…"`, and set it as `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` in Vercel → Settings → Environment Variables (or paste it into `lib/site.ts`). Redeploy, then click **Verify**.
+3. In Search Console, open **Sitemaps** and submit `sitemap.xml`.
+4. Optional: do the same in **Bing Webmaster Tools** using `NEXT_PUBLIC_BING_SITE_VERIFICATION`.
+5. Once your Google Business Profile is live, add its link and any confirmed business details (address, phone) to the structured data in `app/page.tsx`.
+
 ## How the 3D and motion work (for the curious)
 
 - `components/Scene.tsx` draws one 3D world behind the pages: glass panels, a glowing thread, the ev logo as a 3D emblem, five service objects and soft particles, lit with plum, pink and terracotta.

@@ -5,17 +5,32 @@ import PageIntro from "@/components/PageIntro";
 import TiltCard from "@/components/TiltCard";
 import CtaBand from "@/components/CtaBand";
 import { locations } from "@/lib/locations";
+import { site } from "@/lib/site";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
-export const metadata: Metadata = {
-  title: "Where We Work",
-  description: "efficiovirtual works remotely with businesses in the USA, UAE, Canada, UK and Pakistan. See how we adapt digital marketing to each market.",
-  alternates: { canonical: "/locations" },
-};
+export const metadata: Metadata = pageMeta({
+  title: "Where We Work: USA, UAE, Canada, UK & Pakistan",
+  description:
+    "efficiovirtual works remotely with businesses in the USA, UAE, Canada, UK and Pakistan. See how we adapt digital marketing to each market.",
+  path: "/locations",
+});
+
+const jsonLd = [
+  breadcrumbLd([["Where we work", "/locations"]]),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Markets efficiovirtual works in",
+    itemListElement: locations.map((l, i) => ({ "@type": "ListItem", position: i + 1, name: l.country, url: `${site.url}/locations/${l.slug}` })),
+  },
+];
 
 export default function LocationsPage() {
   return (
     <>
       <SceneLoader fixedState={2} />
+      <JsonLd data={jsonLd} />
       <PageIntro eyebrow="Where we work" title="One remote team, five markets.">
         <p>
           We work remotely with businesses in the USA, the UAE, Canada, the UK and Pakistan. Each market has its own
