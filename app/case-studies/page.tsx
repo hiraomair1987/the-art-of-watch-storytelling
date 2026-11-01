@@ -71,7 +71,7 @@ export default function CaseStudiesPage() {
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-cream-muted sm:text-xl">
               Brands and ideas we design, build and grow — and what changed for them.
-              {hasConcepts ? " Demo projects are clearly labelled." : ""}
+              {hasConcepts ? " Concept projects are clearly labelled." : ""}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link href="/contact" className="btn-heat">
@@ -106,7 +106,7 @@ export default function CaseStudiesPage() {
             <div className="mt-7 max-w-xl space-y-5 text-[17px] leading-relaxed">
               <p>
                 We only publish figures that come from a client’s own analytics or ad accounts, and only with their
-                permission. Demo projects show what we can design and build — never invented results.
+                permission. Concept projects show what we can design and build — never invented results.
               </p>
               <p>
                 Long-term growth is the number we care about most. Paid traffic stops the day the budget does; a strong
