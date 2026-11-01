@@ -38,6 +38,36 @@ export const processSteps: Step[] = [
   },
 ];
 
+export type Faq = { q: string; a: string };
+
+/** Homepage FAQ. Also published as FAQ data for Google. Keep answers honest and specific. */
+export const homeFaqs: Faq[] = [
+  {
+    q: "What does a digital marketing agency like efficiovirtual do?",
+    a: "We plan, build and run the channels that bring you customers: Google Ads campaigns, landing pages, marketing automation, 3D and interactive websites, and the creative behind them. Everything is tracked, so you can see what is working.",
+  },
+  {
+    q: "Do you work with businesses in the USA, UK, Canada and Pakistan?",
+    a: "Yes. We work remotely with brands in all four countries and plan campaigns, language and timing around each market — including British or American spelling, local search terms and time zones.",
+  },
+  {
+    q: "Is efficiovirtual a good fit for small businesses and startups?",
+    a: "Yes. Many of our services, such as a Google Ads audit, a single landing page or a first email sequence, are designed to start small and grow as results come in.",
+  },
+  {
+    q: "How much do Google Ads cost?",
+    a: "It depends on your industry, location and goals. You set the ad budget and pay Google directly; our management fee is separate. We recommend a starting budget only after looking at your market, so you don’t overspend while testing.",
+  },
+  {
+    q: "Won’t a 3D website be slow?",
+    a: "Not when it’s built carefully. We load 3D after the essential content, keep files small, and provide simpler fallbacks for older phones and for people who prefer reduced motion.",
+  },
+  {
+    q: "How do we get started?",
+    a: "Email admin@efficiovirtual.com or use the contact form. Tell us what you sell, who you sell to and what you want to improve, and we’ll reply with honest next steps.",
+  },
+];
+
 export type Service = {
   slug: string;
   name: string;
@@ -53,7 +83,7 @@ export const services: Service[] = [
     slug: "google-ads",
     name: "Google Ads",
     short: "Search, Performance Max and YouTube",
-    summary: "Show up at the exact moment people search for what you sell, and pay only for the clicks that matter.",
+    summary: "Google Ads management that puts you in front of people the moment they search for what you sell — so budget goes to clicks that matter.",
     intro:
       "We build and manage Google Ads accounts around intent: the right keywords, tight ad groups, honest ad copy and landing pages that match. Then we keep refining so spend follows results.",
     includes: [
@@ -70,7 +100,7 @@ export const services: Service[] = [
     slug: "marketing-automation",
     name: "Marketing Automation",
     short: "Email, CRM and lead nurturing",
-    summary: "Turn one-time interest into lasting relationships with messages that send themselves at the right time.",
+    summary: "Email marketing automation and CRM workflows that turn one-time interest into repeat customers, without manual follow-up.",
     intro:
       "We map the journey from first click to repeat customer, then build the emails, triggers and CRM workflows that move people along it — without your team doing it by hand.",
     includes: [
@@ -87,7 +117,7 @@ export const services: Service[] = [
     slug: "3d-websites",
     name: "3D Websites",
     short: "Immersive, scroll-driven web experiences",
-    summary: "Give visitors a reason to stay: interactive 3D experiences that tell your story and stay fast.",
+    summary: "3D website design with interactive, scroll-driven storytelling that keeps visitors engaged — and still loads fast.",
     intro:
       "We design and build websites with real-time 3D and scroll-driven storytelling — the kind of site people remember — while keeping performance, accessibility and search visibility in check.",
     includes: [
@@ -104,7 +134,7 @@ export const services: Service[] = [
     slug: "landing-pages",
     name: "Landing Pages",
     short: "Focused pages built to convert",
-    summary: "One page, one goal. Fast, focused pages that turn ad clicks into enquiries and sales.",
+    summary: "High-converting landing page design: one page, one goal, built to turn ad clicks into enquiries and sales.",
     intro:
       "We write, design and build landing pages for a single action — book, buy, sign up — and match them to the ads that send traffic, so every click lands somewhere that makes sense.",
     includes: [
@@ -121,7 +151,7 @@ export const services: Service[] = [
     slug: "creative-design",
     name: "Creative Design",
     short: "Brand, ad and social creative",
-    summary: "Visuals with a point of view — consistent across every ad, post and page your audience sees.",
+    summary: "Ad creative, social media design and brand identity that look consistent across every ad, post and page.",
     intro:
       "We create the visual side of your marketing: ad creative, social content, brand assets and motion — designed as one system so your brand looks the same everywhere and every piece can be tested.",
     includes: [

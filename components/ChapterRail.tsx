@@ -8,6 +8,7 @@ const chapters = [
   { id: "approach", label: "Our approach" },
   { id: "services", label: "Services" },
   { id: "process", label: "Process" },
+  { id: "faq", label: "FAQ" },
   { id: "contact", label: "Let’s talk" },
 ];
 

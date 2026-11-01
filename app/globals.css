@@ -716,3 +716,48 @@
   border-top: 3px solid var(--terracotta);
   color: rgba(238, 235, 228, 0.75);
 }
+
+/* FAQ accordion (native <details>, keyboard accessible by default) */
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 1rem;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary:hover h3 {
+  color: #fff;
+}
+.faq-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: var(--pink);
+  transition: transform 0.3s var(--ease);
+}
+.faq-icon::after {
+  transform: rotate(90deg);
+}
+.faq[open] .faq-icon::after {
+  transform: rotate(0deg);
+}
+.faq[open] {
+  border-color: rgba(244, 166, 207, 0.4);
+}
