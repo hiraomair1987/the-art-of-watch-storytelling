@@ -8,7 +8,7 @@ export const site = {
    * Where the contact form sends messages (opens the visitor's mail app).
    * Override with NEXT_PUBLIC_CONTACT_EMAIL in your hosting environment.
    */
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@efficiovirtual.com",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "admin@efficiovirtual.com",
 };
 
 export const nav = [

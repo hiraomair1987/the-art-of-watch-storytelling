@@ -21,7 +21,7 @@ Copy lives in `lib/content.ts`; nav, site URL and contact email in `lib/site.ts`
 
 ## Contact form
 
-The form opens the visitor's email app with the message filled in, addressed to `NEXT_PUBLIC_CONTACT_EMAIL` (default `hello@efficiovirtual.com`). Service pages link to `/?service=<slug>#contact`, which preselects that service.
+The form opens the visitor's email app with the message filled in, addressed to `NEXT_PUBLIC_CONTACT_EMAIL` (default `admin@efficiovirtual.com`). Service pages link to `/?service=<slug>#contact`, which preselects that service.
 
 ## Run locally
 
