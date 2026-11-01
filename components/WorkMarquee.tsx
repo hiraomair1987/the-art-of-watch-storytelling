@@ -10,7 +10,10 @@ function Card({ c, index, hidden }: { c: CaseStudy; index: number; hidden?: bool
     <>
       <div className="work-thumb">
         {c.published && c.image ? (
-          <img src={c.image} alt={hidden ? "" : `${c.client} project screenshot`} loading="lazy" className="h-full w-full object-cover" />
+          <>
+            <img src={c.image} alt={hidden ? "" : `${c.client} project screenshot`} loading="lazy" className="h-full w-full object-cover object-top" />
+            {c.kind === "concept" && <span className="case-badge concept">Concept</span>}
+          </>
         ) : (
           <>
             <LogoMark className="case-thumb-mark" />

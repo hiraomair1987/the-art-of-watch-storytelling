@@ -73,8 +73,11 @@ export default function CaseStudyPage({ params }: Params) {
                 </li>
               </ol>
             </nav>
-            <p className="eyebrow mt-10">
-              {c.industry} · {c.country}
+            <p className="eyebrow mt-10 flex flex-wrap items-center gap-3">
+              {c.kind === "concept" && <span className="case-badge concept static">Concept project</span>}
+              <span>
+                {c.industry} · {c.country}
+              </span>
             </p>
             <h1 className="display-lg mt-4 text-halo">{c.title}</h1>
             <p className="lede mt-6">{c.summary}</p>
@@ -84,6 +87,13 @@ export default function CaseStudyPage({ params }: Params) {
         {c.image && (
           <div className="shell max-w-5xl pb-12">
             <img src={c.image} alt={`${c.client} — ${c.title}`} className="w-full rounded-3xl border border-cream/10" />
+          </div>
+        )}
+        {c.gallery && c.gallery.length > 0 && (
+          <div className="shell grid max-w-5xl gap-4 pb-12 sm:grid-cols-2">
+            {c.gallery.map((g, i) => (
+              <img key={g} src={g} alt={`${c.client} — screenshot ${i + 2}`} loading="lazy" className="w-full rounded-2xl border border-cream/10" />
+            ))}
           </div>
         )}
 
@@ -132,6 +142,25 @@ export default function CaseStudyPage({ params }: Params) {
                 ))}
               </ul>
             </section>
+            {c.tech && c.tech.length > 0 && (
+              <section className="glass rounded-3xl p-7" aria-labelledby="built-with">
+                <h2 id="built-with" className="text-2xl">
+                  Built with
+                </h2>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {c.tech.map((t) => (
+                    <li key={t} className="filter-pill">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {c.liveUrl && (
+              <a href={c.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-outline-mono w-full justify-center">
+                Visit the live site <span aria-hidden="true">↗</span>
+              </a>
+            )}
             {c.quote && (
               <figure className="glass rounded-3xl p-7">
                 <blockquote className="font-display text-xl text-cream">“{c.quote.text}”</blockquote>
