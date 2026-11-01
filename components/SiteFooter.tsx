@@ -13,7 +13,7 @@ export default function SiteFooter() {
             <Wordmark />
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream-muted">
-            Strategy, creative and performance marketing for brands that want every digital move to count.
+            Google Ads, SEO, social media marketing, websites and creative — for brands that want every digital move to count.
           </p>
           <a href={`mailto:${site.contactEmail}`} className="text-link mt-6 inline-block text-sm">
             {site.contactEmail}

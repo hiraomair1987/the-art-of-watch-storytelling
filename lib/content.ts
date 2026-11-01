@@ -44,7 +44,7 @@ export type Faq = { q: string; a: string };
 export const homeFaqs: Faq[] = [
   {
     q: "What does a digital marketing agency like efficiovirtual do?",
-    a: "We plan, build and run the channels that bring you customers: Google Ads campaigns, landing pages, marketing automation, 3D and interactive websites, and the creative behind them. Everything is tracked, so you can see what is working.",
+    a: "We plan, build and run the channels that bring you customers: Google Ads campaigns, SEO and Google Business Profile, social media marketing, website development and maintenance, landing pages, marketing automation, 3D websites and the creative behind them. Everything is tracked, so you can see what is working.",
   },
   {
     q: "Do you work with businesses in the USA, UK, Canada and Pakistan?",
@@ -53,6 +53,18 @@ export const homeFaqs: Faq[] = [
   {
     q: "Is efficiovirtual a good fit for small businesses and startups?",
     a: "Yes. Many of our services, such as a Google Ads audit, a single landing page or a first email sequence, are designed to start small and grow as results come in.",
+  },
+  {
+    q: "Do you offer SEO and Google Business Profile setup?",
+    a: "Yes. We research the keywords your customers use, improve your website’s content and technical health so it can rank, and set up and optimise your Google Business Profile so you appear in Google Maps and local searches.",
+  },
+  {
+    q: "Which social media platforms do you manage?",
+    a: "We focus on the platforms where your customers actually spend time — usually Instagram, Facebook and LinkedIn — with content, community management and paid social campaigns planned around your goals.",
+  },
+  {
+    q: "Do you look after websites after they launch?",
+    a: "Yes. Our website maintenance covers security updates, backups, uptime monitoring, speed checks and content changes whenever you need them, so your site keeps working without you worrying about it.",
   },
   {
     q: "How much do Google Ads cost?",

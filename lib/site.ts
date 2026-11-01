@@ -4,7 +4,7 @@
  */
 export const site = {
   name: "efficiovirtual",
-  title: "efficiovirtual | Digital Marketing Agency for Google Ads, 3D Websites & Landing Pages",
+  title: "efficiovirtual | Digital Marketing Agency: Google Ads, SEO, Social Media & Web Development",
   description:
     "efficiovirtual is a performance-focused digital marketing agency for brands in the USA, UK, Canada and Pakistan: Google Ads, SEO and Google Business Profile, social media marketing, website development, 3D websites, landing pages, marketing automation and creative design.",
   /** Countries we market to. Used in search-engine data on the homepage. */
