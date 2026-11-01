@@ -102,7 +102,7 @@ export default function SiteHeader() {
           {services.map((s) => (
             <li key={s.slug}>
               <Link href={`/services/${s.slug}`} className="svc-link" aria-current={pathname === `/services/${s.slug}` ? "page" : undefined}>
-                {s.name}
+                {s.navLabel}
               </Link>
             </li>
           ))}

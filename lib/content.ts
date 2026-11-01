@@ -71,6 +71,8 @@ export const homeFaqs: Faq[] = [
 export type Service = {
   slug: string;
   name: string;
+  /** Shorter label used in the terracotta services strip in the header. */
+  navLabel: string;
   short: string;
   summary: string;
   intro: string;
@@ -81,6 +83,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "google-ads",
+    navLabel: "Google Ads",
     name: "Google Ads",
     short: "Search, Performance Max and YouTube",
     summary: "Google Ads management that puts you in front of people the moment they search for what you sell — so budget goes to clicks that matter.",
@@ -98,6 +101,7 @@ export const services: Service[] = [
   },
   {
     slug: "marketing-automation",
+    navLabel: "Automation",
     name: "Marketing Automation",
     short: "Email, CRM and lead nurturing",
     summary: "Email marketing automation and CRM workflows that turn one-time interest into repeat customers, without manual follow-up.",
@@ -115,6 +119,7 @@ export const services: Service[] = [
   },
   {
     slug: "3d-websites",
+    navLabel: "3D Websites",
     name: "3D Websites",
     short: "Immersive, scroll-driven web experiences",
     summary: "3D website design with interactive, scroll-driven storytelling that keeps visitors engaged — and still loads fast.",
@@ -132,6 +137,7 @@ export const services: Service[] = [
   },
   {
     slug: "landing-pages",
+    navLabel: "Landing Pages",
     name: "Landing Pages",
     short: "Focused pages built to convert",
     summary: "High-converting landing page design: one page, one goal, built to turn ad clicks into enquiries and sales.",
@@ -149,6 +155,7 @@ export const services: Service[] = [
   },
   {
     slug: "creative-design",
+    navLabel: "Creative",
     name: "Creative Design",
     short: "Brand, ad and social creative",
     summary: "Ad creative, social media design and brand identity that look consistent across every ad, post and page.",
@@ -163,6 +170,60 @@ export const services: Service[] = [
       "Creative variations for testing",
     ],
     fit: ["Your ads look like everyone else's", "Your brand feels inconsistent across channels", "You need fresh creative regularly"],
+  },
+  {
+    slug: "website-development",
+    name: "Website Development & Maintenance",
+    navLabel: "Web Development",
+    short: "Websites built and looked after",
+    summary: "Website development and maintenance: fast, secure, mobile-friendly sites — plus ongoing updates, backups and fixes so your site keeps working.",
+    intro:
+      "We design and build websites that load quickly, work on every screen and make it easy for visitors to contact or buy from you. After launch we keep them healthy with updates, backups, monitoring and changes whenever you need them.",
+    includes: [
+      "Website design and development",
+      "Built on the platform that suits you — WordPress, Shopify or custom code",
+      "Mobile-first, fast-loading pages",
+      "Security updates, backups and uptime monitoring",
+      "Content and page updates on request",
+      "Speed and technical health checks",
+    ],
+    fit: ["Your website is slow, dated or hard to update", "Nobody is responsible for keeping it running", "You’re launching a new business or brand"],
+  },
+  {
+    slug: "seo-google-business",
+    name: "SEO & Google Business",
+    navLabel: "SEO",
+    short: "Search engine optimization and local search",
+    summary: "Search engine optimization and Google Business Profile setup that help customers find you on Google Search and Google Maps.",
+    intro:
+      "We research what your customers search for, then improve your website’s content, structure and technical health so it can rank. For local businesses we set up and optimise your Google Business Profile so you appear in Maps and nearby searches.",
+    includes: [
+      "Keyword research for your market and country",
+      "On-page SEO: titles, content and page structure",
+      "Technical SEO: speed, indexing and structured data",
+      "Google Business Profile setup and optimisation",
+      "Local SEO for city and regional searches",
+      "Monthly ranking and traffic reporting",
+    ],
+    fit: ["You don’t show up when customers search for you", "Your business needs a Google listing or Maps presence", "You want leads that don’t depend on paying per click"],
+  },
+  {
+    slug: "social-media-marketing",
+    name: "Social Media Marketing",
+    navLabel: "Social Media",
+    short: "Organic content and paid social",
+    summary: "Social media marketing on the platforms your customers use — content, community management and paid social ads that grow your audience.",
+    intro:
+      "We plan, design and publish content that fits your brand, look after your community, and run paid social campaigns that reach the right people — then report on what actually brings in enquiries and sales.",
+    includes: [
+      "Social media strategy and content calendar",
+      "Post, carousel and short video design",
+      "Community management",
+      "Paid social campaigns on Meta and LinkedIn",
+      "Audience targeting and retargeting",
+      "Monthly performance reporting",
+    ],
+    fit: ["You post inconsistently or not at all", "Followers aren’t turning into customers", "You want to run social ads properly"],
   },
 ];
 

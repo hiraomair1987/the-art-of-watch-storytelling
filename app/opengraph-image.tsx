@@ -22,7 +22,7 @@ export default function OG() {
         }}
       >
         <svg width="120" height="120" viewBox={LOGO_VIEWBOX} style={{ marginBottom: 36 }}>
-          <path d={LOGO_PATH} fill="#eeebe4" fillRule="evenodd" />
+          <path d={LOGO_PATH} fill="#039efd" fillRule="evenodd" />
         </svg>
         <div style={{ fontSize: 40, display: "flex" }}>
           efficio<span style={{ color: "#f4a6cf" }}>virtual</span>
