@@ -41,7 +41,7 @@ export default function CaseGrid({ items, serviceNames }: Props) {
                 {c.published && c.kind === "concept" && <span className="case-badge concept">Concept project</span>}
               </div>
               <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-cream-muted">
-                {c.published ? `${c.industry} · ${c.country}` : "Industry · Country"}
+                {c.published ? [c.industry, c.country].filter(Boolean).join(" · ") : "Industry · Country"}
               </p>
               <h3 className="mt-2 font-heavy text-2xl uppercase leading-none tracking-[-0.03em] text-cream">
                 {c.published ? c.client : `Case study ${String(i + 1).padStart(2, "0")}`}

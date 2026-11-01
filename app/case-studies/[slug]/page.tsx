@@ -9,6 +9,7 @@ import { getCaseStudy, publishedCaseStudies } from "@/lib/caseStudies";
 import { getService } from "@/lib/content";
 import { breadcrumbLd, businessRef, pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { withAvailableImages } from "@/lib/caseStudyImages";
 
 type Params = { params: { slug: string } };
 
@@ -21,12 +22,14 @@ export const dynamicParams = false;
 export function generateMetadata({ params }: Params): Metadata {
   const c = getCaseStudy(params.slug);
   if (!c) return {};
-  return pageMeta({ title: `${c.client} Case Study`, description: c.summary, path: `/case-studies/${c.slug}`, image: c.image });
+  const [img] = withAvailableImages([c]);
+  return pageMeta({ title: `${c.client} Case Study`, description: c.summary, path: `/case-studies/${c.slug}`, image: img.image });
 }
 
 export default function CaseStudyPage({ params }: Params) {
-  const c = getCaseStudy(params.slug);
-  if (!c) notFound();
+  const found = getCaseStudy(params.slug);
+  if (!found) notFound();
+  const [c] = withAvailableImages([found]);
   const services = c.services.map((s) => getService(s)).filter(Boolean);
 
   return (
@@ -75,9 +78,7 @@ export default function CaseStudyPage({ params }: Params) {
             </nav>
             <p className="eyebrow mt-10 flex flex-wrap items-center gap-3">
               {c.kind === "concept" && <span className="case-badge concept static">Concept project</span>}
-              <span>
-                {c.industry} · {c.country}
-              </span>
+              <span>{[c.industry, c.country].filter(Boolean).join(" · ")}</span>
             </p>
             <h1 className="display-lg mt-4 text-halo">{c.title}</h1>
             <p className="lede mt-6">{c.summary}</p>

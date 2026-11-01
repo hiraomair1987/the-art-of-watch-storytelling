@@ -22,6 +22,7 @@ export type CaseStudy = {
   title: string;
   client: string;
   industry: string;
+  /** Country of the client/project. Leave empty ("") if you'd rather not say. */
   country: string;
   /** Service slugs from lib/content.ts, e.g. ["google-ads", "landing-pages"]. */
   services: string[];
@@ -65,6 +66,86 @@ const placeholder = (n: number, services: string[]): CaseStudy => ({
 });
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "vanessa-river-travel",
+    published: true,
+    kind: "client",
+    title: "A travel website for creator Vanessa River",
+    client: "Vanessa River",
+    industry: "Travel & tourism",
+    country: "",
+    services: ["website-development", "creative-design"],
+    metric: "WordPress website",
+    tech: ["WordPress", "Elementor"],
+    summary:
+      "A WordPress website for travel creator Vanessa River, showcasing her tour packages, her story and ways for followers to stay in touch.",
+    challenge:
+      "Vanessa needed one place to present her travel packages, introduce herself to new visitors and build a following of people interested in her trips — with a look that matched the feel of her travel content.",
+    approach:
+      "We designed and built a WordPress website with Elementor. A full-width hero sets the tone, followed by a “What I do” section presenting tour packages for Dubai, Canada, Australia, Switzerland, London and the USA.\n\nThe site also includes a press logo strip, an about section, a newsletter sign-up, an Instagram gallery and a footer with navigation, email sign-up, social links and site search.",
+    results: [],
+    image: "/case-studies/vanessa-river.png",
+  },
+  {
+    slug: "harry-narang-consulting",
+    published: true,
+    kind: "client",
+    title: "A personal brand website for agile consultant Harry Narang",
+    client: "Harry Narang",
+    industry: "Consulting & training",
+    country: "",
+    services: ["website-development", "creative-design"],
+    metric: "WordPress website",
+    tech: ["WordPress", "Elementor"],
+    summary:
+      "A personal brand website for Harry Narang, a consultant, trainer and author specialising in agile product development and business transformation.",
+    challenge:
+      "Harry’s audience includes organisations looking for agile training, consulting and speaking. The website needed to establish credibility quickly and guide visitors to the right service and to his newsletter.",
+    approach:
+      "We designed and built a WordPress website with Elementor, opening with a clear statement of Harry’s mission and a newsletter sign-up. Media logos and headline figures follow, then a “How can Harry help you?” section covering training, consulting and his international network.\n\nFurther sections include an embedded video, a client logo wall, a reviews carousel, a photo gallery and a newsletter call to action, with a consistent red-and-white identity throughout.",
+    results: [],
+    image: "/case-studies/harry-narang.png",
+  },
+  {
+    slug: "beehost-hosting",
+    published: true,
+    kind: "client",
+    title: "A hosting and domains website for BeeHost",
+    client: "BeeHost",
+    industry: "Web hosting",
+    country: "",
+    services: ["website-development", "creative-design"],
+    metric: "WordPress website",
+    tech: ["WordPress", "Elementor"],
+    summary:
+      "A bright, conversion-focused website for BeeHost, presenting web hosting, domains, email hosting and SSL certificates with clear pricing.",
+    challenge:
+      "Hosting buyers compare plans and prices carefully. BeeHost needed a site that explains its services simply, makes pricing easy to compare and guides visitors to sign up or get in touch.",
+    approach:
+      "We designed and built a WordPress website with Elementor in BeeHost’s yellow-and-navy colours. It covers core services (web hosting, domain services, email hosting and SSL certificates), advanced services such as reseller, managed and cloud hosting, and pricing plans laid out side by side.\n\nThe site also includes a blog section, a team section, a call-to-action band, a newsletter sign-up and a detailed footer with contact and help links.",
+    results: [],
+    image: "/case-studies/beehost.png",
+  },
+  {
+    slug: "developer-portfolio",
+    published: true,
+    kind: "client",
+    title: "A portfolio website for a web developer",
+    client: "Developer Portfolio",
+    industry: "Personal brand",
+    country: "",
+    services: ["website-development", "creative-design"],
+    metric: "Portfolio website",
+    tech: ["WordPress"],
+    summary:
+      "A clean portfolio website presenting a developer’s work, skills and testimonials, with a clear path to get in touch.",
+    challenge:
+      "A developer’s website has to show their work and skills at a glance, and make it easy for potential clients or employers to make contact.",
+    approach:
+      "We designed a portfolio layout with a bold “I build digital experiences” hero and a “View my work” call to action, followed by an about section, project cards, testimonials, a skills chart and contact options, all in a navy, white and orange palette.",
+    results: [],
+    image: "/case-studies/portfolio.png",
+  },
   {
     slug: "westpaq-cleaning-services",
     published: true,
@@ -128,10 +209,6 @@ export const caseStudies: CaseStudy[] = [
     image: "/case-studies/aetherion.webp",
     gallery: ["/case-studies/aetherion-2.webp"],
   },
-  placeholder(4, ["landing-pages"]),
-  placeholder(5, ["creative-design"]),
-  placeholder(6, ["seo-google-business"]),
-  placeholder(7, ["social-media-marketing"]),
   placeholder(8, ["app-development"]),
 ];
 
