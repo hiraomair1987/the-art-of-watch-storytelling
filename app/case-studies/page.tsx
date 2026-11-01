@@ -184,7 +184,7 @@ export default function CaseStudiesPage() {
               The sectors we <span className="heat-text">know best</span>
             </h2>
           </div>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {sectors.map((s, i) => {
               const projects = publishedCaseStudies.filter((c) => c.sector === s.name);
               return (
