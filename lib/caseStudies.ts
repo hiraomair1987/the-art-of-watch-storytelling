@@ -110,7 +110,8 @@ export const caseStudies: CaseStudy[] = [
     approach:
       "We designed and built a WordPress website with Elementor, opening with a clear statement of Harry’s mission and a newsletter sign-up. Media logos and headline figures follow, then a “How can Harry help you?” section covering training, consulting and his international network.\n\nFurther sections include an embedded video, a client logo wall, a reviews carousel, a photo gallery and a newsletter call to action, with a consistent red-and-white identity throughout.",
     results: [],
-    image: "/case-studies/harry-narang.png",
+    image: "/case-studies/harry-narang.webp",
+    fullPage: "/case-studies/harry-narang-full.webp",
   },
   {
     slug: "beehost-hosting",
