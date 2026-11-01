@@ -41,6 +41,8 @@ export type CaseStudy = {
    * project — labelled clearly on the site and never shown with client results.
    */
   kind?: "client" | "concept";
+  /** Label shown on concept/demo projects, e.g. "Concept" or "Demo". */
+  badge?: string;
   /** Extra screenshots shown on the case study page. */
   gallery?: string[];
   /** Optional full-page screenshot (tall image). Shown in a scrolling browser frame on the case study page. */
@@ -181,27 +183,29 @@ export const caseStudies: CaseStudy[] = [
     gallery: ["/case-studies/westpaq-2.webp"],
   },
   {
-    slug: "brightway-cleaning-demo",
-    sector: "Cleaning services",
+    slug: "art-of-watch-storytelling",
     published: true,
     kind: "concept",
-    liveUrl: "https://cleaning-website-demo-sigma.vercel.app",
-    title: "A ready-to-adapt website demo for cleaning businesses",
-    client: "Brightway Cleaning Co. (demo)",
-    industry: "Residential & commercial cleaning",
-    country: "USA",
-    services: ["website-development", "landing-pages"],
-    metric: "Demo website · cleaning industry",
-    tech: ["HTML", "CSS", "JavaScript"],
+    badge: "Concept",
+    sector: "Luxury & lifestyle",
+    liveUrl: "https://the-art-of-watch-storytelling.vercel.app",
+    title: "A scroll-driven storytelling website for a luxury mechanical watch",
+    client: "The Art of Watch Storytelling",
+    industry: "Luxury watches (concept)",
+    country: "",
+    services: ["3d-websites", "website-development", "creative-design"],
+    metric: "Scroll-driven storytelling website",
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     summary:
-      "A demo site for a fictional Houston cleaning company, built to show cleaning businesses what their own website could look like.",
+      "A cinematic, multi-page concept website that takes a mechanical chronograph apart piece by piece as visitors scroll, then explores the watch, its movement and the craft behind it.",
     challenge:
-      "Many small cleaning businesses rely on word of mouth and have no website, or one that doesn’t win quotes. They need to see a realistic example before committing — one that reflects their services, builds trust and makes booking easy.",
+      "Luxury watches are bought on detail and story. The challenge was to show what makes a mechanical watch special — hundreds of parts working as one — in a way that feels as precise and premium as the object itself, while staying fast and readable on any screen.",
     approach:
-      "We built a complete demo for a fictional brand, Brightway Cleaning Co., covering home, apartment, deep, move-in/move-out, office and post-construction cleaning. It includes trust points, a three-step booking explanation, review and FAQ sections, and a free-quote form, all clearly marked as sample content.\n\nThe demo is designed to be quickly adapted for a real business: the brand, logo, contact details, services, reviews and photos can be swapped without rebuilding the page.",
+      "The homepage is a scroll-driven exploded view: as visitors scroll, an 80-frame image sequence on an HTML canvas separates the watch into its components and reassembles it again, with frames cross-fading so movement never stutters.\n\nFurther pages cover the watch itself (gallery, highlights and full specifications), an interactive movement page with numbered hotspots explaining each part, six stages of the craft from design to quality control, a journal with articles, and a contact page with FAQs. It is built with Next.js, Tailwind CSS and Framer Motion. This is a design concept and is not affiliated with any watch brand.",
     results: [],
-    image: "/case-studies/brightway.webp",
-    gallery: ["/case-studies/brightway-2.webp"],
+    image: "/case-studies/watch-storytelling.webp",
+    gallery: ["/case-studies/watch-storytelling-2.webp"],
+    fullPage: "/case-studies/watch-storytelling-full.webp",
   },
   {
     slug: "aetherion-space-travel",
@@ -306,6 +310,7 @@ export const sectors: Sector[] = [
   { name: "Technology", text: "Clear, pricing-led websites that help hosting and technology businesses explain what they offer." },
   { name: "Cleaning services", text: "Quote-focused websites for commercial and residential cleaning companies." },
   { name: "Real estate", text: "Interactive property websites that make large portfolios easy and engaging to browse." },
+  { name: "Luxury & lifestyle", text: "Cinematic, scroll-driven storytelling websites for premium products." },
   { name: "Industrial & safety supplies", text: "Product-led websites that help suppliers present wide ranges of equipment clearly and turn browsing into enquiries." },
 ];
 

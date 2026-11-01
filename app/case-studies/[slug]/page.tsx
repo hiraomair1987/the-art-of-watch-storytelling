@@ -77,7 +77,7 @@ export default function CaseStudyPage({ params }: Params) {
               </ol>
             </nav>
             <p className="eyebrow mt-10 flex flex-wrap items-center gap-3">
-              {c.kind === "concept" && <span className="case-badge concept static">Demo website</span>}
+              {c.kind === "concept" && <span className="case-badge concept static">{c.badge ?? "Concept"} project</span>}
               <span>{[c.industry, c.country].filter(Boolean).join(" · ")}</span>
             </p>
             <h1 className="display-lg mt-4 text-halo">{c.title}</h1>

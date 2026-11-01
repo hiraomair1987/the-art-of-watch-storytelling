@@ -12,7 +12,7 @@ function Card({ c, index, hidden }: { c: CaseStudy; index: number; hidden?: bool
         {c.published && c.image ? (
           <>
             <img src={c.image} alt={hidden ? "" : `${c.client} project screenshot`} loading="lazy" className="h-full w-full object-cover object-top" />
-            {c.kind === "concept" && <span className="case-badge concept">Demo</span>}
+            {c.kind === "concept" && <span className="case-badge concept">{c.badge ?? "Concept"}</span>}
           </>
         ) : (
           <>
