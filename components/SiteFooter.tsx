@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { nav, site } from "@/lib/site";
 import { services } from "@/lib/content";
+import { locations } from "@/lib/locations";
 import Wordmark from "./Wordmark";
 import SocialLinks from "./SocialLinks";
 
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="shell grid gap-12 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:py-20">
+      <div className="shell grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] md:py-20">
         <div>
           <Link href="/" className="link-quiet text-2xl" aria-label="efficiovirtual — home">
             <Wordmark />
@@ -27,6 +28,18 @@ export default function SiteFooter() {
               <li key={s.slug}>
                 <Link href={`/services/${s.slug}`} className="footer-link">
                   {s.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Where we work">
+          <h2 className="eyebrow">Where we work</h2>
+          <ul className="mt-4 space-y-2.5 text-sm">
+            {locations.map((l) => (
+              <li key={l.slug}>
+                <Link href={`/locations/${l.slug}`} className="footer-link">
+                  {l.country}
                 </Link>
               </li>
             ))}
