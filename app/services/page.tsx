@@ -32,7 +32,7 @@ export default function ServicesPage() {
       <SceneLoader fixedState={4} />
       <JsonLd data={jsonLd} />
       <PageIntro eyebrow="Services" title="Everything you need to grow, working together.">
-        <p>Nine services, each useful on its own and stronger together. Here’s what each one does and what it includes.</p>
+        <p>Ten services, each useful on its own and stronger together. Here’s what each one does and what it includes.</p>
       </PageIntro>
 
       <nav aria-label="On this page" className="pb-10">
