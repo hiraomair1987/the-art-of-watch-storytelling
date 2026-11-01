@@ -18,6 +18,26 @@ export const stages: Stage[] = [
   },
 ];
 
+export type Step = { name: string; line: string; detail: string };
+
+export const processSteps: Step[] = [
+  {
+    name: "Understand",
+    line: "We learn your business before touching a campaign.",
+    detail: "Goals, audience, offer, budget and what has or hasn't worked so far — so the plan fits you, not a template.",
+  },
+  {
+    name: "Create",
+    line: "We build the pieces as one connected system.",
+    detail: "Campaigns, pages, automations and creative designed together, with tracking set up before anything goes live.",
+  },
+  {
+    name: "Improve",
+    line: "We measure, learn and refine — continuously.",
+    detail: "Regular testing and clear reporting, so budget moves toward what works and each month builds on the last.",
+  },
+];
+
 export type Service = {
   slug: string;
   name: string;

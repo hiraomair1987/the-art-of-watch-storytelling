@@ -16,16 +16,16 @@ export default function OG() {
           flexDirection: "column",
           justifyContent: "flex-end",
           padding: 80,
-          color: "#f6efe6",
-          background: "radial-gradient(circle at 80% 20%, #8e1a7d 0%, #610955 35%, #1f0519 75%, #14030f 100%)",
+          color: "#eeebe4",
+          background: "radial-gradient(circle at 80% 20%, #8e1a7d 0%, #5d0755 35%, #1f0519 75%, #14030f 100%)",
           fontFamily: "Georgia, serif",
         }}
       >
         <svg width="120" height="120" viewBox={LOGO_VIEWBOX} style={{ marginBottom: 36 }}>
-          <path d={LOGO_PATH} fill="#f6efe6" fillRule="evenodd" />
+          <path d={LOGO_PATH} fill="#eeebe4" fillRule="evenodd" />
         </svg>
         <div style={{ fontSize: 40, display: "flex" }}>
-          efficio<span style={{ color: "#f07ac8" }}>virtual</span>
+          efficio<span style={{ color: "#f4a6cf" }}>virtual</span>
         </div>
         <div style={{ fontSize: 84, lineHeight: 1.02, marginTop: 24, maxWidth: 900 }}>Make your next digital move count.</div>
       </div>

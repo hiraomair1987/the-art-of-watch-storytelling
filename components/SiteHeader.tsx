@@ -1,17 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { nav, site } from "@/lib/site";
+import { services } from "@/lib/content";
 import Wordmark from "./Wordmark";
 
 /**
- * Three stacked bands: plum utility strip, deep maroon brand bar,
- * a thin plum rule, then a terracotta navigation strip.
+ * Three-band header:
+ *  1. thin deep-plum strip (email)
+ *  2. dark-burgundy bar (logo, main navigation, "Let's talk")
+ *  3. terracotta strip (links to each service)
  */
 export default function SiteHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -20,47 +27,66 @@ export default function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu after navigating.
+  useEffect(() => setOpen(false), [pathname]);
+
+  // Mobile menu: Escape closes it, focus moves into it when it opens.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    menuRef.current?.querySelector<HTMLElement>("a")?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-      {/* Layer 1 · plum utility strip */}
+      {/* Band 1 · thin deep-plum strip */}
       <div className="hdr-top">
-        <div className="shell flex h-full items-center justify-between text-[11px] uppercase tracking-[0.2em]">
-          <p className="hidden sm:block">Strategy · Creative · Performance</p>
-          <a href={`mailto:${site.contactEmail}`} className="hdr-top-link normal-case tracking-normal">
+        <div className="shell flex h-full items-center justify-between gap-4 text-[11px] tracking-[0.14em]">
+          <p className="hidden uppercase sm:block">Digital marketing · Creative · 3D web</p>
+          <a href={`mailto:${site.contactEmail}`} className="hdr-top-link">
             {site.contactEmail}
           </a>
         </div>
       </div>
 
-      {/* Layer 2 · maroon brand bar */}
+      {/* Band 2 · dark-burgundy main navigation */}
       <div className="hdr-main">
         <div className="shell flex h-full items-center justify-between gap-6">
-          <Link href="/" className="link-quiet text-xl md:text-[1.65rem]" aria-label="efficiovirtual — home">
+          <Link href="/" className="link-quiet text-xl md:text-[1.55rem]" aria-label="efficiovirtual — home">
             <Wordmark />
           </Link>
+
+          <nav aria-label="Main" className="hidden md:block">
+            <ul className="flex items-center gap-8 text-[15px]">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="nav-link" aria-current={isActive(item.href) ? "page" : undefined}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
           <div className="flex items-center gap-3">
-            <span className="hidden text-[11px] uppercase tracking-[0.2em] text-sand/80 lg:inline">Jump to</span>
-            <Link href="/#services" className="hdr-jump hidden lg:inline">
-              Services /
-            </Link>
-            <Link href="/#contact" className="hdr-jump mr-3 hidden lg:inline">
-              Contact
-            </Link>
-            <Link href="/#contact" className="btn btn-primary hidden h-10 px-5 text-sm sm:inline-flex">
+            <Link href="/contact" className="btn btn-primary hidden h-10 px-5 text-sm sm:inline-flex">
               Let&rsquo;s talk
             </Link>
             <button
+              ref={buttonRef}
               type="button"
               className="menu-btn md:hidden"
               aria-expanded={open}
-              aria-controls="mobile-nav"
+              aria-controls="mobile-menu"
               onClick={() => setOpen((o) => !o)}
             >
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
@@ -70,38 +96,38 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {/* Thin plum rule */}
-      <div className="hdr-rule" aria-hidden="true" />
-
-      {/* Layer 3 · terracotta navigation */}
-      <nav aria-label="Primary" className="hdr-nav">
-        <ul className="shell flex h-full items-center justify-center gap-4 text-[10.5px] uppercase tracking-[0.12em] sm:gap-12 sm:text-[12px] sm:tracking-[0.18em]">
-          {nav.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className="nav-link">
-                {item.label}
+      {/* Band 3 · terracotta services strip */}
+      <nav aria-label="Services" className="hdr-services">
+        <ul className="shell hdr-services-list">
+          {services.map((s) => (
+            <li key={s.slug}>
+              <Link href={`/services/${s.slug}`} className="svc-link" aria-current={pathname === `/services/${s.slug}` ? "page" : undefined}>
+                {s.name}
               </Link>
             </li>
           ))}
         </ul>
       </nav>
 
-      <nav id="mobile-nav" aria-label="Mobile" hidden={!open} className="hdr-mobile md:hidden">
-        <ul className="shell flex flex-col gap-1 pb-6 pt-3">
-          {nav.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className="mobile-link" onClick={() => setOpen(false)}>
-                {item.label}
+      {/* Mobile menu */}
+      <div id="mobile-menu" ref={menuRef} hidden={!open} className="hdr-mobile md:hidden">
+        <nav aria-label="Mobile">
+          <ul className="shell flex flex-col gap-1 pb-6 pt-4">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="mobile-link" aria-current={isActive(item.href) ? "page" : undefined} onClick={() => setOpen(false)}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li className="pt-3">
+              <Link href="/contact" className="btn btn-primary w-full" onClick={() => setOpen(false)}>
+                Let&rsquo;s talk
               </Link>
             </li>
-          ))}
-          <li className="pt-3">
-            <Link href="/#contact" className="btn btn-primary w-full" onClick={() => setOpen(false)}>
-              Let&rsquo;s talk
-            </Link>
-          </li>
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

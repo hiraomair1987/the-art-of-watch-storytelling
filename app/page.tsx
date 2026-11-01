@@ -4,9 +4,9 @@ import ChapterRail from "@/components/ChapterRail";
 import TiltCard from "@/components/TiltCard";
 import ServiceInView from "@/components/ServiceInView";
 import ContactForm from "@/components/ContactForm";
-import Wordmark from "@/components/Wordmark";
-import { services, stages } from "@/lib/content";
-import { site } from "@/lib/site";
+import SocialLinks from "@/components/SocialLinks";
+import { processSteps, services, stages } from "@/lib/content";
+import { site, socials } from "@/lib/site";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -15,9 +15,12 @@ const jsonLd = {
   url: site.url,
   email: site.contactEmail,
   description: site.description,
+  sameAs: socials.map((s) => s.href),
   makesOffer: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name, description: s.summary } })),
 };
 
+/* Each <section data-chapter> is one chapter of the story. The numbers in
+   data-state-start / data-state-end tell the 3D scene which layout to show. */
 export default function Home() {
   return (
     <>
@@ -26,20 +29,20 @@ export default function Home() {
       <ServiceInView />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* 01 · Opening */}
+      {/* 01 · Hero */}
       <section id="top" data-chapter data-state-start="0" aria-labelledby="hero-title" className="chapter chapter-tall" style={{ minHeight: "150vh" }}>
         <div className="chapter-pin">
           <div className="shell">
             <div className="max-w-2xl text-halo">
-              <p className="text-2xl text-cream sm:text-3xl" data-reveal>
-                <Wordmark />
+              <p className="eyebrow" data-reveal>
+                Digital marketing studio
               </p>
-              <h1 id="hero-title" className="display-xl mt-6" data-reveal style={{ ["--d" as string]: "120ms" }}>
+              <h1 id="hero-title" className="display-xl mt-5" data-reveal style={{ ["--d" as string]: "120ms" }}>
                 Make your next digital move <em className="italic text-accent">count.</em>
               </h1>
               <p className="lede mt-6 max-w-lg" data-reveal style={{ ["--d" as string]: "240ms" }}>
-                We help brands grow by joining sharp strategy, standout creative and performance marketing that’s measured
-                every step of the way.
+                efficiovirtual helps brands grow by joining clear strategy, standout creative and performance marketing — Google
+                Ads, automation, 3D websites, landing pages and design, working as one.
               </p>
               <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "360ms" }}>
                 <Link href="#contact" className="btn btn-primary">
@@ -51,7 +54,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <a href="#challenge" className="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.24em] text-cream-muted hover:text-cream focus-visible:text-cream">
+          <a href="#challenge" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.24em] text-cream-muted hover:text-cream focus-visible:text-cream">
             Scroll to begin
           </a>
         </div>
@@ -65,12 +68,11 @@ export default function Home() {
               The challenge
             </p>
             <h2 id="challenge-title" className="display-lg text-halo mx-auto mt-5 max-w-4xl" data-reveal style={{ ["--d" as string]: "100ms" }}>
-              Attention is earned. <br className="hidden sm:block" />
-              Growth is designed.
+              When marketing is scattered, growth feels like guesswork.
             </h2>
             <p className="lede text-halo mx-auto mt-6 max-w-xl" data-reveal style={{ ["--d" as string]: "200ms" }}>
-              Ads in one place, a website in another, emails nobody owns. Scattered efforts make noise. When every piece is
-              planned to work together, they start to move people.
+              Ads run in one place, the website lives in another, emails go out when someone remembers. Each piece might work
+              on its own — but nobody can say what’s really driving results. Bring them together, and the picture gets clear.
             </p>
           </div>
         </div>
@@ -85,10 +87,10 @@ export default function Home() {
                 Our approach
               </p>
               <h2 id="approach-title" className="display-md mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
-                Three stages, one connected system.
+                Strategy, creative and performance — connected.
               </h2>
             </div>
-            <ol className="mt-[26vh] grid gap-4 md:grid-cols-3 lg:mt-[30vh]">
+            <ol className="mt-[22vh] grid gap-4 md:grid-cols-3 lg:mt-[26vh]">
               {stages.map((s, i) => (
                 <li key={s.name} data-reveal style={{ ["--d" as string]: `${150 + i * 120}ms` }}>
                   <TiltCard className="h-full p-6 sm:p-7">
@@ -114,24 +116,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 04 · Our services */}
+      {/* 04 · Services */}
       <section id="services" data-chapter data-state-start="4" aria-labelledby="services-title" className="chapter chapter-tall unpin-md">
         <div className="chapter-pin">
           <div className="shell">
             <div className="flex flex-col justify-between gap-4 text-halo md:flex-row md:items-end">
               <div className="max-w-xl">
                 <p className="eyebrow" data-reveal>
-                  Our services
+                  Services
                 </p>
                 <h2 id="services-title" className="display-md mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
                   Five ways we move your brand forward.
                 </h2>
               </div>
               <p className="max-w-sm text-sm" data-reveal style={{ ["--d" as string]: "200ms" }}>
-                Use one on its own, or combine them into a single plan. Each one is a piece of the same connected system.
+                Choose one, or combine them into a single plan. Every service is built to work with the others.{" "}
+                <Link href="/services" className="text-link">
+                  Compare all services
+                </Link>
               </p>
             </div>
-            <ul className="mt-[30vh] grid gap-3 sm:grid-cols-2 lg:mt-[26vh] lg:grid-cols-5">
+            <ul className="mt-[26vh] grid gap-3 sm:grid-cols-2 lg:mt-[22vh] lg:grid-cols-5">
               {services.map((s, i) => (
                 <li key={s.slug} data-reveal style={{ ["--d" as string]: `${120 + i * 80}ms` }}>
                   <TiltCard serviceIndex={i} className="flex h-full flex-col p-5">
@@ -149,37 +154,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 05 · The outcome */}
-      <section id="outcome" data-chapter data-state-start="5" aria-labelledby="outcome-title" className="chapter chapter-tall">
+      {/* 05 · Process */}
+      <section id="process" data-chapter data-state-start="5" aria-labelledby="process-title" className="chapter chapter-tall">
         <div className="chapter-pin">
           <div className="shell">
             <div className="max-w-xl text-halo">
               <p className="eyebrow" data-reveal>
-                The outcome
+                Process
               </p>
-              <h2 id="outcome-title" className="display-lg mt-5" data-reveal style={{ ["--d" as string]: "100ms" }}>
-                Growth you can measure, and keep.
+              <h2 id="process-title" className="display-md mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
+                Three steps, repeated until it works.
               </h2>
-              <p className="lede mt-6" data-reveal style={{ ["--d" as string]: "200ms" }}>
-                No guesswork and no quick spikes that fade. Every channel is tracked, every decision has a reason, and each
-                step builds on the last — so progress is clear today and still compounding next year.
-              </p>
-              <ul className="mt-8 grid gap-3 text-sm sm:grid-cols-2" data-reveal style={{ ["--d" as string]: "300ms" }}>
-                {["Tracking you can trust", "Reporting in plain language", "Budget that follows results", "Systems that keep working"].map((x) => (
-                  <li key={x} className="flex items-center gap-3 text-cream">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_#f07ac8]" aria-hidden="true" />
-                    {x}
+              <ol className="mt-7 space-y-3">
+                {processSteps.map((step, i) => (
+                  <li key={step.name} data-reveal style={{ ["--d" as string]: `${200 + i * 120}ms` }}>
+                    <TiltCard className="flex gap-5 px-5 py-4 sm:px-6">
+                      <span className="font-display text-3xl leading-none text-accent tabular-nums" aria-hidden="true">
+                        0{i + 1}
+                      </span>
+                      <div>
+                        <h3 className="text-xl sm:text-2xl">{step.name}</h3>
+                        <p className="mt-1 text-cream">{step.line}</p>
+                        <p className="mt-2 text-sm">{step.detail}</p>
+                      </div>
+                    </TiltCard>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 06 · Closing */}
+      {/* 06 · Contact */}
       <section id="contact" data-chapter data-state-start="6" aria-labelledby="contact-title" className="chapter">
-        <div className="shell grid gap-12 pb-24 pt-44 lg:min-h-screen lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16">
+        <div className="shell grid gap-12 pb-24 pt-44 lg:min-h-screen lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
           <div className="text-halo">
             <p className="eyebrow" data-reveal>
               Let’s talk
@@ -191,14 +200,19 @@ export default function Home() {
               Tell us where you are and where you want to be. We’ll reply with honest next steps — even if that means
               starting small.
             </p>
-            <p className="mt-8 text-sm" data-reveal style={{ ["--d" as string]: "300ms" }}>
-              Prefer email?{" "}
-              <a href={`mailto:${site.contactEmail}`} className="text-link">
-                {site.contactEmail}
+            <div className="mt-8" data-reveal style={{ ["--d" as string]: "300ms" }}>
+              <a href={`mailto:${site.contactEmail}`} className="email-cta">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-cream-muted">Email us</span>
+                <span className="font-display text-2xl text-cream sm:text-3xl">{site.contactEmail}</span>
               </a>
-            </p>
+            </div>
+            <div className="mt-8" data-reveal style={{ ["--d" as string]: "400ms" }}>
+              <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-cream-muted">Follow efficiovirtual</p>
+              <SocialLinks size="lg" />
+            </div>
           </div>
           <div className="glass rounded-3xl p-6 sm:p-9" data-reveal style={{ ["--d" as string]: "200ms" }}>
+            <h3 className="mb-6 text-2xl">Or send a quick message</h3>
             <ContactForm />
           </div>
         </div>

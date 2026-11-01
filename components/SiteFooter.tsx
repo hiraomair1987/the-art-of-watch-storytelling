@@ -2,11 +2,12 @@ import Link from "next/link";
 import { nav, site } from "@/lib/site";
 import { services } from "@/lib/content";
 import Wordmark from "./Wordmark";
+import SocialLinks from "./SocialLinks";
 
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="shell grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:py-20">
+      <div className="shell grid gap-12 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:py-20">
         <div>
           <Link href="/" className="link-quiet text-2xl" aria-label="efficiovirtual — home">
             <Wordmark />
@@ -17,8 +18,9 @@ export default function SiteFooter() {
           <a href={`mailto:${site.contactEmail}`} className="text-link mt-6 inline-block text-sm">
             {site.contactEmail}
           </a>
+          <SocialLinks className="mt-6" />
         </div>
-        <nav aria-label="Services">
+        <nav aria-label="Footer services">
           <h2 className="eyebrow">Services</h2>
           <ul className="mt-4 space-y-2.5 text-sm">
             {services.map((s) => (
@@ -43,9 +45,11 @@ export default function SiteFooter() {
           </ul>
         </nav>
       </div>
-      <div className="shell flex flex-col gap-2 border-t border-cream/10 py-6 text-xs text-cream-muted sm:flex-row sm:justify-between">
-        <p>© {new Date().getFullYear()} efficiovirtual. All rights reserved.</p>
-        <p>efficiovirtual.com</p>
+      <div className="footer-base">
+        <div className="shell flex flex-col gap-2 py-5 text-xs sm:flex-row sm:justify-between">
+          <p>© {new Date().getFullYear()} efficiovirtual. All rights reserved.</p>
+          <p>efficiovirtual.com</p>
+        </div>
       </div>
     </footer>
   );

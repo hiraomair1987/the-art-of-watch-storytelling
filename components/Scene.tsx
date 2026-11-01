@@ -22,12 +22,14 @@ import { LOGO_CENTER, LOGO_PATH } from "@/lib/logo";
 type Props = {
   /** When set, the scene shows a single service object (used on service pages). */
   detailIndex?: number;
+  /** When set, the scene holds one story layout instead of following scroll (used on inner pages). */
+  fixedState?: number;
 };
 
 const PANELS = 18;
 const THREAD_CTRL = 9;
 const THREAD_SAMPLES = 180;
-const STATES = 7; // 0 opening · 1 scattered · 2 aligned · 3 approach · 4 services · 5 outcome · 6 closing
+const STATES = 7; // 0 opening · 1 scattered · 2 aligned · 3 approach · 4 services · 5 process · 6 closing
 
 /* ------------------------------------------------------------------ utils */
 
@@ -309,7 +311,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
     const x0 = portrait ? -1.6 : 0.6 * lx;
     const x1 = portrait ? 1.6 : 5.6 * lx;
     const y0 = portrait ? -4.2 : -3;
-    const y1 = portrait ? 4.6 : 2.9;
+    const y1 = portrait ? 4.2 : 2.4;
     for (let i = 0; i < PANELS; i++) {
       const u = i / (PANELS - 1);
       s.pos.push(v(lerp(x0, x1, u) + Math.sin(u * Math.PI) * 0.7, lerp(y0, y1, Math.pow(u, 1.15)), lerp(-1.2, 1.2, u)));
@@ -321,7 +323,7 @@ function buildStates({ lx, portrait }: Layout): State[] {
       s.thread.push(v(lerp(x0, x1, u) + Math.sin(u * Math.PI) * 0.7, lerp(y0, y1, Math.pow(u, 1.15)) + 0.22, lerp(-1.2, 1.2, u)));
     }
     s.reveal = 1;
-    s.core.set(x1 + 0.2, y1 + 0.6, 1.4);
+    s.core.set(x1 + 0.2, y1 + 0.55, 1.4);
     s.coreScale = 1.15;
     s.emblem = 0.5;
     s.nodes = [s.core.clone(), s.core.clone()];
@@ -427,7 +429,7 @@ function buildServiceObjects(glass: THREE.Material, edge: THREE.LineBasicMateria
 
 /* ------------------------------------------------------------ component */
 
-export default function Scene({ detailIndex }: Props) {
+export default function Scene({ detailIndex, fixedState }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -464,19 +466,23 @@ export default function Scene({ detailIndex }: Props) {
     const key = new THREE.DirectionalLight(0xffeadb, 0.9);
     key.position.set(3, 5, 6);
     scene.add(key);
-    const violet = new THREE.PointLight(0x8a5cff, 60, 40, 2);
-    violet.position.set(-6, -2, 4);
-    scene.add(violet);
-    const magenta = new THREE.PointLight(0xe04fb3, 34, 30, 2);
-    magenta.position.set(5, 3, 3);
-    scene.add(magenta);
+    // Brand lighting: plum fill, soft pink key, warm terracotta rim
+    const plum = new THREE.PointLight(0xb03ca6, 60, 40, 2);
+    plum.position.set(-6, -2, 4);
+    scene.add(plum);
+    const pink = new THREE.PointLight(0xf4a6cf, 40, 30, 2);
+    pink.position.set(6, 4, 4);
+    scene.add(pink);
+    const terracotta = new THREE.PointLight(0xe0703f, 45, 26, 2);
+    terracotta.position.set(1, -4, 5);
+    scene.add(terracotta);
 
     const root = new THREE.Group();
     scene.add(root);
 
     // Materials
     const glass = new THREE.MeshPhysicalMaterial({
-      color: 0x610955,
+      color: 0x5d0755,
       emissive: 0x2a0424,
       metalness: 0.15,
       roughness: 0.16,
@@ -536,14 +542,17 @@ export default function Scene({ detailIndex }: Props) {
     // The ev logo as a glass emblem at the heart of the world
     const emblemGroup = new THREE.Group();
     const emblemMat = new THREE.MeshPhysicalMaterial({
-      color: 0xf6efe6,
-      emissive: 0x610955,
-      emissiveIntensity: 0.8,
+      color: 0xa23394,
+      emissive: 0x5d0755,
+      emissiveIntensity: 0.45,
       fog: false,
-      metalness: 0.25,
-      roughness: 0.22,
+      metalness: 0.35,
+      roughness: 0.16,
       clearcoat: 1,
-      envMapIntensity: 1,
+      clearcoatRoughness: 0.08,
+      sheen: 1,
+      sheenColor: new THREE.Color(0xf4a6cf),
+      envMapIntensity: 1.2,
       side: THREE.DoubleSide,
     });
     {
@@ -597,7 +606,7 @@ export default function Scene({ detailIndex }: Props) {
     const pCol = new Float32Array(PCOUNT * 3);
     const cA = new THREE.Color(0xb47cf0);
     const cB = new THREE.Color(0xff86d4);
-    const cC = new THREE.Color(0xf6efe6);
+    const cC = new THREE.Color(0xeeebe4);
     const pr = mulberry32(21);
     for (let i = 0; i < PCOUNT; i++) {
       pPos[i * 3] = (pr() - 0.5) * 30;
@@ -646,6 +655,7 @@ export default function Scene({ detailIndex }: Props) {
 
     function scrollT() {
       if (isDetail) return 4;
+      if (typeof fixedState === "number") return fixedState;
       if (!segs.length) return 0;
       const y = window.scrollY;
       if (y <= segs[0].y0) return segs[0].t0;
@@ -882,7 +892,7 @@ export default function Scene({ detailIndex }: Props) {
       pmrem.dispose();
       renderer.dispose();
     };
-  }, [detailIndex]);
+  }, [detailIndex, fixedState]);
 
   return <canvas ref={canvasRef} className="scene-canvas" aria-hidden="true" />;
 }

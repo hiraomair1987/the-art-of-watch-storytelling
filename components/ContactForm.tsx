@@ -11,7 +11,7 @@ export default function ContactForm() {
   const [sent, setSent] = useState(false);
   const [topic, setTopic] = useState(topics[topics.length - 1]);
 
-  // A "Discuss this service" link arrives as /?service=<slug>#contact.
+  // A "Discuss this service" link arrives as /contact?service=<slug>.
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get("service");
     const match = services.find((s) => s.slug === slug);

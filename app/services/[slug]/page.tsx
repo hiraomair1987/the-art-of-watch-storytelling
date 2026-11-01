@@ -43,7 +43,7 @@ export default function ServicePage({ params }: Params) {
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/#services" className="footer-link">
+                <Link href="/services" className="footer-link">
                   Services
                 </Link>
               </li>
@@ -67,10 +67,10 @@ export default function ServicePage({ params }: Params) {
               {s.intro}
             </p>
             <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "400ms" }}>
-              <Link href={`/?service=${s.slug}#contact`} className="btn btn-primary">
+              <Link href={`/contact?service=${s.slug}`} className="btn btn-primary">
                 Let’s talk about {s.name} <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/#services" className="btn btn-ghost">
+              <Link href="/services" className="btn btn-ghost">
                 All services
               </Link>
             </div>
@@ -148,7 +148,7 @@ export default function ServicePage({ params }: Params) {
           </ul>
           <div className="glass mt-16 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center sm:p-10" data-reveal>
             <h2 className="display-md max-w-lg">Ready to make your next move count?</h2>
-            <Link href={`/?service=${s.slug}#contact`} className="btn btn-primary shrink-0">
+            <Link href={`/contact?service=${s.slug}`} className="btn btn-primary shrink-0">
               Let’s talk <span aria-hidden="true">→</span>
             </Link>
           </div>

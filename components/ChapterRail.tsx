@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 const chapters = [
-  { id: "top", label: "Opening" },
+  { id: "top", label: "Home" },
   { id: "challenge", label: "The challenge" },
   { id: "approach", label: "Our approach" },
-  { id: "services", label: "Our services" },
-  { id: "outcome", label: "The outcome" },
+  { id: "services", label: "Services" },
+  { id: "process", label: "Process" },
   { id: "contact", label: "Let’s talk" },
 ];
 
