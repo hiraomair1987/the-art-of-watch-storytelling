@@ -133,7 +133,8 @@ export const caseStudies: CaseStudy[] = [
     approach:
       "We designed and built a WordPress website with Elementor in BeeHost’s yellow-and-navy colours. It covers core services (web hosting, domain services, email hosting and SSL certificates), advanced services such as reseller, managed and cloud hosting, and pricing plans laid out side by side.\n\nThe site also includes a blog section, a team section, a call-to-action band, a newsletter sign-up and a detailed footer with contact and help links.",
     results: [],
-    image: "/case-studies/beehost.png",
+    image: "/case-studies/beehost.webp",
+    fullPage: "/case-studies/beehost-full.webp",
   },
   {
     slug: "developer-portfolio",
