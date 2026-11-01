@@ -69,6 +69,16 @@ The easiest way is [Vercel](https://vercel.com) (free for personal use): sign in
 
 No client logos, testimonials or statistics are included — add real ones only.
 
+## Case studies
+
+The Case Studies page (`/case-studies`) shows eight placeholder cards until you add real projects. Edit `lib/caseStudies.ts`:
+
+1. Replace a placeholder with your project details: client, title, industry, country, services, summary, challenge, what you did and results. Only use real, approved information.
+2. Optional: put an image in `public/case-studies/` (about 1600×1000 px) and set `image: "/case-studies/your-image.jpg"`.
+3. Set `published: true`.
+
+Each published case study gets its own page at `/case-studies/<slug>` and is added to the sitemap. While all eight are placeholders, the Case Studies page is hidden from Google so unfinished content doesn't affect your SEO.
+
 ## SEO
 
 What's already set up:
@@ -92,8 +102,8 @@ Before Google can index the site:
 - `components/Scene.tsx` draws one 3D world behind the pages: glass panels, a glowing thread, the ev logo as a 3D emblem, five service objects and soft particles, lit with plum, pink and terracotta.
 - Each homepage chapter is a `<section data-chapter …>`. As you scroll, the scene moves smoothly from one chapter's layout to the next and pauses while a chapter is on screen.
 - Mouse: gentle parallax on the 3D objects and a slight tilt on cards. Touch screens: no cursor effects; scrolling adds a gentle sway and the card in the middle of the screen lights up its 3D object.
-- If someone's device asks for **reduced motion**, animations and parallax are turned off.
-- If a device can't show 3D, the site shows a plum gradient background instead, and everything still works.
+- Motion effects stay on for everyone. If a device asks for **reduced motion**, only the constant background drifting pauses.
+- Devices without a graphics card get a lighter version of the 3D. Only if WebGL isn't available at all (and for search bots and speed-test tools) does the site show a static logo and gradient instead.
 
 ## Contact form
 

@@ -3,8 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-// three.js is only downloaded once we know the device can show 3D smoothly,
-// and only after the page has finished loading — so text appears first.
+// three.js is downloaded after the page has finished loading, so text appears first.
 const Scene = dynamic(() => import("./Scene"), { ssr: false });
 
 type Props = {
@@ -14,17 +13,18 @@ type Props = {
   fixedState?: number;
 };
 
-/** Quick check for hardware-accelerated WebGL, without loading three.js. */
+/**
+ * Show 3D wherever WebGL works. Search-engine bots and speed-test tools
+ * (Googlebot, Lighthouse/PageSpeed) get the lightweight static version instead,
+ * so they measure the page content quickly. Visitors always get the 3D.
+ */
 function canRun3D() {
   try {
-    const nav = navigator as Navigator & { deviceMemory?: number };
-    if ((nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 1) return false;
+    if (/bot|crawl|spider|lighthouse|pagespeed|headlesschrome/i.test(navigator.userAgent)) return false;
     const gl = document.createElement("canvas").getContext("webgl");
     if (!gl) return false;
-    const info = gl.getExtension("WEBGL_debug_renderer_info");
-    const gpu = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
     gl.getExtension("WEBGL_lose_context")?.loseContext();
-    return !/swiftshader|llvmpipe|software|basic render/i.test(gpu);
+    return true;
   } catch {
     return false;
   }

@@ -88,17 +88,8 @@
     border-radius: 6px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
-      transition-duration: 0.01ms !important;
-      animation-duration: 0.01ms !important;
-    }
-  }
+  /* Motion effects stay on for everyone (owner's choice). The 3D scene pauses only
+     its constant background drifting when a device asks to reduce motion. */
 }
 
 @layer components {
@@ -652,11 +643,6 @@
   opacity: 1;
   transform: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .js-reveal [data-reveal] {
-    transform: none;
-  }
-}
 
 .logo-mark {
   /* Brand logo colour — keep the logo in this exact blue everywhere. */
@@ -805,4 +791,36 @@ html[data-webgl="off"] .hero-fallback {
   html[data-webgl="off"] .hero-fallback {
     display: none;
   }
+}
+
+/* Case study cards */
+.case-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 90% at 80% 10%, rgba(167, 83, 55, 0.45), transparent 60%),
+    radial-gradient(60% 80% at 10% 100%, rgba(39, 159, 229, 0.25), transparent 60%),
+    linear-gradient(135deg, var(--brand), var(--maroon));
+  border-bottom: 1px solid rgba(238, 235, 228, 0.1);
+}
+.case-thumb-mark {
+  width: 34%;
+  color: var(--logo-blue);
+  opacity: 0.55;
+  filter: drop-shadow(0 0 24px rgba(3, 158, 253, 0.4));
+}
+.case-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--blue-light);
 }
