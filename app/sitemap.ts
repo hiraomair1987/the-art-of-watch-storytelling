@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { services } from "@/lib/content";
 import { locations } from "@/lib/locations";
+import { publishedCaseStudies } from "@/lib/caseStudies";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -11,6 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...services.map((s) => ({ url: `${site.url}/services/${s.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${site.url}/locations`, changeFrequency: "monthly" as const, priority: 0.8 },
     ...locations.map((l) => ({ url: `${site.url}/locations/${l.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
+    // Case studies are listed only once at least one real one is published.
+    ...(publishedCaseStudies.length
+      ? [
+          { url: `${site.url}/case-studies`, changeFrequency: "monthly" as const, priority: 0.8 },
+          ...publishedCaseStudies.map((c) => ({ url: `${site.url}/case-studies/${c.slug}`, changeFrequency: "yearly" as const, priority: 0.6 })),
+        ]
+      : []),
   ];
   return list.map((e) => ({ ...e, lastModified }));
 }

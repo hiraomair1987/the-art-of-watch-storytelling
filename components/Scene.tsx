@@ -529,8 +529,10 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       return;
     }
 
-    // Without a graphics card (software rendering) or on very low-end devices the
-    // scene would make scrolling sluggish, so keep the lightweight CSS background instead.
+    // "Lite" mode for devices without a graphics card (software rendering) or with
+    // very little power: the full scene still shows, at lower resolution, with fewer
+    // particles and about 30 frames per second, so scrolling stays smooth.
+    let lite = false;
     {
       const gl = renderer.getContext();
       const info = gl.getExtension("WEBGL_debug_renderer_info");
@@ -538,11 +540,7 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       const nav = navigator as Navigator & { deviceMemory?: number };
       const software = /swiftshader|llvmpipe|software|basic render/i.test(gpu);
       const lowEnd = (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 1;
-      if (software || lowEnd) {
-        renderer.dispose();
-        document.documentElement.dataset.webgl = "off";
-        return;
-      }
+      lite = software || lowEnd;
     }
 
     const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -702,7 +700,7 @@ export default function Scene({ detailIndex, fixedState }: Props) {
 
     // Particles
     const small = window.innerWidth < 768;
-    const PCOUNT = small ? 500 : 1100;
+    const PCOUNT = lite ? 300 : small ? 500 : 1100;
     const pPos = new Float32Array(PCOUNT * 3);
     const pCol = new Float32Array(PCOUNT * 3);
     const cA = new THREE.Color(0x8fcaf0);
@@ -773,7 +771,7 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       const w = window.innerWidth;
       const h = window.innerHeight;
       const aspect = w / h;
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, w < 768 ? 1.5 : 1.75));
+      renderer.setPixelRatio(lite ? 1 : Math.min(window.devicePixelRatio, w < 768 ? 1.5 : 1.75));
       renderer.setSize(w, h, false);
       camera.aspect = aspect;
       camera.fov = aspect < 0.9 ? 50 : 42;
@@ -852,14 +850,17 @@ export default function Scene({ detailIndex, fixedState }: Props) {
     function frame(now: number) {
       raf = requestAnimationFrame(frame);
       if (document.hidden) return;
+      if (lite && now - last < 32) return; // ~30fps in lite mode
       const dt = clamp((now - last) / 1000, 0, 0.05);
       last = now;
+      // Scroll, pointer and section transitions are always on. If the visitor's device
+      // asks to reduce motion, only the constant background drifting is paused.
       const motion = !reduced;
       if (motion) elapsed += dt;
 
       // Scroll → story position
       const target = scrollT();
-      tShown = motion ? damp(tShown, target, 5, dt) : Math.round(target);
+      tShown = damp(tShown, target, 5, dt);
       const t = clamp(tShown, 0, STATES - 1);
       const i0 = Math.min(STATES - 2, Math.floor(t));
       const f = t - i0;
@@ -867,10 +868,10 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       const B = states[i0 + 1];
 
       // Pointer / touch parallax
-      const finePointer = hoverQuery.matches && motion;
+      const finePointer = hoverQuery.matches;
       pointer.x = damp(pointer.x, finePointer ? pointer.tx : 0, 3, dt);
       pointer.y = damp(pointer.y, finePointer ? pointer.ty : 0, 3, dt);
-      scrollVel = motion ? damp(scrollVel, 0, 2.5, dt) : 0;
+      scrollVel = damp(scrollVel, 0, 2.5, dt);
       const sway = clamp(scrollVel, -0.25, 0.25);
 
       // Panels
@@ -967,7 +968,7 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       root.rotation.copy(euler);
 
       const settled = Math.abs(tShown - target) < 0.0005 && Math.abs(pointer.x - pointer.tx) < 0.001;
-      if (!motion && settled && !needsRender && shown) return;
+      if (!motion && settled && Math.abs(scrollVel) < 0.001 && !needsRender && shown) return;
       needsRender = false;
       renderer.render(scene, camera);
       if (!shown) {

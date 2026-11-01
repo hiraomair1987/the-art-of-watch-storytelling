@@ -18,7 +18,6 @@ export default function TiltCard({ children, className = "", serviceIndex }: Pro
   function onMove(e: PointerEvent<HTMLDivElement>) {
     const el = ref.current;
     if (!el || e.pointerType !== "mouse") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const r = el.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width;
     const y = (e.clientY - r.top) / r.height;
