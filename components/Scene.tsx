@@ -493,6 +493,22 @@ function buildServiceObjects(glass: THREE.Material, edge: THREE.LineBasicMateria
     g.add(bar);
     objs.push(g);
   }
+  // SaaS Development — stacked platform layers with a connecting ring
+  {
+    const g = new THREE.Group();
+    [0, 1, 2].forEach((k) => {
+      const layer = withEdges(new THREE.CylinderGeometry(0.52 - k * 0.06, 0.52 - k * 0.06, 0.12, 40));
+      layer.position.y = -0.3 + k * 0.3;
+      g.add(layer);
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 8), accent);
+      dot.position.set(0.3 - k * 0.04, -0.3 + k * 0.3, 0.38 - k * 0.04);
+      g.add(dot);
+    });
+    const ring = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.TorusGeometry(0.78, 0.004, 4, 64)), edge);
+    ring.rotation.x = Math.PI / 2.4;
+    g.add(ring);
+    objs.push(g);
+  }
   return objs;
 }
 

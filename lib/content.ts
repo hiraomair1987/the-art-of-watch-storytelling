@@ -59,7 +59,7 @@ export type Faq = { q: string; a: string };
 export const homeFaqs: Faq[] = [
   {
     q: "What digital marketing services does efficiovirtual offer?",
-    a: "Our core services are Google Ads management, marketing automation, 3D website design, landing page design and creative design. We also offer SEO and Google Business Profile setup, social media marketing, website development and maintenance, and mobile and web app development. You can use one service on its own or combine several into a single plan.",
+    a: "Our core services are Google Ads management, marketing automation, 3D website design, landing page design and creative design. We also offer SEO and Google Business Profile setup, social media marketing, website development and maintenance, mobile and web app development, and SaaS product development. You can use one service on its own or combine several into a single plan.",
   },
   {
     q: "What does Google Ads management include?",
@@ -90,8 +90,8 @@ export const homeFaqs: Faq[] = [
     a: "Whichever platforms you need. We plan content, community management and paid social campaigns around where your customers actually spend their time.",
   },
   {
-    q: "Do you look after websites after they launch?",
-    a: "Yes, if you need it — and for as long as you need it. Ongoing care can include updates, backups, security, speed checks and content changes.",
+    q: "Do you look after websites, apps and SaaS products after launch?",
+    a: "Yes, if you need it — and for as long as you need it. Ongoing care can include updates, bug fixes, new features, backups, security, speed checks and content changes.",
   },
   {
     q: "Can we work together remotely?",
@@ -321,6 +321,28 @@ export const services: Service[] = [
       "Updates, fixes and new features after launch",
     ],
     fit: ["You have an app idea and need a team to build it", "Your customers or staff need a better tool than a website", "Your existing app needs a redesign or new features"],
+  },
+  {
+    slug: "saas-development",
+    seoTitle: "SaaS Development Services",
+    seoDescription: "SaaS development from idea to launch: product planning, UX/UI, user accounts, subscription billing, dashboards and secure, scalable hosting.",
+    h1: "SaaS product development",
+    forWho: "Founders and businesses turning a software idea or internal tool into a subscription product.",
+    name: "SaaS Development",
+    navLabel: "SaaS",
+    short: "Software-as-a-service products",
+    summary: "SaaS development from first idea to paying customers — planned, designed, built and looked after as your product grows.",
+    intro:
+      "We help you turn a software idea into a working SaaS product: deciding what the first version needs, designing an interface people enjoy using, building secure accounts, subscriptions and dashboards, and launching it. After launch we keep developing and maintaining the product for as long as you need.",
+    includes: [
+      "Product discovery and first-version (MVP) planning",
+      "UX and UI design for web apps and dashboards",
+      "User accounts, roles and permissions",
+      "Subscription billing and payment integration",
+      "Secure, scalable hosting and integrations",
+      "Ongoing development, updates and maintenance",
+    ],
+    fit: ["You have a software idea and need a team to build it", "You want to turn an internal tool into a product others pay for", "Your existing SaaS needs new features or a redesign"],
   },
 ];
 

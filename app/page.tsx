@@ -207,7 +207,7 @@ export default function Home() {
 
           <div className="mt-12" data-reveal>
             <h3 className="eyebrow">Also available</h3>
-            <ul className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {extraServices.map((s) => (
                 <li key={s.slug}>
                   <TiltCard serviceIndex={services.indexOf(s)} className="h-full p-5">
