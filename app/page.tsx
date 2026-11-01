@@ -81,9 +81,9 @@ export default function Home() {
               When marketing is scattered, growth feels like guesswork.
             </h2>
             <p className="lede text-halo mx-auto mt-6 max-w-xl" data-reveal style={{ ["--d" as string]: "200ms" }}>
-              Ads run in one place, the website lives in another, emails go out when someone remembers. Each piece might work
-              on its own — but nobody can say what’s really driving leads and sales. Connect your ads, landing pages and
-              follow-up, and the picture gets clear.
+              Ads run in one place, social posts in another, the website hasn’t been updated in months and nobody is sure
+              how you rank on Google. Each piece might work on its own — but nobody can say what’s really driving leads and
+              sales. Connect your search, social, website and follow-up, and the picture gets clear.
             </p>
           </div>
         </div>
@@ -141,7 +141,8 @@ export default function Home() {
                 </h2>
               </div>
               <p className="max-w-sm text-sm" data-reveal style={{ ["--d" as string]: "200ms" }}>
-                Choose one, or combine them into a single plan. Every service is built to work with the others.{" "}
+                From paid ads and SEO to social media, websites and automation — choose one, or combine them into a single
+                plan. Every service is built to work with the others.{" "}
                 <Link href="/services" className="text-link">
                   Compare all services
                 </Link>

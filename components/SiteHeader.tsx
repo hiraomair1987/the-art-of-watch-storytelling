@@ -51,7 +51,7 @@ export default function SiteHeader() {
       {/* Band 1 · thin deep-plum strip */}
       <div className="hdr-top">
         <div className="shell flex h-full items-center justify-between gap-4 text-[11px] tracking-[0.14em]">
-          <p className="hidden uppercase sm:block">Digital marketing · Creative · 3D web</p>
+          <p className="hidden uppercase md:block">Google Ads · SEO · Social Media · Web Development</p>
           <a href={`mailto:${site.contactEmail}`} className="hdr-top-link">
             {site.contactEmail}
           </a>
