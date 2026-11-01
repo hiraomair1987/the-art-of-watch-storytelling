@@ -5,19 +5,28 @@ import TiltCard from "@/components/TiltCard";
 import ServiceInView from "@/components/ServiceInView";
 import ContactForm from "@/components/ContactForm";
 import SocialLinks from "@/components/SocialLinks";
-import { processSteps, services, stages } from "@/lib/content";
+import { homeFaqs, processSteps, services, stages } from "@/lib/content";
 import { site, socials } from "@/lib/site";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "efficiovirtual",
-  url: site.url,
-  email: site.contactEmail,
-  description: site.description,
-  sameAs: socials.map((s) => s.href),
-  makesOffer: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name, description: s.summary } })),
-};
+// Structured data helps Google understand the business and show FAQ answers.
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "efficiovirtual",
+    url: site.url,
+    email: site.contactEmail,
+    description: site.description,
+    areaServed: site.areasServed.map((name) => ({ "@type": "Country", name })),
+    sameAs: socials.map((s) => s.href),
+    makesOffer: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name, description: s.summary } })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: homeFaqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  },
+];
 
 /* Each <section data-chapter> is one chapter of the story. The numbers in
    data-state-start / data-state-end tell the 3D scene which layout to show. */
@@ -35,14 +44,14 @@ export default function Home() {
           <div className="shell">
             <div className="max-w-2xl text-halo">
               <p className="eyebrow" data-reveal>
-                Digital marketing studio
+                Digital marketing agency · USA · UK · Canada · Pakistan
               </p>
               <h1 id="hero-title" className="display-xl mt-5" data-reveal style={{ ["--d" as string]: "120ms" }}>
                 Make your next digital move <em className="italic text-accent">count.</em>
               </h1>
               <p className="lede mt-6 max-w-lg" data-reveal style={{ ["--d" as string]: "240ms" }}>
-                efficiovirtual helps brands grow by joining clear strategy, standout creative and performance marketing — Google
-                Ads, automation, 3D websites, landing pages and design, working as one.
+                efficiovirtual is a performance-focused digital marketing agency. We combine Google Ads management, marketing
+                automation, 3D website design and high-converting landing pages into one plan that helps your brand grow.
               </p>
               <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "360ms" }}>
                 <Link href="#contact" className="btn btn-primary">
@@ -72,7 +81,8 @@ export default function Home() {
             </h2>
             <p className="lede text-halo mx-auto mt-6 max-w-xl" data-reveal style={{ ["--d" as string]: "200ms" }}>
               Ads run in one place, the website lives in another, emails go out when someone remembers. Each piece might work
-              on its own — but nobody can say what’s really driving results. Bring them together, and the picture gets clear.
+              on its own — but nobody can say what’s really driving leads and sales. Connect your ads, landing pages and
+              follow-up, and the picture gets clear.
             </p>
           </div>
         </div>
@@ -126,7 +136,7 @@ export default function Home() {
                   Services
                 </p>
                 <h2 id="services-title" className="display-md mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
-                  Five ways we move your brand forward.
+                  Digital marketing services that work together.
                 </h2>
               </div>
               <p className="max-w-sm text-sm" data-reveal style={{ ["--d" as string]: "200ms" }}>
@@ -186,9 +196,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Where we work + FAQ (shares the calm closing layout of the 3D scene) */}
+      <section id="faq" data-chapter data-state-start="6" aria-labelledby="faq-title" className="chapter">
+        <div className="shell grid gap-12 pb-12 pt-40 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div className="text-halo">
+            <p className="eyebrow" data-reveal>
+              Where we work
+            </p>
+            <h2 className="display-md mt-4" data-reveal style={{ ["--d" as string]: "100ms" }}>
+              A remote digital marketing agency for four markets.
+            </h2>
+            <p className="lede mt-5" data-reveal style={{ ["--d" as string]: "200ms" }}>
+              We work with brands in the United States, the United Kingdom, Canada and Pakistan — adapting search terms,
+              spelling, ad timing and offers to each audience, while keeping your brand consistent everywhere.
+            </p>
+            <ul className="mt-7 grid grid-cols-2 gap-3" data-reveal style={{ ["--d" as string]: "300ms" }}>
+              {site.areasServed.map((c) => (
+                <li key={c} className="glass rounded-xl px-4 py-3 text-cream">
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 id="faq-title" className="display-md text-halo" data-reveal>
+              Questions, answered
+            </h2>
+            <div className="mt-6 space-y-3">
+              {homeFaqs.map((f, i) => (
+                <details key={f.q} className="faq glass rounded-2xl" data-reveal style={{ ["--d" as string]: `${i * 60}ms` }}>
+                  <summary>
+                    <h3 className="font-sans text-base font-medium text-cream sm:text-[17px]">{f.q}</h3>
+                    <span className="faq-icon" aria-hidden="true" />
+                  </summary>
+                  <p className="px-5 pb-5 text-[15px] leading-relaxed sm:px-6">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 06 · Contact */}
       <section id="contact" data-chapter data-state-start="6" aria-labelledby="contact-title" className="chapter">
-        <div className="shell grid gap-12 pb-24 pt-44 lg:min-h-screen lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
+        <div className="shell grid gap-12 pb-24 pt-24 lg:min-h-screen lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
           <div className="text-halo">
             <p className="eyebrow" data-reveal>
               Let’s talk
