@@ -8,21 +8,21 @@ import LogoMark from "./LogoMark";
 
 type Props = { items: CaseStudy[]; serviceNames: Record<string, string> };
 
-/** Filterable grid of case studies ("Behind the work"). */
+/** Filterable grid of case studies ("Behind the work"), filtered by sector. */
 export default function CaseGrid({ items, serviceNames }: Props) {
   const [filter, setFilter] = useState("all");
   const tabs = useMemo(() => {
-    const used = new Set(items.filter((c) => c.published).flatMap((c) => c.services));
-    return [["all", "All work"], ...[...used].map((s) => [s, serviceNames[s] ?? s])] as [string, string][];
-  }, [items, serviceNames]);
-  const shown = items.filter((c) => filter === "all" || c.services.includes(filter));
+    const used = Array.from(new Set(items.filter((c) => c.published && c.sector).map((c) => c.sector as string)));
+    return ["all", ...used];
+  }, [items]);
+  const shown = items.filter((c) => filter === "all" || c.sector === filter);
 
   return (
     <>
-      <div className="mt-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter case studies by service">
-        {tabs.map(([key, label]) => (
+      <div className="mt-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter case studies by industry">
+        {tabs.map((key) => (
           <button key={key} type="button" className={`filter-pill ${filter === key ? "is-active" : ""}`} aria-pressed={filter === key} onClick={() => setFilter(key)}>
-            {label}
+            {key === "all" ? "All work" : key}
           </button>
         ))}
       </div>

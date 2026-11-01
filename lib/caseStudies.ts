@@ -22,6 +22,8 @@ export type CaseStudy = {
   title: string;
   client: string;
   industry: string;
+  /** Broad sector used for the filter tabs and "sectors we know best" (e.g. "Travel"). */
+  sector?: string;
   /** Country of the client/project. Leave empty ("") if you'd rather not say. */
   country: string;
   /** Service slugs from lib/content.ts, e.g. ["google-ads", "landing-pages"]. */
@@ -68,6 +70,7 @@ const placeholder = (n: number, services: string[]): CaseStudy => ({
 export const caseStudies: CaseStudy[] = [
   {
     slug: "vanessa-river-travel",
+    sector: "Travel",
     published: true,
     kind: "client",
     title: "A travel website for creator Vanessa River",
@@ -88,6 +91,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "harry-narang-consulting",
+    sector: "Professional services",
     published: true,
     kind: "client",
     title: "A personal brand website for agile consultant Harry Narang",
@@ -108,6 +112,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "beehost-hosting",
+    sector: "Technology",
     published: true,
     kind: "client",
     title: "A hosting and domains website for BeeHost",
@@ -128,6 +133,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "developer-portfolio",
+    sector: "Professional services",
     published: true,
     kind: "client",
     title: "A portfolio website for a web developer",
@@ -148,6 +154,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "westpaq-cleaning-services",
+    sector: "Cleaning services",
     published: true,
     kind: "client",
     liveUrl: "https://westpaq-cleaning-services.vercel.app",
@@ -170,6 +177,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "brightway-cleaning-demo",
+    sector: "Cleaning services",
     published: true,
     kind: "concept",
     liveUrl: "https://cleaning-website-demo-sigma.vercel.app",
@@ -192,6 +200,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "aetherion-space-travel",
+    sector: "Travel",
     published: true,
     kind: "client",
     liveUrl: "https://aetherion-mocha.vercel.app",
@@ -223,31 +232,31 @@ export const caseStudies: CaseStudy[] = [
 export type Testimonial = { quote: string; name: string; context: string; rating?: number; placeholder?: boolean };
 
 export const testimonials: Testimonial[] = [
-  { quote: "Your first client testimonial will appear here.", name: "Client name", context: "Industry", placeholder: true },
-  { quote: "Add real quotes from happy clients in lib/caseStudies.ts.", name: "Client name", context: "Industry", placeholder: true },
-  { quote: "Testimonials rotate automatically, one at a time.", name: "Client name", context: "Industry", placeholder: true },
-  { quote: "Each testimonial can show the client’s name, company and a star rating from a real review.", name: "Client name", context: "Industry", placeholder: true },
+  { quote: "Client testimonial coming soon.", name: "Client name", context: "Industry", placeholder: true },
+  { quote: "Client testimonial coming soon.", name: "Client name", context: "Industry", placeholder: true },
+  { quote: "Client testimonial coming soon.", name: "Client name", context: "Industry", placeholder: true },
 ];
 
 /**
  * PORTFOLIO NUMBERS ("What the numbers look like") — real figures only.
- * The first one counts published case studies automatically.
- * Replace the placeholders with your best real results and set `placeholder: false`.
+ * "auto:projects", "auto:sectors" and "auto:services" are counted from the
+ * published case studies. You can also add your own real figures, e.g.
+ * { value: "320%", label: "Best organic increase" } — only with client permission.
  */
 export type Stat = { value: string; label: string; placeholder?: boolean };
 export const stats: Stat[] = [
-  { value: "auto", label: "Case studies published" },
-  { value: "00%", label: "Best result — add your top client result", placeholder: true },
-  { value: "00", label: "Best PageSpeed score at launch", placeholder: true },
+  { value: "auto:projects", label: "Projects published" },
+  { value: "auto:sectors", label: "Industries served" },
+  { value: "auto:services", label: "Services delivered across these projects" },
 ];
 
-/** SECTORS ("The sectors we know best"). Replace with the industries you work with most. */
+/** SECTORS ("The sectors we know best"). Each name should match the `sector` of your case studies. */
 export type Sector = { name: string; text: string; placeholder?: boolean };
 export const sectors: Sector[] = [
-  { name: "Sector one", text: "Describe the industry and the kind of work you do for it.", placeholder: true },
-  { name: "Sector two", text: "Describe the industry and the kind of work you do for it.", placeholder: true },
-  { name: "Sector three", text: "Describe the industry and the kind of work you do for it.", placeholder: true },
-  { name: "Sector four", text: "Describe the industry and the kind of work you do for it.", placeholder: true },
+  { name: "Travel", text: "Story-led travel websites and immersive 3D experiences for travel brands and creators." },
+  { name: "Professional services", text: "Personal brand and consulting websites that build credibility and lead visitors to get in touch." },
+  { name: "Technology", text: "Clear, pricing-led websites that help hosting and technology businesses explain what they offer." },
+  { name: "Cleaning services", text: "Quote-focused websites for commercial and residential cleaning companies." },
 ];
 
 /** FAQ about the case studies themselves. Keep answers true to how you publish results. */
