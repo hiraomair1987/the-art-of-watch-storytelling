@@ -17,7 +17,7 @@ function Card({ c, index, hidden }: { c: CaseStudy; index: number; hidden?: bool
         ) : (
           <>
             <LogoMark className="case-thumb-mark" />
-            <span className="case-badge">Placeholder</span>
+            {!c.published && <span className="case-badge">Placeholder</span>}
           </>
         )}
       </div>

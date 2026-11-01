@@ -12,6 +12,7 @@ import { caseFaqs, caseStudies, publishedCaseStudies, sectors, stats, testimonia
 import { services } from "@/lib/content";
 import { site } from "@/lib/site";
 import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import { withAvailableImages } from "@/lib/caseStudyImages";
 
 const hasPublished = publishedCaseStudies.length > 0;
 const hasConcepts = publishedCaseStudies.some((c) => c.kind === "concept");
@@ -44,6 +45,7 @@ const jsonLd = [
 
 export default function CaseStudiesPage() {
   const count = String(caseStudies.length).padStart(2, "0");
+  const items = withAvailableImages(caseStudies);
 
   return (
     <>
@@ -80,7 +82,7 @@ export default function CaseStudiesPage() {
               <h2 className="font-mono text-xs font-medium text-[#f0a46b]">Selected work</h2>
               <span className="text-cream-muted">{count} case studies</span>
             </div>
-            <WorkMarquee items={caseStudies} />
+            <WorkMarquee items={items} />
           </div>
         </div>
       </section>
@@ -127,7 +129,7 @@ export default function CaseStudiesPage() {
               {publishedCaseStudies.length ? `${numberWord(publishedCaseStudies.length)} projects, shown in full` : "Projects, shown in full"}
             </h2>
           </div>
-          <CaseGrid items={caseStudies} serviceNames={serviceNames} />
+          <CaseGrid items={items} serviceNames={serviceNames} />
         </div>
       </section>
 
