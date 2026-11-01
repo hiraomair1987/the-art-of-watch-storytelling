@@ -246,8 +246,8 @@ export const caseStudies: CaseStudy[] = [
     approach:
       "We designed and built a website whose homepage is a 3D ring of property cards: visitors move, drag or swipe to spin it, click a property to lock it in the centre, and open a detail panel with specifications, description and similar properties. A filter panel narrows the portfolio by type, location, budget, status and bedrooms, and a grid view offers a simpler alternative.\n\nFurther sections cover flagship developments, investment options (ready-to-move, pre-launch and commercial), a dedicated guide for NRI buyers with a five-step buying process, the company’s principles, and an enquiry form. The site switches between English and Hindi, supports keyboard navigation and touch gestures, and is built as a lightweight HTML, CSS and JavaScript site.",
     results: [],
-    // Upload a screenshot with this exact name to public/case-studies/ and it appears automatically.
-    image: "/case-studies/aurora-estates.png",
+    image: "/case-studies/aurora-estates.webp",
+    fullPage: "/case-studies/aurora-estates-full.webp",
   },
   {
     slug: "revsol",
