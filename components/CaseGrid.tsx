@@ -38,7 +38,7 @@ export default function CaseGrid({ items, serviceNames }: Props) {
                   <LogoMark className="case-thumb-mark" />
                 )}
                 {!c.published && <span className="case-badge">Placeholder</span>}
-                {c.published && c.kind === "concept" && <span className="case-badge concept">Concept project</span>}
+                {c.published && c.kind === "concept" && <span className="case-badge concept">Demo website</span>}
               </div>
               <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-cream-muted">
                 {c.published ? [c.industry, c.country].filter(Boolean).join(" · ") : "Industry · Country"}
