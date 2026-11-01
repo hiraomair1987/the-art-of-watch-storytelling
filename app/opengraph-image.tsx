@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { LOGO_PATH, LOGO_VIEWBOX } from "@/lib/logo";
 
-export const alt = "efficiovirtual — Make your next digital move count.";
+export const alt = "efficiovirtual — Digital marketing that moves your brand forward.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,7 +27,7 @@ export default function OG() {
         <div style={{ fontSize: 40, display: "flex" }}>
           efficio<span style={{ color: "#a0d3f1" }}>virtual</span>
         </div>
-        <div style={{ fontSize: 84, lineHeight: 1.02, marginTop: 24, maxWidth: 900 }}>Make your next digital move count.</div>
+        <div style={{ fontSize: 84, lineHeight: 1.02, marginTop: 24, maxWidth: 900 }}>Digital marketing that moves your brand forward.</div>
       </div>
     ),
     size,

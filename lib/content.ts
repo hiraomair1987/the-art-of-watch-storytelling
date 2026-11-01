@@ -3,18 +3,30 @@ export type Stage = { name: string; line: string; points: string[] };
 export const stages: Stage[] = [
   {
     name: "Strategy",
-    line: "Find where growth is actually available.",
-    points: ["Audience and search-demand research", "Clear goals tied to revenue, not vanity metrics", "A channel plan sized to your budget"],
+    line: "Start with where growth is realistically available.",
+    points: [
+      "Research into your audience, competitors and search demand",
+      "Goals tied to enquiries and sales, not vanity metrics",
+      "A channel plan that fits your budget and stage",
+    ],
   },
   {
     name: "Creative",
-    line: "Make the message impossible to scroll past.",
-    points: ["Positioning and messaging that sounds like you", "Ads, pages and visuals built as one system", "Every asset made to be tested"],
+    line: "Give people a clear reason to stop, read and act.",
+    points: [
+      "Messaging that sounds like your brand",
+      "Ads, pages and visuals designed as one system",
+      "Variations made to be tested, not guessed",
+    ],
   },
   {
     name: "Performance",
-    line: "Measure, learn, and put budget where it works.",
-    points: ["Conversion tracking set up properly from day one", "Regular testing of bids, audiences and creative", "Plain-language reporting you can act on"],
+    line: "Measure what happens, then put effort where it works.",
+    points: [
+      "Conversion tracking set up before campaigns go live",
+      "Ongoing testing of audiences, bids, pages and creative",
+      "Plain-language reporting with clear next steps",
+    ],
   },
 ];
 
@@ -23,18 +35,21 @@ export type Step = { name: string; line: string; detail: string };
 export const processSteps: Step[] = [
   {
     name: "Understand",
-    line: "We learn your business before touching a campaign.",
-    detail: "Goals, audience, offer, budget and what has or hasn't worked so far — so the plan fits you, not a template.",
+    line: "We learn how your business wins customers today.",
+    detail:
+      "We look at your goals, audience, offer, budget and existing marketing — what is working, what isn’t, and where the gaps are — so the plan is built around your business rather than a template.",
   },
   {
     name: "Create",
     line: "We build the pieces as one connected system.",
-    detail: "Campaigns, pages, automations and creative designed together, with tracking set up before anything goes live.",
+    detail:
+      "Campaigns, landing pages, automations, websites and creative are planned together, with tracking in place before anything launches, so every part supports the others.",
   },
   {
     name: "Improve",
-    line: "We measure, learn and refine — continuously.",
-    detail: "Regular testing and clear reporting, so budget moves toward what works and each month builds on the last.",
+    line: "We measure, learn and refine.",
+    detail:
+      "We review results regularly, test new ideas, and move time and budget toward what performs — then report back in plain language so you always know what changed and why.",
   },
 ];
 
@@ -43,40 +58,48 @@ export type Faq = { q: string; a: string };
 /** Homepage FAQ. Also published as FAQ data for Google. Keep answers honest and specific. */
 export const homeFaqs: Faq[] = [
   {
-    q: "What does a digital marketing agency like efficiovirtual do?",
-    a: "We plan, build and run the channels that bring you customers: Google Ads campaigns, SEO and Google Business Profile, social media marketing, website development and maintenance, landing pages, marketing automation, 3D websites and the creative behind them. Everything is tracked, so you can see what is working.",
+    q: "What digital marketing services does efficiovirtual offer?",
+    a: "Our core services are Google Ads management, marketing automation, 3D website design, landing page design and creative design. We also offer SEO and Google Business Profile setup, social media marketing, and website development and maintenance. You can use one service on its own or combine several into a single plan.",
   },
   {
-    q: "Do you work with businesses in the USA, UK, Canada and Pakistan?",
-    a: "Yes. We work remotely with brands in all four countries and plan campaigns, language and timing around each market — including British or American spelling, local search terms and time zones.",
+    q: "What does Google Ads management include?",
+    a: "It covers keyword and competitor research, campaign setup or restructuring, ad copy, conversion tracking, and ongoing optimisation of bids, budgets, audiences and ads. We explain what we change and why in regular, plain-language reports.",
   },
   {
-    q: "Is efficiovirtual a good fit for small businesses and startups?",
-    a: "Yes. Many of our services, such as a Google Ads audit, a single landing page or a first email sequence, are designed to start small and grow as results come in.",
+    q: "What can marketing automation do for my business?",
+    a: "Marketing automation sends the right message at the right moment without manual work — for example welcome emails for new subscribers, follow-ups for new leads, reminders for abandoned enquiries, or re-engagement emails for past customers. We map your customer journey first, then build the emails, triggers and CRM workflows around it.",
+  },
+  {
+    q: "Why choose a 3D website, and will it be slow?",
+    a: "A 3D website can explain a product or brand in a more memorable, interactive way than a standard page. Speed and accessibility are part of the build: essential content loads first, 3D loads afterwards, files are kept small, and simpler fallbacks are provided for older devices and for visitors who prefer reduced motion.",
+  },
+  {
+    q: "How is a landing page different from a regular web page?",
+    a: "A landing page is built for one specific goal, such as booking a call or buying a product, and usually matches a particular ad or campaign. It removes distractions, answers likely questions, and makes the next step obvious — which is why it is often the missing link between ad clicks and real enquiries.",
+  },
+  {
+    q: "What creative design work do you provide?",
+    a: "We design ad creative for search, social and display, social media graphics and short motion pieces, brand identity updates, presentations and product visuals. Creative is produced in variations so it can be tested and improved over time.",
   },
   {
     q: "Do you offer SEO and Google Business Profile setup?",
-    a: "Yes. We research the keywords your customers use, improve your website’s content and technical health so it can rank, and set up and optimise your Google Business Profile so you appear in Google Maps and local searches.",
+    a: "Yes. We research the terms your customers search for, improve your website’s content and technical health so it can compete in search results, and set up and optimise your Google Business Profile so you can appear in Google Maps and local searches.",
   },
   {
     q: "Which social media platforms do you manage?",
-    a: "We focus on the platforms where your customers actually spend time — usually Instagram, Facebook and LinkedIn — with content, community management and paid social campaigns planned around your goals.",
+    a: "Whichever platforms you need. We plan content, community management and paid social campaigns around where your customers actually spend their time.",
   },
   {
     q: "Do you look after websites after they launch?",
-    a: "Yes. Our website maintenance covers security updates, backups, uptime monitoring, speed checks and content changes whenever you need them, so your site keeps working without you worrying about it.",
+    a: "Yes, if you need it — and for as long as you need it. Ongoing care can include updates, backups, security, speed checks and content changes.",
   },
   {
-    q: "How much do Google Ads cost?",
-    a: "It depends on your industry, location and goals. You set the ad budget and pay Google directly; our management fee is separate. We recommend a starting budget only after looking at your market, so you don’t overspend while testing.",
-  },
-  {
-    q: "Won’t a 3D website be slow?",
-    a: "Not when it’s built carefully. We load 3D after the essential content, keep files small, and provide simpler fallbacks for older phones and for people who prefer reduced motion.",
+    q: "Can we work together remotely?",
+    a: "Yes. We work remotely by email and scheduled calls, share work in progress for feedback, and agree communication times that suit your time zone.",
   },
   {
     q: "How do we get started?",
-    a: "Email admin@efficiovirtual.com or use the contact form. Tell us what you sell, who you sell to and what you want to improve, and we’ll reply with honest next steps.",
+    a: "Email admin@efficiovirtual.com or use the contact form. Tell us what you offer, who your customers are and what you would like to improve. We’ll reply with questions or suggested next steps — there’s no obligation to continue.",
   },
 ];
 
@@ -85,6 +108,8 @@ export type Service = {
   name: string;
   /** Shorter label used in the terracotta services strip in the header. */
   navLabel: string;
+  /** Who the service is most useful for (shown on homepage cards). */
+  forWho: string;
   short: string;
   summary: string;
   intro: string;
@@ -95,6 +120,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "google-ads",
+    forWho: "Businesses that want enquiries or sales from people already searching for what they offer.",
     navLabel: "Google Ads",
     name: "Google Ads",
     short: "Search, Performance Max and YouTube",
@@ -113,6 +139,7 @@ export const services: Service[] = [
   },
   {
     slug: "marketing-automation",
+    forWho: "Teams whose leads and customers need consistent follow-up without extra manual work.",
     navLabel: "Automation",
     name: "Marketing Automation",
     short: "Email, CRM and lead nurturing",
@@ -131,6 +158,7 @@ export const services: Service[] = [
   },
   {
     slug: "3d-websites",
+    forWho: "Brands launching a product, service or identity that deserves a memorable first impression.",
     navLabel: "3D Websites",
     name: "3D Websites",
     short: "Immersive, scroll-driven web experiences",
@@ -149,6 +177,7 @@ export const services: Service[] = [
   },
   {
     slug: "landing-pages",
+    forWho: "Anyone running ads or campaigns who needs more of those clicks to become enquiries.",
     navLabel: "Landing Pages",
     name: "Landing Pages",
     short: "Focused pages built to convert",
@@ -167,6 +196,7 @@ export const services: Service[] = [
   },
   {
     slug: "creative-design",
+    forWho: "Brands that need consistent, test-ready visuals across ads, social media and the web.",
     navLabel: "Creative",
     name: "Creative Design",
     short: "Brand, ad and social creative",
@@ -185,6 +215,7 @@ export const services: Service[] = [
   },
   {
     slug: "website-development",
+    forWho: "Businesses that need a reliable website — and someone to keep it running.",
     name: "Website Development & Maintenance",
     navLabel: "Web Development",
     short: "Websites built and looked after",
@@ -203,6 +234,7 @@ export const services: Service[] = [
   },
   {
     slug: "seo-google-business",
+    forWho: "Businesses that want to be found in Google Search and Maps without paying per click.",
     name: "SEO & Google Business",
     navLabel: "SEO",
     short: "Search engine optimization and local search",
@@ -221,6 +253,7 @@ export const services: Service[] = [
   },
   {
     slug: "social-media-marketing",
+    forWho: "Brands that want a steady, on-brand social presence that brings in enquiries.",
     name: "Social Media Marketing",
     navLabel: "Social Media",
     short: "Organic content and paid social",

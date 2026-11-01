@@ -4,11 +4,11 @@
  */
 export const site = {
   name: "efficiovirtual",
-  title: "efficiovirtual | Digital Marketing Agency: Google Ads, SEO, Social Media & Web Development",
+  title: "efficiovirtual | Digital Marketing, Google Ads & Web Design",
   description:
-    "efficiovirtual is a performance-focused digital marketing agency for brands in the USA, UK, Canada and Pakistan: Google Ads, SEO and Google Business Profile, social media marketing, website development, 3D websites, landing pages, marketing automation and creative design.",
-  /** Countries we market to. Used in search-engine data on the homepage. */
-  areasServed: ["United States", "United Kingdom", "Canada", "Pakistan"],
+    "Grow your brand with Google Ads, marketing automation, 3D websites, landing pages, and creative design from efficiovirtual.",
+  /** Markets where efficiovirtual takes on clients (remote work). Used in structured data and homepage copy. */
+  areasServed: ["United States", "United Arab Emirates", "Canada", "United Kingdom", "Pakistan"],
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://efficiovirtual.com",
   /** Contact email used by every email link and the contact form. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "admin@efficiovirtual.com",
