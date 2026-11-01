@@ -17,6 +17,13 @@ export const site = {
    * Leave as null to use the built-in vector version of the ev mark.
    */
   logoFile: null as string | null,
+  /**
+   * Google Search Console "HTML tag" verification code (only the content="..." part).
+   * Paste it here or set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel.
+   */
+  googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "",
+  /** Bing Webmaster Tools verification code (optional). */
+  bingSiteVerification: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ?? "",
 };
 
 export const socials = [

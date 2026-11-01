@@ -495,6 +495,22 @@ export default function Scene({ detailIndex, fixedState }: Props) {
       return;
     }
 
+    // Without a graphics card (software rendering) or on very low-end devices the
+    // scene would make scrolling sluggish, so keep the lightweight CSS background instead.
+    {
+      const gl = renderer.getContext();
+      const info = gl.getExtension("WEBGL_debug_renderer_info");
+      const gpu = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
+      const nav = navigator as Navigator & { deviceMemory?: number };
+      const software = /swiftshader|llvmpipe|software|basic render/i.test(gpu);
+      const lowEnd = (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 1;
+      if (software || lowEnd) {
+        renderer.dispose();
+        document.documentElement.dataset.webgl = "off";
+        return;
+      }
+    }
+
     const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const hoverQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
     let reduced = reduceQuery.matches;

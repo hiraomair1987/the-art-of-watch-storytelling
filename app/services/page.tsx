@@ -5,17 +5,32 @@ import PageIntro from "@/components/PageIntro";
 import TiltCard from "@/components/TiltCard";
 import CtaBand from "@/components/CtaBand";
 import { services } from "@/lib/content";
+import { site } from "@/lib/site";
+import { breadcrumbLd, pageMeta } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description: "Google Ads, SEO and Google Business, social media marketing, website development and maintenance, 3D websites, landing pages, marketing automation and creative design from efficiovirtual.",
-  alternates: { canonical: "/services" },
-};
+export const metadata: Metadata = pageMeta({
+  title: "Digital Marketing Services",
+  description:
+    "Google Ads, SEO, social media, marketing automation, websites, 3D web design, landing pages and creative design — explore efficiovirtual’s services.",
+  path: "/services",
+});
+
+const jsonLd = [
+  breadcrumbLd([["Services", "/services"]]),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "efficiovirtual services",
+    itemListElement: services.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: `${site.url}/services/${s.slug}` })),
+  },
+];
 
 export default function ServicesPage() {
   return (
     <>
       <SceneLoader fixedState={4} />
+      <JsonLd data={jsonLd} />
       <PageIntro eyebrow="Services" title="Everything you need to grow, working together.">
         <p>Eight services, each useful on its own and stronger together. Here’s what each one does and what it includes.</p>
       </PageIntro>

@@ -783,3 +783,26 @@
     padding-bottom: 6rem;
   }
 }
+
+/* Hero visual when 3D is unavailable (no graphics acceleration) */
+.hero-fallback {
+  display: none;
+}
+html[data-webgl="off"] .hero-fallback {
+  display: block;
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  width: min(30vw, 380px);
+  aspect-ratio: 1;
+  transform: translateY(-40%);
+  color: var(--logo-blue);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 40px rgba(3, 158, 253, 0.45)) drop-shadow(0 0 120px rgba(93, 7, 85, 0.9));
+  pointer-events: none;
+}
+@media (max-width: 1023px) {
+  html[data-webgl="off"] .hero-fallback {
+    display: none;
+  }
+}

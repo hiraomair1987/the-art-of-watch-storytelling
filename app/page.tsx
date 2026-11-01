@@ -6,21 +6,17 @@ import TiltCard from "@/components/TiltCard";
 import ServiceInView from "@/components/ServiceInView";
 import ContactForm from "@/components/ContactForm";
 import SocialLinks from "@/components/SocialLinks";
+import LogoMark from "@/components/LogoMark";
 import { homeFaqs, processSteps, services, stages } from "@/lib/content";
 import { site, socials } from "@/lib/site";
 import { locations } from "@/lib/locations";
+import { pageMeta } from "@/lib/seo";
 
 const pageTitle = "efficiovirtual | Digital Marketing, Google Ads & Web Design";
 const pageDescription =
   "Grow your brand with Google Ads, marketing automation, 3D websites, landing pages, and creative design from efficiovirtual.";
 
-export const metadata: Metadata = {
-  title: { absolute: pageTitle },
-  description: pageDescription,
-  alternates: { canonical: "/" },
-  openGraph: { title: pageTitle, description: pageDescription, url: "/", type: "website", siteName: "efficiovirtual" },
-  twitter: { card: "summary_large_image", title: pageTitle, description: pageDescription },
-};
+export const metadata: Metadata = pageMeta({ title: pageTitle, description: pageDescription, path: "/", absoluteTitle: true });
 
 /** The five core services get full cards; the rest are listed as "also available". */
 const coreSlugs = ["google-ads", "marketing-automation", "3d-websites", "landing-pages", "creative-design"];
@@ -84,18 +80,18 @@ export default function Home() {
         <div className="chapter-pin">
           <div className="shell">
             <div className="max-w-2xl text-halo">
-              <p className="eyebrow" data-reveal>
+              <p className="eyebrow">
                 Digital marketing agency
               </p>
-              <h1 id="hero-title" className="display-xl mt-5" data-reveal style={{ ["--d" as string]: "120ms" }}>
+              <h1 id="hero-title" className="display-xl mt-5">
                 Digital marketing that moves your brand <em className="italic text-accent">forward.</em>
               </h1>
-              <p className="lede mt-6 max-w-xl" data-reveal style={{ ["--d" as string]: "240ms" }}>
+              <p className="lede mt-6 max-w-xl">
                 efficiovirtual helps startups, small businesses and growing brands turn attention into enquiries and sales.
                 We plan and run Google Ads, build landing pages and 3D websites, automate follow-up and design the creative
                 that ties it all together.
               </p>
-              <div className="mt-9 flex flex-wrap gap-3" data-reveal style={{ ["--d" as string]: "360ms" }}>
+              <div className="mt-9 flex flex-wrap gap-3">
                 <Link href="#contact" className="btn btn-primary">
                   Let’s talk <span aria-hidden="true">→</span>
                 </Link>
@@ -104,6 +100,10 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+          </div>
+          {/* Static logo glow, shown only when the 3D scene is unavailable */}
+          <div className="hero-fallback" aria-hidden="true">
+            <LogoMark className="h-full w-full" />
           </div>
           <a href="#intro" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.24em] text-cream-muted hover:text-cream focus-visible:text-cream">
             Scroll to learn more

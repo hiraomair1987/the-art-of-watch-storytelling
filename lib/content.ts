@@ -110,6 +110,12 @@ export type Service = {
   navLabel: string;
   /** Who the service is most useful for (shown on homepage cards). */
   forWho: string;
+  /** SEO: page title (under ~43 characters; " — efficiovirtual" is added). */
+  seoTitle: string;
+  /** SEO: meta description (under ~155 characters). */
+  seoDescription: string;
+  /** The service page's H1 — descriptive, includes the main keyword. */
+  h1: string;
   short: string;
   summary: string;
   intro: string;
@@ -120,6 +126,9 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "google-ads",
+    seoTitle: "Google Ads Management Services",
+    seoDescription: "Google Ads management from efficiovirtual: keyword research, campaign setup, conversion tracking and ongoing optimisation for search and Performance Max.",
+    h1: "Google Ads management",
     forWho: "Businesses that want enquiries or sales from people already searching for what they offer.",
     navLabel: "Google Ads",
     name: "Google Ads",
@@ -139,6 +148,9 @@ export const services: Service[] = [
   },
   {
     slug: "marketing-automation",
+    seoTitle: "Marketing Automation Services",
+    seoDescription: "Marketing automation services: email sequences, CRM workflows and lead nurturing that follow up with every lead and customer automatically.",
+    h1: "Marketing automation services",
     forWho: "Teams whose leads and customers need consistent follow-up without extra manual work.",
     navLabel: "Automation",
     name: "Marketing Automation",
@@ -158,6 +170,9 @@ export const services: Service[] = [
   },
   {
     slug: "3d-websites",
+    seoTitle: "3D Website Design & Development",
+    seoDescription: "3D website design with interactive, scroll-driven storytelling — built to load fast, work on mobile and stay accessible. From efficiovirtual.",
+    h1: "3D website design and development",
     forWho: "Brands launching a product, service or identity that deserves a memorable first impression.",
     navLabel: "3D Websites",
     name: "3D Websites",
@@ -177,6 +192,9 @@ export const services: Service[] = [
   },
   {
     slug: "landing-pages",
+    seoTitle: "Landing Page Design Services",
+    seoDescription: "Landing page design that turns ad clicks into enquiries: conversion-focused copy, fast mobile-first builds, tracking and A/B testing.",
+    h1: "Landing page design",
     forWho: "Anyone running ads or campaigns who needs more of those clicks to become enquiries.",
     navLabel: "Landing Pages",
     name: "Landing Pages",
@@ -196,6 +214,9 @@ export const services: Service[] = [
   },
   {
     slug: "creative-design",
+    seoTitle: "Creative Design for Ads, Social & Brand",
+    seoDescription: "Creative design for ads, social media and brand identity: consistent, test-ready visuals across every channel, from efficiovirtual.",
+    h1: "Creative design for ads, social media and brand",
     forWho: "Brands that need consistent, test-ready visuals across ads, social media and the web.",
     navLabel: "Creative",
     name: "Creative Design",
@@ -215,6 +236,9 @@ export const services: Service[] = [
   },
   {
     slug: "website-development",
+    seoTitle: "Website Development & Maintenance",
+    seoDescription: "Website development and maintenance: fast, secure, mobile-friendly websites, plus updates, backups and support for as long as you need it.",
+    h1: "Website development and maintenance",
     forWho: "Businesses that need a reliable website — and someone to keep it running.",
     name: "Website Development & Maintenance",
     navLabel: "Web Development",
@@ -234,6 +258,9 @@ export const services: Service[] = [
   },
   {
     slug: "seo-google-business",
+    seoTitle: "SEO Services & Google Business Profile",
+    seoDescription: "SEO services and Google Business Profile setup: keyword research, on-page and technical SEO, and local search optimisation for Google and Maps.",
+    h1: "SEO services and Google Business Profile setup",
     forWho: "Businesses that want to be found in Google Search and Maps without paying per click.",
     name: "SEO & Google Business",
     navLabel: "SEO",
@@ -253,6 +280,9 @@ export const services: Service[] = [
   },
   {
     slug: "social-media-marketing",
+    seoTitle: "Social Media Marketing Services",
+    seoDescription: "Social media marketing on the platforms your customers use: content, community management and paid social campaigns, from efficiovirtual.",
+    h1: "Social media marketing services",
     forWho: "Brands that want a steady, on-brand social presence that brings in enquiries.",
     name: "Social Media Marketing",
     navLabel: "Social Media",

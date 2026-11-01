@@ -14,9 +14,14 @@ export const metadata: Metadata = {
   title: { default: site.title, template: "%s — efficiovirtual" },
   description: site.description,
   applicationName: "efficiovirtual",
-  alternates: { canonical: "/" },
-  openGraph: { title: site.title, description: site.description, siteName: "efficiovirtual", type: "website", url: "/" },
-  twitter: { card: "summary_large_image", title: site.title, description: site.description },
+  openGraph: { siteName: "efficiovirtual", type: "website", locale: "en" },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  // Search Console / Bing verification codes (set them in lib/site.ts or as environment variables)
+  verification: {
+    google: site.googleSiteVerification || undefined,
+    other: site.bingSiteVerification ? { "msvalidate.01": site.bingSiteVerification } : undefined,
+  },
 };
 
 export const viewport: Viewport = {
