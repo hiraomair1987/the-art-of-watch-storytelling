@@ -43,6 +43,8 @@ export type CaseStudy = {
   kind?: "client" | "concept";
   /** Extra screenshots shown on the case study page. */
   gallery?: string[];
+  /** Optional full-page screenshot (tall image). Shown in a scrolling browser frame on the case study page. */
+  fullPage?: string;
   challenge: string;
   approach: string;
   /** Real, verifiable results only — e.g. "Cost per lead down 32% in 90 days". */
@@ -221,7 +223,27 @@ export const caseStudies: CaseStudy[] = [
     image: "/case-studies/aetherion.webp",
     gallery: ["/case-studies/aetherion-2.webp"],
   },
-  placeholder(8, ["app-development"]),
+  {
+    slug: "revsol",
+    published: true,
+    kind: "client",
+    sector: "Industrial & safety supplies",
+    title: "A product-led website for a Pakistani fire safety, tools and water pump supplier",
+    client: "Revsol",
+    industry: "Fire safety, tools & industrial supplies",
+    country: "Pakistan",
+    services: ["website-development", "creative-design"],
+    metric: "Business website",
+    summary:
+      "A comprehensive business website for Revsol, bringing fire extinguishers, power tools, safety gear, piping and water pumps together in one clear, easy-to-browse place.",
+    challenge:
+      "Revsol supplies a wide range of products — from fire extinguishers and PPE to power tools, piping and water pumps — for homes, businesses and industrial sites across Pakistan. Customers needed to find the right category quickly, understand the services on offer and get in touch without wading through a cluttered catalogue.",
+    approach:
+      "We designed and built a structured website that leads with Revsol’s “all in one place” promise and three key strengths: quality tools with warranty, certified fire safety and PPE solutions, and complete piping and water pump services.\n\nThe page is organised into clear product sections — power tools and hardware, fire protection equipment and services (supply, refilling, maintenance, delivery and installation), water and pressure pumps, safety gear and PPE, emergency lighting and public address systems — each with a direct call to action. A searchable FAQ, a blog area for buying guides, brand logos and a trust section support both visitors and search visibility, with a WhatsApp button for quick enquiries.",
+    results: [],
+    image: "/case-studies/revsol.webp",
+    fullPage: "/case-studies/revsol-full.webp",
+  },
 ];
 
 /**
@@ -257,6 +279,7 @@ export const sectors: Sector[] = [
   { name: "Professional services", text: "Personal brand and consulting websites that build credibility and lead visitors to get in touch." },
   { name: "Technology", text: "Clear, pricing-led websites that help hosting and technology businesses explain what they offer." },
   { name: "Cleaning services", text: "Quote-focused websites for commercial and residential cleaning companies." },
+  { name: "Industrial & safety supplies", text: "Product-led websites that help suppliers present wide ranges of equipment clearly and turn browsing into enquiries." },
 ];
 
 /** FAQ about the case studies themselves. Keep answers true to how you publish results. */

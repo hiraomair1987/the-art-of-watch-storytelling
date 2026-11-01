@@ -18,5 +18,6 @@ export function withAvailableImages(items: CaseStudy[]): CaseStudy[] {
     ...c,
     image: publicFileExists(c.image) ? c.image : undefined,
     gallery: c.gallery?.filter((g) => publicFileExists(g)),
+    fullPage: publicFileExists(c.fullPage) ? c.fullPage : undefined,
   }));
 }

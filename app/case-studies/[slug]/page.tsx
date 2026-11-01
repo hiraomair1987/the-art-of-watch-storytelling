@@ -90,6 +90,25 @@ export default function CaseStudyPage({ params }: Params) {
             <img src={c.image} alt={`${c.client} — ${c.title}`} className="w-full rounded-3xl border border-cream/10" />
           </div>
         )}
+        {c.fullPage && (
+          <div className="shell max-w-5xl pb-12">
+            <figure className="page-preview-wrap">
+              <div className="page-preview" tabIndex={0} aria-label={`${c.client} — full page preview. Hover or focus to scroll through the page.`}>
+                <div className="page-preview-bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div className="page-preview-window">
+                  <img src={c.fullPage} alt={`Full-page screenshot of the ${c.client} website`} loading="lazy" className="page-preview-img" />
+                </div>
+              </div>
+              <figcaption className="mt-4 text-center font-mono text-xs uppercase tracking-[0.16em] text-cream-muted">
+                Hover to scroll through the full page
+              </figcaption>
+            </figure>
+          </div>
+        )}
         {c.gallery && c.gallery.length > 0 && (
           <div className="shell grid max-w-5xl gap-4 pb-12 sm:grid-cols-2">
             {c.gallery.map((g, i) => (

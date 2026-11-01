@@ -1319,3 +1319,46 @@ a.work-card-link:hover .work-arrow {
 [data-scroll-x] {
   will-change: transform;
 }
+
+/* Full-page screenshot in a browser frame that scrolls on hover/focus */
+.page-preview {
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(238, 235, 228, 0.16);
+  background: #0e0410;
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(240, 164, 107, 0.08);
+}
+.page-preview-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  background: rgba(238, 235, 228, 0.06);
+}
+.page-preview-bar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(238, 235, 228, 0.25);
+}
+.page-preview-window {
+  height: min(70vh, 640px);
+  overflow: hidden;
+}
+.page-preview-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(0);
+  transition: transform 9s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+.page-preview:hover .page-preview-img,
+.page-preview:focus-visible .page-preview-img {
+  transform: translateY(calc(-100% + min(70vh, 640px)));
+}
+@media (hover: none) {
+  .page-preview-window {
+    overflow-y: auto;
+  }
+}
