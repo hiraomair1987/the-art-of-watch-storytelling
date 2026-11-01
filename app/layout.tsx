@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Archivo, Fraunces, IBM_Plex_Mono, Inter } from "next/font/google";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import Reveal from "@/components/Reveal";
@@ -8,6 +8,9 @@ import "./globals.css";
 
 const display = Fraunces({ subsets: ["latin"], display: "swap", variable: "--font-display", axes: ["opsz", "SOFT"] });
 const sans = Inter({ subsets: ["latin"], display: "swap", variable: "--font-sans" });
+// Heavy grotesk and mono, used for the bold "showcase" style (e.g. Case Studies page)
+const heavy = Archivo({ subsets: ["latin"], display: "swap", variable: "--font-heavy", weight: ["800", "900"] });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], display: "swap", variable: "--font-mono", weight: ["400", "500"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -32,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${heavy.variable} ${mono.variable}`}>
       <body>
         <a
           href="#content"
